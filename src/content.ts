@@ -199,9 +199,9 @@ export const projects = {
     place: { en: "Universitat de València, Spain", no: "Universitat de València, Spania", es: "Universitat de València, España" },
     date: { en: "Defended Jan 2026", no: "Forsvart jan. 2026", es: "Defendida en ene. 2026" },
     title: {
-      en: "Antioxidant extracts from plant by-products and spirulina",
-      no: "Antioksidantekstrakter fra plantebiprodukter og spirulina",
-      es: "Extractos antioxidantes de subproductos vegetales y espirulina",
+      en: "Obtaining and characterising antioxidant extracts from plant by-products and spirulina",
+      no: "Framstilling og karakterisering av antioksidantekstrakter fra plantebiprodukter og spirulina",
+      es: "Obtención y caracterización de extractos antioxidantes de subproductos vegetales y espirulina",
     },
     summary: {
       en: "A third of the world's food is lost or wasted, yet agro-food waste is rich in bioactive compounds. I obtained and characterised water-based extracts from sweet potato peel, orange peel and spirulina with two green technologies, then tested spirulina extract as a natural antioxidant and colourant in beef burgers.",
