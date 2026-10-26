@@ -188,28 +188,30 @@ export const projects = {
     no: "Forsknings- og produktprosjekter",
     es: "Proyectos de investigación y producto",
   },
-  visualNote: {
-    en: "Illustration",
-    no: "Illustrasjon",
-    es: "Ilustración",
-  },
+  viewPhoto: { en: "Open photo", no: "Åpne bilde", es: "Abrir foto" },
+  close: { en: "Close", no: "Lukk", es: "Cerrar" },
   thesis: {
     kicker: {
       en: "Bachelor's thesis · graded 9.7/10",
       no: "Bacheloroppgave · karakter 9,7/10",
       es: "Tesis de grado · nota 9,7/10",
     },
-    place: "Universitat de València, Spain",
-    date: { en: "Sep 2025 – Feb 2026", no: "sep. 2025 – feb. 2026", es: "sep. 2025 – feb. 2026" },
+    place: { en: "Universitat de València, Spain", no: "Universitat de València, Spania", es: "Universitat de València, España" },
+    date: { en: "Defended Jan 2026", no: "Forsvart jan. 2026", es: "Defendida en ene. 2026" },
     title: {
-      en: "Agro-food by-products as natural antioxidants in a hamburger",
-      no: "Biprodukter fra matindustrien som naturlige antioksidanter i hamburger",
-      es: "Subproductos agroalimentarios como antioxidantes naturales en hamburguesas",
+      en: "Antioxidant extracts from plant by-products and spirulina",
+      no: "Antioksidantekstrakter fra plantebiprodukter og spirulina",
+      es: "Extractos antioxidantes de subproductos vegetales y espirulina",
     },
-    visualAlt: {
-      en: "Illustration of the three by-products studied: sweet potato peel, orange peel and spirulina",
-      no: "Illustrasjon av de tre biproduktene: søtpotetskall, appelsinskall og spirulina",
-      es: "Ilustración de los tres subproductos estudiados: cáscara de batata, cáscara de naranja y espirulina",
+    summary: {
+      en: "A third of the world's food is lost or wasted, yet agro-food waste is rich in bioactive compounds. I obtained and characterised water-based extracts from sweet potato peel, orange peel and spirulina with two green technologies, then tested spirulina extract as a natural antioxidant and colourant in beef burgers.",
+      no: "En tredjedel av verdens mat går tapt eller kastes, men avfall fra matindustrien er rikt på bioaktive forbindelser. Jeg framstilte og karakteriserte vannbaserte ekstrakter fra søtpotetskall, appelsinskall og spirulina med to grønne teknologier, og testet spirulinaekstrakt som naturlig antioksidant og fargestoff i hamburgere av storfekjøtt.",
+      es: "Un tercio de los alimentos del mundo se pierde o desperdicia, pero los residuos agroalimentarios son ricos en compuestos bioactivos. Obtuve y caractericé extractos acuosos de cáscara de batata, cáscara de naranja y espirulina con dos tecnologías verdes, y probé el extracto de espirulina como antioxidante y colorante natural en hamburguesas de carne vacuna.",
+    },
+    supervisor: {
+      en: "Supervisor: Francisco J. Barba Orellano · Food Science and Technology",
+      no: "Veileder: Francisco J. Barba Orellano · Næringsmiddelvitenskap og -teknologi",
+      es: "Tutor: Francisco J. Barba Orellano · Ciencia y Tecnología de los Alimentos",
     },
     sourcesLabel: { en: "Sources studied", no: "Råstoffer undersøkt", es: "Materias primas estudiadas" },
     sources: [
@@ -228,6 +230,13 @@ export const projects = {
         latin: "Arthrospira platensis",
         tone: "spirulina",
       },
+    ],
+    specsLabel: { en: "Lab conditions", no: "Forsøksbetingelser", es: "Condiciones de laboratorio" },
+    specs: [
+      { label: { en: "PEF", no: "PEF", es: "PEF" }, value: { en: "3 kV/cm · 200 kJ/kg", no: "3 kV/cm · 200 kJ/kg", es: "3 kV/cm · 200 kJ/kg" } },
+      { label: { en: "ASE", no: "ASE", es: "ASE" }, value: { en: "40 °C · 103.4 bar", no: "40 °C · 103,4 bar", es: "40 °C · 103,4 bar" } },
+      { label: { en: "Dose", no: "Dose", es: "Dosis" }, value: { en: "1% w/w", no: "1 % vekt/vekt", es: "1 % p/p" } },
+      { label: { en: "Shelf life", no: "Holdbarhet", es: "Vida útil" }, value: { en: "5 days · 4 °C", no: "5 dager · 4 °C", es: "5 días · 4 °C" } },
     ],
     steps: [
       {
@@ -249,9 +258,9 @@ export const projects = {
       {
         label: { en: "Application", no: "Anvendelse", es: "Aplicación" },
         text: {
-          en: "Added freeze-dried spirulina extracts to beef burgers as a natural antioxidant and colourant, tracking pH and colour over 5 days of refrigerated storage. The PEF extract gave the best stability against proteolytic deterioration.",
-          no: "Tilsatte frysetørkede spirulinaekstrakter i hamburgere av storfekjøtt som naturlig antioksidant og fargestoff, og fulgte pH og farge gjennom 5 dager kjølelagring. PEF-ekstraktet ga best stabilitet mot proteolytisk nedbrytning.",
-          es: "Incorporé extractos liofilizados de espirulina a hamburguesas de carne vacuna como antioxidante y colorante natural, con seguimiento de pH y color durante 5 días de refrigeración. El extracto por PEF mostró la mejor estabilidad frente al deterioro proteolítico.",
+          en: "Added freeze-dried spirulina extracts (1% w/w) to beef burgers as a natural antioxidant and colourant, tracking pH and colour over 5 days of refrigerated storage. The PEF extract gave the best stability against proteolytic deterioration.",
+          no: "Tilsatte frysetørkede spirulinaekstrakter (1 % vekt/vekt) i hamburgere av storfekjøtt som naturlig antioksidant og fargestoff, og fulgte pH og farge gjennom 5 dager kjølelagring. PEF-ekstraktet ga best stabilitet mot proteolytisk nedbrytning.",
+          es: "Incorporé extractos liofilizados de espirulina (1 % p/p) a hamburguesas de carne vacuna como antioxidante y colorante natural, con seguimiento de pH y color durante 5 días de refrigeración. El extracto por PEF mostró la mejor estabilidad frente al deterioro proteolítico.",
         },
       },
       {
@@ -263,51 +272,159 @@ export const projects = {
         },
       },
     ],
+    findingsLabel: { en: "Key findings", no: "Hovedfunn", es: "Conclusiones clave" },
+    findings: {
+      en: [
+        "Spirulina had the highest polyphenols, protein and antioxidant capacity (ABTS and ORAC).",
+        "Spirulina extract blended into burgers at 1% with no formulation problems and kept pH and appearance more stable than the control.",
+        "The PEF extract preserved meat quality best. The blue-green colour is stable, so it suits clean-label niches or a lower dose.",
+      ],
+      no: [
+        "Spirulina hadde høyest innhold av polyfenoler og protein og høyest antioksidantkapasitet (ABTS og ORAC).",
+        "Spirulinaekstraktet kunne tilsettes hamburgerne med 1 % uten problemer, og holdt pH og utseende mer stabilt enn kontrollen.",
+        "PEF-ekstraktet bevarte kjøttkvaliteten best. Den blågrønne fargen er stabil og passer for «clean label»-nisjer eller lavere dose.",
+      ],
+      es: [
+        "La espirulina tuvo el mayor contenido de polifenoles y proteínas y la mayor capacidad antioxidante (ABTS y ORAC).",
+        "El extracto de espirulina se incorporó al 1 % sin problemas de formulación y mantuvo el pH y la apariencia más estables que el control.",
+        "El extracto por PEF conservó mejor la calidad de la carne. El color verde azulado es estable, ideal para nichos clean label o una dosis menor.",
+      ],
+    } satisfies TList,
+    gallery: [
+      {
+        src: "extracts",
+        caption: {
+          en: "Water-based extracts after separation",
+          no: "Vannbaserte ekstrakter etter separasjon",
+          es: "Extractos acuosos tras la separación",
+        },
+      },
+      {
+        src: "burgers",
+        caption: {
+          en: "Control burgers (top) and burgers with spirulina extract",
+          no: "Kontrollhamburgere (øverst) og hamburgere med spirulinaekstrakt",
+          es: "Hamburguesas control (arriba) y con extracto de espirulina",
+        },
+      },
+      {
+        src: "colourDays",
+        caption: {
+          en: "Colour over 5 days at 4 °C: control, ASE and PEF",
+          no: "Farge over 5 dager ved 4 °C: kontroll, ASE og PEF",
+          es: "Color durante 5 días a 4 °C: control, ASE y PEF",
+        },
+      },
+      {
+        src: "ase",
+        caption: {
+          en: "ASE-200 pressurised liquid extractor",
+          no: "ASE-200 for trykksatt væskeekstraksjon",
+          es: "Equipo ASE-200 de líquidos presurizados",
+        },
+      },
+      {
+        src: "samples",
+        caption: {
+          en: "Freeze-dried and stored samples",
+          no: "Frysetørkede og lagrede prøver",
+          es: "Muestras liofilizadas y almacenadas",
+        },
+      },
+    ],
   },
-  impact: {
+  alfarajote: {
     kicker: {
-      en: "Product development",
-      no: "Produktutvikling",
-      es: "Desarrollo de producto",
+      en: "Product development · ImpactTaste × Estrella Galicia",
+      no: "Produktutvikling · ImpactTaste × Estrella Galicia",
+      es: "Desarrollo de producto · ImpactTaste × Estrella Galicia",
     },
-    title: "ImpactTaste × Estrella Galicia",
+    title: "Alfarajote",
+    tagline: {
+      en: "One bite, two cultures",
+      no: "Én bit, to kulturer",
+      es: "Un bocado, dos culturas",
+    },
     place: { en: "Spain", no: "Spania", es: "España" },
     date: { en: "2025", no: "2025", es: "2025" },
     summary: {
-      en: "An alfajor, Argentina's flagship sweet, made with spent brewing grain, a by-product of the brewing industry. The product idea was my own.",
-      no: "En alfajor, Argentinas mest kjente søtsak, laget med mask, et biprodukt fra ølbrygging. Produktideen var min egen.",
-      es: "Un alfajor, producto emblema argentino, elaborado con bagazo de cervecería, un subproducto de la industria cervecera. La idea del producto fue propia.",
+      en: "An Argentine alfajor made with flour from brewer's spent grain, a by-product of beer production, that brings Spanish and Argentine food cultures together. The product idea was mine, and I developed it with my team from recipe to business plan.",
+      no: "En argentinsk alfajor laget med mel av mask fra ølbrygging, et biprodukt fra ølproduksjon, som forener spansk og argentinsk matkultur. Produktideen var min, og jeg utviklet den sammen med teamet mitt fra oppskrift til forretningsplan.",
+      es: "Un alfajor argentino elaborado con harina de bagazo de cervecería, un subproducto de la producción de cerveza, que une la cultura gastronómica española y la argentina. La idea del producto fue mía y la desarrollé con mi equipo, desde la receta hasta el plan de negocio.",
     },
-    points: {
-      en: [
-        "Product concept, target consumers, naming, value proposition and communication",
-        "Consumer research on acceptance and market positioning",
-        "Linked sustainability and the circular economy to commercial value",
-      ],
-      no: [
-        "Produktkonsept, målgruppe, navn, verdiforslag og kommunikasjon",
-        "Forbrukerundersøkelse om aksept og markedsposisjon",
-        "Koblet bærekraft og sirkulærøkonomi til kommersiell verdi",
-      ],
-      es: [
-        "Concepto de producto, público objetivo, nombre, propuesta de valor y comunicación",
-        "Investigación de consumidores sobre aceptación y posicionamiento",
-        "Vinculé sustentabilidad y economía circular con valor comercial",
-      ],
+    claims: {
+      en: ["Source of fibre", "No additives", "Local ingredients", "55 g"],
+      no: ["Kilde til fiber", "Uten tilsetningsstoffer", "Lokale råvarer", "55 g"],
+      es: ["Fuente de fibra", "Sin aditivos", "Ingredientes locales", "55 g"],
     } satisfies TList,
-    statValue: "117",
-    statLabel: {
-      en: "consumers surveyed",
-      no: "forbrukere spurt",
-      es: "consumidores encuestados",
+    surveyLabel: {
+      en: "Consumer survey · 117 respondents",
+      no: "Forbrukerundersøkelse · 117 respondenter",
+      es: "Encuesta a consumidores · 117 respuestas",
     },
-    visualAlt: {
-      en: "Illustration of an alfajor made with spent brewing grain",
-      no: "Illustrasjon av en alfajor laget med mask fra ølbrygging",
-      es: "Ilustración de un alfajor elaborado con bagazo de cervecería",
+    survey: [
+      { value: 96, label: { en: "Interested in the product", no: "Interessert i produktet", es: "Interés en el producto" } },
+      { value: 75, label: { en: "Value the flavour", no: "Verdsetter smaken", es: "Valoran el sabor" } },
+      { value: 67, label: { en: "Value the use of spent grain", no: "Verdsetter bruken av mask", es: "Valoran el uso de bagazo" } },
+      { value: 65, label: { en: "Drawn to the cultural fusion", no: "Tiltrukket av kulturmøtet", es: "Les atrae la fusión cultural" } },
+    ],
+    businessLabel: { en: "Business case", no: "Forretningsmodell", es: "Modelo de negocio" },
+    business: [
+      { value: { en: "€1.12", no: "1,12 €", es: "1,12 €" }, label: { en: "Unit cost", no: "Enhetskostnad", es: "Costo unitario" } },
+      { value: { en: "€2.50", no: "2,50 €", es: "2,50 €" }, label: { en: "Retail price", no: "Utsalgspris", es: "Precio de venta" } },
+      { value: { en: "250k", no: "250 000", es: "250.000" }, label: { en: "Units per year", no: "Enheter per år", es: "Unidades por año" } },
+      { value: { en: "€625k", no: "625 000 €", es: "625.000 €" }, label: { en: "Annual revenue", no: "Årlig omsetning", es: "Facturación anual" } },
+      { value: { en: "51%", no: "51 %", es: "51 %" }, label: { en: "IRR", no: "Internrente", es: "TIR" } },
+      { value: { en: "1.5 yr", no: "1,5 år", es: "1,5 años" }, label: { en: "Discounted payback", no: "Diskontert tilbakebetaling", es: "Payback descontado" } },
+    ],
+    quote: {
+      en: "Viable, sensorially irresistible, culturally powerful and environmentally essential.",
+      no: "Levedyktig, sensorisk uimotståelig, kulturelt sterk og miljømessig avgjørende.",
+      es: "Viable, sensorialmente irresistible, culturalmente potente y ambientalmente esencial.",
     },
-    grainLabel: { en: "Spent grain", no: "Mask", es: "Bagazo" },
-    fillingLabel: { en: "Dulce de leche", no: "Dulce de leche", es: "Dulce de leche" },
+    quoteSource: {
+      en: "Feedback from experts in food engineering, by-products and consumer behaviour",
+      no: "Tilbakemelding fra eksperter innen næringsmiddelteknologi, biprodukter og forbrukeratferd",
+      es: "Devolución de expertos en ingeniería en alimentos, subproductos y comportamiento del consumidor",
+    },
+    gallery: [
+      {
+        src: "product",
+        caption: {
+          en: "Final product and packaging",
+          no: "Ferdig produkt og emballasje",
+          es: "Producto final y packaging",
+        },
+      },
+      {
+        src: "kitchen",
+        caption: {
+          en: "Developing the dough with spent-grain flour",
+          no: "Utvikling av deigen med maskmel",
+          es: "Desarrollo de la masa con harina de bagazo",
+        },
+      },
+      {
+        src: "filling",
+        caption: { en: "Filling with dulce de leche", no: "Fylling med dulce de leche", es: "Relleno con dulce de leche" },
+      },
+      {
+        src: "coating",
+        caption: { en: "Coating in 85% cocoa chocolate", no: "Dekking med 85 % kakaosjokolade", es: "Baño de chocolate 85 % cacao" },
+      },
+      {
+        src: "finished",
+        caption: { en: "Finished prototypes", no: "Ferdige prototyper", es: "Prototipos terminados" },
+      },
+      {
+        src: "box",
+        caption: {
+          en: "Gift box with regional flavours",
+          no: "Gaveeske med regionale smaker",
+          es: "Caja con sabores regionales",
+        },
+      },
+    ],
   },
 };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowDownToLine, ArrowUpRight, Mail, Menu } from "lucide-react";
+import { ArrowDown, ArrowDownToLine, ArrowUpRight, Mail, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -7,7 +7,20 @@ import { LangProvider, useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import portrait from "@/assets/dolores-rivera.jpg";
 import diploma from "@/assets/diploma-ingenieria-alimentos.jpg";
+import imgExtracts from "@/assets/projects/thesis-extracts.jpg";
+import imgBurgers from "@/assets/projects/thesis-burgers.jpg";
+import imgColourDays from "@/assets/projects/thesis-colour-days.jpg";
+import imgAse from "@/assets/projects/thesis-ase.jpg";
+import imgSamples from "@/assets/projects/thesis-samples.jpg";
+import imgProduct from "@/assets/projects/alfarajote-product.jpg";
+import imgKitchen from "@/assets/projects/alfarajote-kitchen.jpg";
+import imgFilling from "@/assets/projects/alfarajote-filling.jpg";
+import imgCoating from "@/assets/projects/alfarajote-coating.jpg";
+import imgFinished from "@/assets/projects/alfarajote-finished.jpg";
+import imgBox from "@/assets/projects/alfarajote-box.jpg";
+import * as Dialog from "@radix-ui/react-dialog";
 import {
+  type Lang,
   LANGS,
   about,
   contact,
@@ -292,152 +305,245 @@ function About() {
   );
 }
 
-function ThesisVisual() {
-  const { t } = useLang();
-  const th = projects.thesis;
-  return (
-    <figure
-      role="img"
-      aria-label={t(th.visualAlt)}
-      className="relative flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-sm border border-ink/10 bg-card p-6 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.35)]"
-    >
-      <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-        <span>Sample set · 03</span>
-        <span>València · 2026</span>
-      </div>
-      <div className="relative mx-auto h-[58%] w-[70%]" aria-hidden="true">
-        <span className="absolute left-0 top-[8%] aspect-square w-[46%] rounded-full bg-batata/90 mix-blend-multiply" />
-        <span className="absolute right-0 top-0 aspect-square w-[50%] rounded-full bg-citrus/85 mix-blend-multiply" />
-        <span className="absolute bottom-0 left-1/2 aspect-square w-[54%] -translate-x-1/2 rounded-full bg-spirulina mix-blend-multiply" />
-      </div>
-      <div className="flex items-end justify-between gap-4 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-        <span>PEF ⟷ PLE/ASE · H₂O</span>
-        <span>{t(projects.visualNote)}</span>
-      </div>
-    </figure>
-  );
-}
+const projectImages: Record<string, { src: string; w: number; h: number }> = {
+  extracts: { src: imgExtracts, w: 1320, h: 660 },
+  burgers: { src: imgBurgers, w: 684, h: 533 },
+  colourDays: { src: imgColourDays, w: 640, h: 360 },
+  ase: { src: imgAse, w: 600, h: 800 },
+  samples: { src: imgSamples, w: 600, h: 800 },
+  product: { src: imgProduct, w: 1050, h: 1400 },
+  kitchen: { src: imgKitchen, w: 600, h: 800 },
+  filling: { src: imgFilling, w: 600, h: 800 },
+  coating: { src: imgCoating, w: 408, h: 720 },
+  finished: { src: imgFinished, w: 600, h: 800 },
+  box: { src: imgBox, w: 600, h: 800 },
+};
 
-function AlfajorVisual() {
+type GalleryItem = { src: string; caption: Record<Lang, string> };
+
+// Thumbnail grid; each photo opens full size in a dialog
+function Gallery({ items, className, thumbClass }: { items: GalleryItem[]; className?: string; thumbClass?: string }) {
   const { t } = useLang();
-  const p = projects.impact;
-  // spent-grain kernels scattered around the alfajor: [x, y, rotation]
-  const kernels: [number, number, number][] = [
-    [62, 70, -20], [96, 52, 30], [330, 64, 15], [352, 98, -35], [300, 46, 60],
-    [48, 236, 40], [84, 258, -10], [370, 236, 25], [352, 278, -45], [372, 206, 5],
-  ];
+  const [open, setOpen] = useState<GalleryItem | null>(null);
   return (
-    <figure
-      role="img"
-      aria-label={t(p.visualAlt)}
-      className="relative aspect-[4/3] w-full overflow-hidden rounded-sm border border-ink/10 bg-card shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.35)]"
-    >
-      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden="true">
-        {kernels.map(([x, y, r], i) => (
-          <ellipse
-            key={i}
-            cx={x}
-            cy={y}
-            rx="9"
-            ry="4.5"
-            transform={`rotate(${r} ${x} ${y})`}
-            fill="hsl(var(--sand))"
-            stroke="hsl(var(--umber))"
-            strokeWidth="1"
-          />
-        ))}
-        <ellipse cx="200" cy="222" rx="118" ry="10" fill="hsl(var(--ink) / 0.08)" />
-        <rect x="88" y="176" width="224" height="36" rx="18" fill="hsl(var(--sand))" />
-        <rect x="96" y="160" width="208" height="24" rx="12" fill="hsl(var(--umber))" />
-        <rect x="88" y="120" width="224" height="44" rx="22" fill="hsl(var(--sand))" />
-        <path d="M88 142a22 22 0 0 1 22-22h180a22 22 0 0 1 22 22z" fill="hsl(var(--umber-deep))" />
-        {[[120, 190], [150, 198], [190, 188], [232, 197], [270, 190], [130, 152], [178, 150], [226, 154], [276, 150]].map(([x, y], i) => (
-          <circle key={i} cx={x} cy={y} r="2" fill="hsl(var(--umber) / 0.55)" />
-        ))}
-        <g fill="currentColor" className="text-muted-foreground" fontFamily="IBM Plex Mono, monospace" fontSize="10" letterSpacing="1.5">
-          <line x1="96" y1="58" x2="96" y2="100" stroke="currentColor" strokeWidth="0.75" />
-          <text x="108" y="62">{t(p.grainLabel).toUpperCase()}</text>
-          <line x1="290" y1="184" x2="290" y2="238" stroke="currentColor" strokeWidth="0.75" />
-          <text x="290" y="254" textAnchor="middle">{t(p.fillingLabel).toUpperCase()}</text>
-        </g>
-        <text x="20" y="288" textAnchor="start" fill="currentColor" className="text-muted-foreground" fontFamily="IBM Plex Mono, monospace" fontSize="10" letterSpacing="1.5">
-          {t(projects.visualNote).toUpperCase()}
-        </text>
-      </svg>
-    </figure>
+    <>
+      <ul className={className}>
+        {items.map((it) => {
+          const img = projectImages[it.src];
+          return (
+            <li key={it.src} className="min-w-0">
+              <figure>
+                <button
+                  type="button"
+                  onClick={() => setOpen(it)}
+                  aria-label={`${t(projects.viewPhoto)}: ${t(it.caption)}`}
+                  className="group block w-full overflow-hidden rounded-sm border border-ink/10 bg-card"
+                >
+                  <img
+                    src={img.src}
+                    alt=""
+                    width={img.w}
+                    height={img.h}
+                    loading="lazy"
+                    className={cn(
+                      "w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none",
+                      thumbClass,
+                    )}
+                  />
+                </button>
+                <figcaption className="mt-2 text-xs leading-snug text-muted-foreground">{t(it.caption)}</figcaption>
+              </figure>
+            </li>
+          );
+        })}
+      </ul>
+      <Dialog.Root open={open !== null} onOpenChange={(o) => !o && setOpen(null)}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 flex max-h-[92vh] w-[min(92vw,64rem)] -translate-x-1/2 -translate-y-1/2 flex-col gap-3 focus:outline-none">
+            {open && (
+              <>
+                <img
+                  src={projectImages[open.src].src}
+                  alt={t(open.caption)}
+                  className="max-h-[80vh] w-full rounded-sm object-contain"
+                />
+                <div className="flex items-center justify-between gap-4 text-paper">
+                  <Dialog.Title className="text-sm">{t(open.caption)}</Dialog.Title>
+                  <Dialog.Close className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-paper/30 hover:bg-paper/10">
+                    <X className="size-4" aria-hidden="true" />
+                    <span className="sr-only">{t(projects.close)}</span>
+                  </Dialog.Close>
+                </div>
+              </>
+            )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </>
   );
 }
 
 function Projects() {
   const { t } = useLang();
   const th = projects.thesis;
-  const p = projects.impact;
+  const al = projects.alfarajote;
+  const product = projectImages.product;
   return (
     <section id="projects" className="bg-sand-tint py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading index="04" id="projects" title={t(projects.heading)} />
 
-        <article className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-          <ThesisVisual />
-          <div className="min-w-0">
-            <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(th.kicker)}</p>
-            <h3 className="mt-3 font-display text-2xl leading-snug text-balance sm:text-3xl">{t(th.title)}</h3>
-            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              {th.place} · {t(th.date)}
-            </p>
-            <p className="mt-6 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              {t(th.sourcesLabel)}
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {th.sources.map((src) => (
-                <li
-                  key={src.latin}
-                  className="flex items-center gap-2 rounded-full border border-ink/20 bg-paper/60 py-1.5 pl-2 pr-3.5 text-sm"
-                >
-                  <span className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass])} aria-hidden="true" />
-                  {t(src.name)}
-                  <span className="font-display italic text-muted-foreground">{src.latin}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Thesis */}
+        <article>
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
+            <div className="min-w-0">
+              <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(th.kicker)}</p>
+              <h3 className="mt-3 font-display text-3xl leading-tight text-balance sm:text-4xl">{t(th.title)}</h3>
+              <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                {t(th.place)} · {t(th.date)}
+              </p>
+              <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(th.summary)}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{t(th.supervisor)}</p>
+              <ul className="mt-6 flex flex-wrap gap-2" aria-label={t(th.sourcesLabel)}>
+                {th.sources.map((src) => (
+                  <li
+                    key={src.latin}
+                    className="flex items-center gap-2 rounded-full border border-ink/20 bg-paper/60 py-1.5 pl-2 pr-3.5 text-sm"
+                  >
+                    <span className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass])} aria-hidden="true" />
+                    {t(src.name)}
+                    <span className="font-display italic text-muted-foreground">{src.latin}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Gallery
+              items={[th.gallery[0]]}
+              thumbClass="aspect-[2/1]"
+              className="min-w-0 self-start [&_figure>button]:shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
+            />
+          </div>
+
+          <dl className="mt-10 grid grid-cols-2 border-y border-ink/15 sm:grid-cols-4" aria-label={t(th.specsLabel)}>
+            {th.specs.map((sp, i) => (
+              <div key={i} className={cn("py-4 pr-3", i % 2 === 1 && "border-l border-ink/15 pl-4", i > 0 && "sm:border-l sm:pl-4", i >= 2 && "border-t border-ink/15 sm:border-t-0")}>
+                <dt className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">{t(sp.label)}</dt>
+                <dd className="mt-1 font-display text-lg tabular-nums">{t(sp.value)}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/15 sm:grid-cols-2 lg:grid-cols-4">
+            {th.steps.map((step, i) => (
+              <li key={i} className="bg-sand-tint p-6">
+                <p className="flex items-baseline gap-3">
+                  <span className="font-mono text-xs text-citrus-deep">0{i + 1}</span>
+                  <span className="font-display text-xl">{t(step.label)}</span>
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-ink/75">{t(step.text)}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-14">
+            <div>
+              <h4 className="section-label">{t(th.findingsLabel)}</h4>
+              <ul className="mt-4 space-y-4">
+                {t(th.findings).map((f) => (
+                  <li key={f} className="flex gap-3 text-[15px] leading-relaxed">
+                    <span className="mt-2.5 h-px w-4 shrink-0 bg-umber" aria-hidden="true" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Gallery
+              items={th.gallery.slice(1)}
+              className="grid grid-cols-2 gap-4"
+              thumbClass="aspect-[4/3]"
+            />
           </div>
         </article>
-        <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/15 sm:grid-cols-2 lg:grid-cols-4">
-          {th.steps.map((step, i) => (
-            <li key={i} className="bg-sand-tint p-6">
-              <p className="flex items-baseline gap-3">
-                <span className="font-mono text-xs text-citrus-deep">0{i + 1}</span>
-                <span className="font-display text-xl">{t(step.label)}</span>
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-ink/75">{t(step.text)}</p>
-            </li>
-          ))}
-        </ol>
 
-        <article className="mt-20 grid items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-2 lg:gap-14">
-          <div className="min-w-0 lg:order-2">
-            <AlfajorVisual />
+        {/* Alfarajote */}
+        <article className="mt-20 border-t border-ink/15 pt-20">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+            <figure className="min-w-0 self-start">
+              <img
+                src={product.src}
+                alt={t(al.gallery[0].caption)}
+                width={product.w}
+                height={product.h}
+                loading="lazy"
+                className="aspect-[4/5] w-full rounded-sm object-cover shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
+              />
+              <figcaption className="mt-2 text-xs text-muted-foreground">{t(al.gallery[0].caption)}</figcaption>
+            </figure>
+            <div className="min-w-0">
+              <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(al.kicker)}</p>
+              <h3 className="mt-3 font-display text-5xl font-semibold tracking-tight text-umber sm:text-6xl">{al.title}</h3>
+              <p className="mt-1 font-display text-xl italic text-ink/80">{t(al.tagline)}</p>
+              <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                {t(al.place)} · {t(al.date)}
+              </p>
+              <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(al.summary)}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {t(al.claims).map((c) => (
+                  <li key={c}>
+                    <Badge variant="outline" className="rounded-full border-umber/40 bg-paper/60 px-3 py-1 text-[13px] font-normal">
+                      {c}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+
+              <h4 className="section-label mt-8">{t(al.surveyLabel)}</h4>
+              <ul className="mt-4 space-y-3">
+                {al.survey.map((row) => (
+                  <li key={row.value + row.label.en}>
+                    <div className="flex items-baseline justify-between gap-3 text-sm">
+                      <span>{t(row.label)}</span>
+                      <span className="font-display text-lg tabular-nums">{row.value}%</span>
+                    </div>
+                    <div className="mt-1 h-1.5 rounded-full bg-ink/10" aria-hidden="true">
+                      <div className="h-full rounded-full bg-umber" style={{ width: `${row.value}%` }} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <blockquote className="mt-8 border-l-2 border-umber pl-5">
+                <p className="font-display text-xl italic leading-snug">“{t(al.quote)}”</p>
+                <footer className="mt-2 text-xs text-muted-foreground">{t(al.quoteSource)}</footer>
+              </blockquote>
+            </div>
           </div>
-          <div className="min-w-0 lg:order-1">
-            <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(p.kicker)}</p>
-            <h3 className="mt-3 font-display text-2xl leading-snug sm:text-3xl">{p.title}</h3>
-            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              {t(p.place)} · {t(p.date)}
-            </p>
-            <p className="mt-5 text-[17px] leading-relaxed text-ink/85">{t(p.summary)}</p>
-            <ul className="mt-5 space-y-2 text-sm text-ink/75">
-              {t(p.points).map((pt) => (
-                <li key={pt} className="flex gap-3">
-                  <span className="mt-2 h-px w-3 shrink-0 bg-umber" aria-hidden="true" />
-                  {pt}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 flex items-baseline gap-3 border-t border-ink/15 pt-5">
-              <span className="font-display text-5xl font-light tabular-nums">{p.statValue}</span>
-              <span className="text-sm text-muted-foreground">{t(p.statLabel)}</span>
-            </p>
-          </div>
+
+          <h4 className="section-label mt-12">{t(al.businessLabel)}</h4>
+          <dl className="mt-4 grid grid-cols-2 border-y border-ink/15 sm:grid-cols-3 lg:grid-cols-6">
+            {al.business.map((b, i) => (
+              <div
+                key={b.label.en}
+                className={cn(
+                  "flex flex-col py-4 pr-3",
+                  i % 2 === 1 && "border-l border-ink/15 pl-4",
+                  i >= 2 && "border-t border-ink/15",
+                  "sm:border-l-0 sm:pl-0 sm:[&:not(:nth-child(3n+1))]:border-l sm:[&:not(:nth-child(3n+1))]:pl-4 sm:[&:nth-child(-n+3)]:border-t-0",
+                  "lg:border-t-0 lg:[&:not(:first-child)]:border-l lg:[&:not(:first-child)]:pl-4",
+                )}
+              >
+                <dt className="text-xs text-muted-foreground">{t(b.label)}</dt>
+                <dd className="order-first font-display text-2xl tabular-nums">{t(b.value)}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <Gallery
+            items={al.gallery.slice(1)}
+            className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
+            thumbClass="aspect-[3/4]"
+          />
         </article>
       </div>
     </section>
