@@ -187,10 +187,10 @@ function Hero() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
             {t(hero.lead)}
           </p>
-          <p className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-spirulina-deep/20 bg-accent px-3 py-1 text-sm text-spirulina-deep">
+          <p className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-umber/25 bg-accent px-3 py-1 text-sm text-umber-deep">
             <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-spirulina-deep/40 motion-reduce:animate-none" />
-              <span className="relative inline-flex size-2 rounded-full bg-spirulina-deep" />
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-umber/40 motion-reduce:animate-none" />
+              <span className="relative inline-flex size-2 rounded-full bg-umber" />
             </span>
             {t(hero.status)}
           </p>
@@ -279,7 +279,7 @@ function Research() {
   const { t } = useLang();
   const th = research.thesis;
   return (
-    <section id="research" className="bg-sage py-20 text-ink">
+    <section id="research" className="bg-sand-tint py-20 text-ink">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 grid gap-3 lg:grid-cols-[12rem_1fr] lg:gap-8">
           <p className="pt-2 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
@@ -324,7 +324,7 @@ function Research() {
 
             <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/15 sm:grid-cols-2">
               {th.steps.map((step, i) => (
-                <li key={i} className="bg-sage p-6">
+                <li key={i} className="bg-sand-tint p-6">
                   <p className="flex items-baseline gap-3">
                     <span className="font-mono text-xs text-citrus-deep">0{i + 1}</span>
                     <span className="font-display text-xl">{t(step.label)}</span>
@@ -383,7 +383,7 @@ function Experience() {
               </div>
               <div>
                 <h3 className="font-display text-xl">{t(item.role)}</h3>
-                <p className="mt-0.5 text-sm font-medium text-spirulina-deep">{item.org}</p>
+                <p className="mt-0.5 text-sm font-medium text-umber-deep">{item.org}</p>
                 <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">{t(item.text)}</p>
               </div>
             </li>
@@ -475,7 +475,7 @@ function Skills() {
                     {[0, 1, 2, 3].map((i) => (
                       <span
                         key={i}
-                        className={cn("h-1.5 flex-1 rounded-full", i < l.level ? "bg-spirulina" : "bg-ink/10")}
+                        className={cn("h-1.5 flex-1 rounded-full", i < l.level ? "bg-umber" : "bg-ink/10")}
                       />
                     ))}
                   </div>
@@ -492,7 +492,7 @@ function Skills() {
 function Contact() {
   const { t } = useLang();
   return (
-    <section id="contact" className="bg-spirulina text-ink">
+    <section id="contact" className="bg-sand text-ink">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
           <p className="pt-3 font-mono text-xs uppercase tracking-[0.18em] text-ink/75">
