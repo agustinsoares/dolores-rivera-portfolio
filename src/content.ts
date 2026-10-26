@@ -14,6 +14,20 @@ export const contact = {
   linkedin: "https://www.linkedin.com/in/doloresrivera4344/",
   linkedinLabel: "linkedin.com/in/doloresrivera4344",
   cv: "/CV_Maria_Dolores_Rivera.pdf",
+  phones: [
+    {
+      country: { en: "Norway", no: "Norge", es: "Noruega" },
+      display: "+47 455 37 331",
+      tel: "+4745537331",
+      whatsapp: "",
+    },
+    {
+      country: { en: "Argentina · WhatsApp", no: "Argentina · WhatsApp", es: "Argentina · WhatsApp" },
+      display: "+54 9 2284 46-4478",
+      tel: "+5492284464478",
+      whatsapp: "https://wa.me/5492284464478",
+    },
+  ],
 };
 
 export const ui = {
@@ -892,10 +906,11 @@ export const contactSection = {
     es: "Hablemos",
   },
   text: {
-    en: "I'm looking for junior roles in Bergen and across Norway where engineering, lab and hands-on skills count. Email is the best way to reach me.",
-    no: "Jeg ser etter juniorstillinger i Bergen og ellers i Norge der ingeniørkunnskap, laboratorieerfaring og praktiske ferdigheter teller. E-post er den beste måten å nå meg på.",
-    es: "Busco puestos junior en Bergen y el resto de Noruega donde cuenten la ingeniería, el laboratorio y lo práctico. El correo electrónico es la mejor forma de contactarme.",
+    en: "I'm looking for junior roles in Bergen, and I'm also open to international opportunities when the work can be done remotely. Wherever engineering, lab and hands-on skills count, I'd love to hear from you.",
+    no: "Jeg ser etter juniorstillinger i Bergen, og er også åpen for internasjonale muligheter når arbeidet kan gjøres på fjernarbeid. Der ingeniørkunnskap, laboratorieerfaring og praktiske ferdigheter teller, hører jeg gjerne fra deg.",
+    es: "Busco puestos junior en Bergen y también estoy abierta a oportunidades internacionales cuando el trabajo pueda hacerse de forma remota. Donde cuenten la ingeniería, el laboratorio y lo práctico, me encantaría saber de vos.",
   },
+  whatsappLabel: { en: "Message on WhatsApp", no: "Send melding på WhatsApp", es: "Escribir por WhatsApp" },
   footer: {
     en: "Bergen, Norway",
     no: "Bergen, Norge",

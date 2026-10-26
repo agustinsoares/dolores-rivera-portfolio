@@ -6,6 +6,8 @@ import {
   ArrowUpRight,
   Mail,
   Menu,
+  MessageCircle,
+  Phone,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -1076,11 +1078,38 @@ function Contact() {
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/75">{t(contactSection.text)}</p>
             <a
               href={`mailto:${contact.email}`}
-              className="mt-10 inline-flex items-center gap-3 break-all font-display text-2xl underline decoration-ink/40 decoration-1 underline-offset-8 transition-colors hover:decoration-citrus-deep sm:text-3xl"
+              className="mt-10 inline-flex max-w-full items-center gap-3 font-display text-[1.3rem] underline decoration-ink/40 decoration-1 underline-offset-8 transition-colors [overflow-wrap:anywhere] hover:decoration-citrus-deep sm:text-3xl"
             >
               <Mail className="size-6 shrink-0" aria-hidden="true" />
               {contact.email}
             </a>
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+              {contact.phones.map((ph) => (
+                <li key={ph.tel} className="border-t border-ink/20 pt-3">
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-ink/85">{t(ph.country)}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1">
+                    <a
+                      href={`tel:${ph.tel}`}
+                      className="inline-flex items-center gap-2 font-display text-xl tabular-nums underline decoration-ink/30 decoration-1 underline-offset-4 hover:decoration-citrus-deep"
+                    >
+                      <Phone className="size-4 shrink-0" aria-hidden="true" />
+                      {ph.display}
+                    </a>
+                    {ph.whatsapp && (
+                      <a
+                        href={ph.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm underline decoration-ink/30 underline-offset-4 hover:decoration-citrus-deep"
+                      >
+                        <MessageCircle className="size-4" aria-hidden="true" />
+                        {t(contactSection.whatsappLabel)}
+                      </a>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
             <div className="mt-10 flex flex-wrap gap-3">
               <Button asChild size="lg" variant="secondary" className="rounded-full bg-paper text-ink hover:bg-paper/90">
                 <a href={contact.linkedin} target="_blank" rel="noopener noreferrer">
