@@ -43,6 +43,15 @@ import chartProtein from "@/assets/projects/chart-protein.jpg";
 import imgHands from "@/assets/projects/alfarajote-hands.jpg";
 import imgVideoPoster from "@/assets/projects/alfarajote-video-poster.jpg";
 import videoPrototype from "@/assets/projects/alfarajote-prototipo.mp4";
+import igTurtles from "@/assets/instagram/turtles.jpg";
+import igLion from "@/assets/instagram/lion.jpg";
+import igBunnies from "@/assets/instagram/bunnies.jpg";
+import igCrab from "@/assets/instagram/crab.jpg";
+import igOwl from "@/assets/instagram/owl.jpg";
+import igPizza from "@/assets/instagram/pizza.jpg";
+import igDolphin from "@/assets/instagram/dolphin.jpg";
+import igFish from "@/assets/instagram/fish.jpg";
+import igTart from "@/assets/instagram/tart.jpg";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   type Lang,
@@ -362,6 +371,7 @@ const projectImages: Record<string, { src: string; w: number; h: number }> = {
 };
 
 const stepImages = [step1, step2, step3, step4, step5];
+const igFeed = [igTurtles, igLion, igBunnies, igCrab, igOwl, igPizza, igDolphin, igFish, igTart];
 
 type GalleryItem = { src: string; caption: Record<Lang, string> };
 
@@ -752,22 +762,22 @@ function Projects() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t(ig.cta)}: ${ig.handle}`}
-            className="group relative mx-auto block w-full max-w-sm overflow-hidden rounded-sm border border-ink/10 bg-card p-5 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
+            className="group relative mx-auto block w-full max-w-md overflow-hidden rounded-sm border border-ink/10 bg-card p-3 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
           >
-            {/* a "range of colours" in food tones, after the account name */}
-            <div className="grid grid-cols-3 gap-2" aria-hidden="true">
-              {[
-                "bg-citrus", "bg-batata", "bg-spirulina",
-                "bg-sand", "bg-umber", "bg-[#d9a441]",
-                "bg-[#7a9a52]", "bg-[#c4473a]", "bg-[#e8d9b5]",
-              ].map((c, i) => (
-                <span
+            <div role="img" aria-label={t(ig.feedAlt)} className="grid grid-cols-3 gap-1">
+              {igFeed.map((src, i) => (
+                <img
                   key={i}
-                  className={cn("aspect-square rounded-sm transition-transform duration-500 group-hover:scale-[0.96] motion-reduce:transition-none", c)}
+                  src={src}
+                  alt=""
+                  width={480}
+                  height={480}
+                  loading="lazy"
+                  className="aspect-square w-full object-cover transition-opacity duration-300 group-hover:opacity-90"
                 />
               ))}
             </div>
-            <span className="mt-5 flex items-center justify-between gap-3">
+            <span className="mt-3 flex items-center justify-between gap-3 px-1 pb-1">
               <span className="flex items-center gap-2 font-display text-xl">
                 <InstagramIcon className="size-5 text-umber-deep" />
                 {ig.handle}
@@ -779,7 +789,16 @@ function Projects() {
             <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(ig.kicker)}</p>
             <h3 className="mt-3 font-display text-4xl font-semibold tracking-tight text-umber sm:text-5xl">{ig.title}</h3>
             <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">{ig.handle}</p>
+            <dl className="mt-4 flex gap-8">
+              {ig.stats.map((st) => (
+                <div key={st.value} className="flex flex-col">
+                  <dt className="text-sm text-muted-foreground">{t(st.label)}</dt>
+                  <dd className="order-first font-display text-3xl tabular-nums">{st.value}</dd>
+                </div>
+              ))}
+            </dl>
             <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(ig.summary)}</p>
+            <p className="mt-3 border-l-2 border-umber pl-4 text-[15px] italic leading-relaxed text-ink/75">{t(ig.nameStory)}</p>
             <ul className="mt-5 flex flex-wrap gap-2">
               {t(ig.points).map((c) => (
                 <li key={c}>

@@ -569,15 +569,29 @@ export const projects = {
     handle: "@lagamadecolores",
     url: "https://www.instagram.com/lagamadecolores/",
     summary: {
-      en: "My Instagram page, where I used to share recipes and healthy-eating ideas: colourful, simple food with a nutrition angle.",
-      no: "Instagram-siden min, der jeg delte oppskrifter og ideer om sunt kosthold: fargerik, enkel mat med fokus på ernæring.",
-      es: "Mi página de Instagram, donde subía recetas e ideas de alimentación saludable: comida colorida y simple, con mirada nutricional.",
+      en: "I started this account during lockdown to share plant-based recipes with fruit and vegetables of every colour, the vegetable garden we built at home, and tips so others could grow their own food.",
+      no: "Jeg startet kontoen under nedstengningen for å dele plantebaserte oppskrifter med frukt og grønnsaker i alle farger, kjøkkenhagen vi bygde hjemme, og tips så andre kunne dyrke sin egen mat.",
+      es: "Abrí esta cuenta durante la cuarentena para compartir recetas a base de vegetales, con frutas y verduras de todos los colores, la huerta que armamos en casa y tips para que otros pudieran producir sus propios alimentos.",
     },
+    nameStory: {
+      en: "The name has a double meaning: “La Gama” was the old name of my hometown, and “Colores” is what my family calls me instead of Dolores. It is also about the range of colours in real food.",
+      no: "Navnet har dobbel betydning: «La Gama» var det gamle navnet på hjembyen min, og «Colores» er det familien kaller meg i stedet for Dolores. Det handler også om fargespekteret i ekte mat.",
+      es: "El nombre tiene doble sentido: “La Gama” era el nombre anterior de mi ciudad y “Colores” es como me dicen en casa en lugar de Dolores. Además habla de la gama de colores de la comida real.",
+    },
+    stats: [
+      { value: "93", label: { en: "posts", no: "innlegg", es: "publicaciones" } },
+      { value: "558", label: { en: "followers", no: "følgere", es: "seguidores" } },
+    ],
     points: {
-      en: ["Recipe development", "Food photography and styling", "Communicating nutrition simply"],
-      no: ["Oppskriftsutvikling", "Matfotografering og styling", "Formidle ernæring på en enkel måte"],
-      es: ["Desarrollo de recetas", "Fotografía y estilismo de alimentos", "Comunicar nutrición de forma simple"],
+      en: ["Plant-based recipes", "Creative fruit and veg plates", "Home vegetable garden", "Homemade jams", "Food photography"],
+      no: ["Plantebaserte oppskrifter", "Kreative frukt- og grønnsakstallerkener", "Kjøkkenhage hjemme", "Hjemmelaget syltetøy", "Matfotografering"],
+      es: ["Recetas a base de vegetales", "Platos creativos con frutas y verduras", "Huerta casera", "Mermeladas caseras", "Fotografía de alimentos"],
     } satisfies TList,
+    feedAlt: {
+      en: "Posts from @lagamadecolores: animals made from fruit, such as kiwi turtles, an orange lion and strawberry bunnies, plus homemade vegetable pizzas",
+      no: "Innlegg fra @lagamadecolores: dyr laget av frukt, som kiwiskilpadder, en appelsinløve og jordbærkaniner, og hjemmelagde grønnsakspizzaer",
+      es: "Publicaciones de @lagamadecolores: animales hechos con frutas, como tortugas de kiwi, un león de naranja y conejitos de frutilla, y pizzas caseras de verduras",
+    },
     cta: { en: "Visit on Instagram", no: "Besøk på Instagram", es: "Ver en Instagram" },
   },
 };
