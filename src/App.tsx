@@ -70,6 +70,24 @@ function LanguageSwitcher({ className }: { className?: string }) {
   );
 }
 
+// MDR monogram written like a signature; the ink "writes" in on load, then the swash draws underneath
+function Signature() {
+  return (
+    <span aria-hidden="true" className="relative block w-[5.5rem] text-ink transition-transform duration-300 group-hover:-rotate-3">
+      <span className="signature-ink block font-signature text-[2.9rem] leading-[0.9]">MDR</span>
+      <svg viewBox="0 0 80 14" className="signature-swash absolute -bottom-1 left-0 w-full overflow-visible" fill="none">
+        <path
+          d="M2 9c14-5 30-7 46-4 9 2 15 4 22 1 3-1 5-3 6-5"
+          stroke="hsl(var(--umber))"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          pathLength={1}
+        />
+      </svg>
+    </span>
+  );
+}
+
 function Header() {
   const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
@@ -90,14 +108,8 @@ function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <a
-          href="#top"
-          aria-label="María Dolores Rivera"
-          className="flex size-11 items-center justify-center font-display text-2xl font-semibold italic leading-none tracking-[-0.12em] text-ink"
-        >
-          <span aria-hidden="true">
-            D<span className="text-umber">R</span>
-          </span>
+        <a href="#top" aria-label="María Dolores Rivera" className="group -ml-1 flex h-12 items-center px-1">
+          <Signature />
         </a>
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-7 text-sm">
@@ -123,7 +135,7 @@ function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="flex w-80 flex-col bg-paper">
               <SheetTitle className="font-display text-xl font-semibold">
-                María Dolores <span className="italic text-umber-deep">Rivera</span>
+                María Dolores <span className="italic">Rivera</span>
               </SheetTitle>
               <nav aria-label="Mobile" className="mt-8">
                 <ul className="space-y-1">
@@ -160,17 +172,23 @@ function Hero() {
   const { t } = useLang();
   return (
     <section id="top" className="mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 sm:pt-14 lg:pb-24">
-      <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto] lg:gap-20">
-        <div className="reveal order-2 md:order-1">
+      <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[auto_auto] md:justify-center md:gap-14 lg:gap-24">
+        <div className="reveal relative order-2 md:order-1">
           <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.16em] text-umber-deep">
             <span className="h-px w-7 bg-umber" aria-hidden="true" />
             {t(hero.eyebrow)}
           </p>
+          <span
+            className="pointer-events-none absolute -right-6 top-[42%] hidden size-8 items-center justify-center rounded-full border border-umber/60 lg:flex"
+            aria-hidden="true"
+          >
+            <span className="size-1.5 rounded-full bg-umber" />
+          </span>
           <h1 className="mt-6 font-display text-[3.4rem] font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl lg:text-[5.5rem]">
             <span className="block">{hero.firstName}</span>
-            <span className="block italic text-umber">{hero.lastName}</span>
+            <span className="block italic">{hero.lastName}</span>
           </h1>
-          <p className="mt-8 max-w-md text-[17px] leading-relaxed text-muted-foreground text-pretty">
+          <p className="mt-8 max-w-[28rem] text-[17px] leading-relaxed text-muted-foreground text-pretty">
             <strong className="font-semibold text-foreground">{t(hero.role)}</strong> {t(hero.lead)}{" "}
             {t(hero.basedIn)} <strong className="font-semibold text-foreground">{t(hero.location)}</strong>.
           </p>
@@ -192,7 +210,14 @@ function Hero() {
           </div>
         </div>
 
-        <div className="reveal order-1 md:order-2 [animation-delay:150ms]">
+        <div className="reveal relative order-1 md:order-2 [animation-delay:150ms]">
+          <a
+            href="#about"
+            className="absolute -left-12 bottom-0 hidden flex-col items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-muted-foreground lg:-left-14 lg:flex"
+          >
+            <span className="[writing-mode:vertical-rl]">{t(hero.scroll)}</span>
+            <span className="h-14 w-px bg-ink/25" aria-hidden="true" />
+          </a>
           <img
             src={portrait}
             alt={t(hero.photoAlt)}
@@ -202,20 +227,6 @@ function Hero() {
           />
         </div>
 
-        {/* decorative ring between the columns, as in a lab sample marker */}
-        <span
-          className="pointer-events-none absolute left-[50%] top-[36%] hidden size-8 items-center justify-center rounded-full border border-umber/60 lg:flex"
-          aria-hidden="true"
-        >
-          <span className="size-1.5 rounded-full bg-umber" />
-        </span>
-        <a
-          href="#about"
-          className="absolute bottom-0 left-[54%] hidden flex-col items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-muted-foreground lg:flex"
-        >
-          <span className="[writing-mode:vertical-rl]">{t(hero.scroll)}</span>
-          <span className="h-14 w-px bg-ink/25" aria-hidden="true" />
-        </a>
       </div>
 
       <dl className="mt-16 grid grid-cols-2 border-t border-ink/15 lg:grid-cols-4">

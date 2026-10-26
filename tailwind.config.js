@@ -12,6 +12,7 @@ export default {
         display: ['"Fraunces"', "Georgia", "serif"],
         sans: ['"Instrument Sans"', "system-ui", "sans-serif"],
         mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+        signature: ['"Herr Von Muellerhoff"', '"Brush Script MT"', "cursive"],
       },
       colors: {
         paper: "hsl(var(--paper))",
