@@ -15,13 +15,13 @@ import {
   education,
   experience,
   hero,
-  research,
+  projects,
   skills,
   stats,
   ui,
 } from "@/content";
 
-const SECTIONS = ["about", "research", "experience", "education", "skills", "contact"] as const;
+const SECTIONS = ["about", "education", "experience", "projects", "skills", "contact"] as const;
 
 const toneClass = {
   batata: "bg-batata",
@@ -99,11 +99,25 @@ function Header() {
             D<span className="text-umber">R</span>
           </span>
         </a>
+        <nav aria-label="Main" className="hidden lg:block">
+          <ul className="flex items-center gap-7 text-sm">
+            {SECTIONS.map((id) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  className="text-muted-foreground underline-offset-[6px] transition-colors hover:text-foreground hover:underline hover:decoration-umber"
+                >
+                  {t(ui.nav[id])}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="size-11 rounded-none" aria-label={t(ui.menu)}>
+              <Button variant="ghost" size="icon" className="size-11 rounded-none lg:hidden" aria-label={t(ui.menu)}>
                 <Menu className="!size-5" />
               </Button>
             </SheetTrigger>
@@ -111,7 +125,7 @@ function Header() {
               <SheetTitle className="font-display text-xl font-semibold">
                 María Dolores <span className="italic text-umber-deep">Rivera</span>
               </SheetTitle>
-              <nav aria-label="Main" className="mt-8">
+              <nav aria-label="Mobile" className="mt-8">
                 <ul className="space-y-1">
                   {SECTIONS.map((id) => (
                     <li key={id}>
@@ -267,90 +281,153 @@ function About() {
   );
 }
 
-function Research() {
+function ThesisVisual() {
   const { t } = useLang();
-  const th = research.thesis;
+  const th = projects.thesis;
   return (
-    <section id="research" className="bg-sand-tint py-20 text-ink">
+    <figure
+      role="img"
+      aria-label={t(th.visualAlt)}
+      className="relative flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-sm border border-ink/10 bg-card p-6 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.35)]"
+    >
+      <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+        <span>Sample set · 03</span>
+        <span>València · 2026</span>
+      </div>
+      <div className="relative mx-auto h-[58%] w-[70%]" aria-hidden="true">
+        <span className="absolute left-0 top-[8%] aspect-square w-[46%] rounded-full bg-batata/90 mix-blend-multiply" />
+        <span className="absolute right-0 top-0 aspect-square w-[50%] rounded-full bg-citrus/85 mix-blend-multiply" />
+        <span className="absolute bottom-0 left-1/2 aspect-square w-[54%] -translate-x-1/2 rounded-full bg-spirulina mix-blend-multiply" />
+      </div>
+      <div className="flex items-end justify-between gap-4 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+        <span>PEF ⟷ PLE/ASE · H₂O</span>
+        <span>{t(projects.visualNote)}</span>
+      </div>
+    </figure>
+  );
+}
+
+function AlfajorVisual() {
+  const { t } = useLang();
+  const p = projects.impact;
+  // spent-grain kernels scattered around the alfajor: [x, y, rotation]
+  const kernels: [number, number, number][] = [
+    [62, 70, -20], [96, 52, 30], [330, 64, 15], [352, 98, -35], [300, 46, 60],
+    [48, 236, 40], [84, 258, -10], [370, 236, 25], [352, 278, -45], [372, 206, 5],
+  ];
+  return (
+    <figure
+      role="img"
+      aria-label={t(p.visualAlt)}
+      className="relative aspect-[4/3] w-full overflow-hidden rounded-sm border border-ink/10 bg-card shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.35)]"
+    >
+      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden="true">
+        {kernels.map(([x, y, r], i) => (
+          <ellipse
+            key={i}
+            cx={x}
+            cy={y}
+            rx="9"
+            ry="4.5"
+            transform={`rotate(${r} ${x} ${y})`}
+            fill="hsl(var(--sand))"
+            stroke="hsl(var(--umber))"
+            strokeWidth="1"
+          />
+        ))}
+        <ellipse cx="200" cy="222" rx="118" ry="10" fill="hsl(var(--ink) / 0.08)" />
+        <rect x="88" y="176" width="224" height="36" rx="18" fill="hsl(var(--sand))" />
+        <rect x="96" y="160" width="208" height="24" rx="12" fill="hsl(var(--umber))" />
+        <rect x="88" y="120" width="224" height="44" rx="22" fill="hsl(var(--sand))" />
+        <path d="M88 142a22 22 0 0 1 22-22h180a22 22 0 0 1 22 22z" fill="hsl(var(--umber-deep))" />
+        {[[120, 190], [150, 198], [190, 188], [232, 197], [270, 190], [130, 152], [178, 150], [226, 154], [276, 150]].map(([x, y], i) => (
+          <circle key={i} cx={x} cy={y} r="2" fill="hsl(var(--umber) / 0.55)" />
+        ))}
+        <g fill="currentColor" className="text-muted-foreground" fontFamily="IBM Plex Mono, monospace" fontSize="10" letterSpacing="1.5">
+          <line x1="96" y1="58" x2="96" y2="100" stroke="currentColor" strokeWidth="0.75" />
+          <text x="108" y="62">{t(p.grainLabel).toUpperCase()}</text>
+          <line x1="290" y1="184" x2="290" y2="238" stroke="currentColor" strokeWidth="0.75" />
+          <text x="290" y="254" textAnchor="middle">{t(p.fillingLabel).toUpperCase()}</text>
+        </g>
+        <text x="20" y="288" textAnchor="start" fill="currentColor" className="text-muted-foreground" fontFamily="IBM Plex Mono, monospace" fontSize="10" letterSpacing="1.5">
+          {t(projects.visualNote).toUpperCase()}
+        </text>
+      </svg>
+    </figure>
+  );
+}
+
+function Projects() {
+  const { t } = useLang();
+  const th = projects.thesis;
+  const p = projects.impact;
+  return (
+    <section id="projects" className="bg-sand-tint py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mb-10 grid gap-3 lg:grid-cols-[12rem_1fr] lg:gap-8">
-          <p className="pt-2 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-            02 — {t(ui.nav.research)}
-          </p>
-          <h2 className="font-display text-3xl font-light leading-tight tracking-tight sm:text-4xl">
-            {t(research.heading)}
-          </h2>
-        </div>
+        <SectionHeading index="04" id="projects" title={t(projects.heading)} />
 
-        <article className="grid gap-8 border-t border-ink/15 pt-10 lg:grid-cols-[12rem_1fr] lg:gap-8">
-          <div className="font-mono text-xs uppercase leading-relaxed tracking-widest text-muted-foreground">
-            <p>{t(th.date)}</p>
-            <p className="mt-1 normal-case tracking-normal">{th.place}</p>
-          </div>
-          <div>
+        <article className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+          <ThesisVisual />
+          <div className="min-w-0">
             <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(th.kicker)}</p>
-            <h3 className="mt-3 max-w-3xl font-display text-2xl leading-snug sm:text-3xl">
-              {t(th.title)}
-            </h3>
-
-            <div className="mt-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                {t(th.sourcesLabel)}
-              </p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {th.sources.map((src) => (
-                  <li
-                    key={src.latin}
-                    className="flex items-center gap-2 rounded-full border border-ink/20 py-1.5 pl-2 pr-3.5 text-sm"
-                  >
-                    <span
-                      className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass], src.tone === "spirulina" && "ring-1 ring-ink/20")}
-                      aria-hidden="true"
-                    />
-                    {t(src.name)}
-                    <span className="font-display italic text-muted-foreground">{src.latin}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/15 sm:grid-cols-2">
-              {th.steps.map((step, i) => (
-                <li key={i} className="bg-sand-tint p-6">
-                  <p className="flex items-baseline gap-3">
-                    <span className="font-mono text-xs text-citrus-deep">0{i + 1}</span>
-                    <span className="font-display text-xl">{t(step.label)}</span>
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-ink/75">{t(step.text)}</p>
+            <h3 className="mt-3 font-display text-2xl leading-snug text-balance sm:text-3xl">{t(th.title)}</h3>
+            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {th.place} · {t(th.date)}
+            </p>
+            <p className="mt-6 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {t(th.sourcesLabel)}
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {th.sources.map((src) => (
+                <li
+                  key={src.latin}
+                  className="flex items-center gap-2 rounded-full border border-ink/20 bg-paper/60 py-1.5 pl-2 pr-3.5 text-sm"
+                >
+                  <span className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass])} aria-hidden="true" />
+                  {t(src.name)}
+                  <span className="font-display italic text-muted-foreground">{src.latin}</span>
                 </li>
               ))}
-            </ol>
+            </ul>
           </div>
         </article>
+        <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/15 sm:grid-cols-2 lg:grid-cols-4">
+          {th.steps.map((step, i) => (
+            <li key={i} className="bg-sand-tint p-6">
+              <p className="flex items-baseline gap-3">
+                <span className="font-mono text-xs text-citrus-deep">0{i + 1}</span>
+                <span className="font-display text-xl">{t(step.label)}</span>
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-ink/75">{t(step.text)}</p>
+            </li>
+          ))}
+        </ol>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-[12rem_1fr] lg:gap-8">
-          <div />
-          <div className="grid gap-6 md:grid-cols-2">
-            {research.projects.map((p) => (
-              <article key={p.title} className="flex flex-col rounded-sm border border-ink/15 p-6">
-                <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(p.kicker)}</p>
-                <h3 className="mt-3 font-display text-2xl leading-snug">{p.title}</h3>
-                <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                  {t(p.place)} · {t(p.date)}
-                </p>
-                <p className="mt-4 leading-relaxed text-ink/85">{t(p.summary)}</p>
-                <ul className="mt-4 space-y-2 text-sm text-ink/75">
-                  {t(p.points).map((pt) => (
-                    <li key={pt} className="flex gap-3">
-                      <span className="mt-2 h-px w-3 shrink-0 bg-citrus-deep" aria-hidden="true" />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+        <article className="mt-20 grid items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-2 lg:gap-14">
+          <div className="min-w-0 lg:order-2">
+            <AlfajorVisual />
           </div>
-        </div>
+          <div className="min-w-0 lg:order-1">
+            <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(p.kicker)}</p>
+            <h3 className="mt-3 font-display text-2xl leading-snug sm:text-3xl">{p.title}</h3>
+            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {t(p.place)} · {t(p.date)}
+            </p>
+            <p className="mt-5 text-[17px] leading-relaxed text-ink/85">{t(p.summary)}</p>
+            <ul className="mt-5 space-y-2 text-sm text-ink/75">
+              {t(p.points).map((pt) => (
+                <li key={pt} className="flex gap-3">
+                  <span className="mt-2 h-px w-3 shrink-0 bg-umber" aria-hidden="true" />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 flex items-baseline gap-3 border-t border-ink/15 pt-5">
+              <span className="font-display text-5xl font-light tabular-nums">{p.statValue}</span>
+              <span className="text-sm text-muted-foreground">{t(p.statLabel)}</span>
+            </p>
+          </div>
+        </article>
       </div>
     </section>
   );
@@ -392,7 +469,7 @@ function Education() {
   return (
     <section id="education" className="border-y border-ink/10 bg-card/60 py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeading index="04" id="education" title={t(d.title)} />
+        <SectionHeading index="02" id="education" title={t(d.title)} />
         <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
           <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             <p>{d.date}</p>
@@ -617,9 +694,9 @@ function Page() {
       <main id="main">
         <Hero />
         <About />
-        <Research />
-        <Experience />
         <Education />
+        <Experience />
+        <Projects />
         <Skills />
         <Contact />
       </main>

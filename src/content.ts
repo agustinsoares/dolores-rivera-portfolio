@@ -19,7 +19,7 @@ export const contact = {
 export const ui = {
   nav: {
     about: { en: "About", no: "Om meg", es: "Perfil" },
-    research: { en: "Research", no: "Forskning", es: "Investigación" },
+    projects: { en: "Projects", no: "Prosjekter", es: "Proyectos" },
     experience: { en: "Experience", no: "Erfaring", es: "Experiencia" },
     education: { en: "Education", no: "Utdanning", es: "Formación" },
     skills: { en: "Skills", no: "Ferdigheter", es: "Habilidades" },
@@ -182,11 +182,16 @@ export const about = {
   } satisfies TList,
 };
 
-export const research = {
+export const projects = {
   heading: {
-    en: "Research and product development",
-    no: "Forskning og produktutvikling",
-    es: "Investigación y desarrollo de productos",
+    en: "Research and product projects",
+    no: "Forsknings- og produktprosjekter",
+    es: "Proyectos de investigación y producto",
+  },
+  visualNote: {
+    en: "Illustration",
+    no: "Illustrasjon",
+    es: "Ilustración",
   },
   thesis: {
     kicker: {
@@ -200,6 +205,11 @@ export const research = {
       en: "Agro-food by-products as natural antioxidants in a hamburger",
       no: "Biprodukter fra matindustrien som naturlige antioksidanter i hamburger",
       es: "Subproductos agroalimentarios como antioxidantes naturales en hamburguesas",
+    },
+    visualAlt: {
+      en: "Illustration of the three by-products studied: sweet potato peel, orange peel and spirulina",
+      no: "Illustrasjon av de tre biproduktene: søtpotetskall, appelsinskall og spirulina",
+      es: "Ilustración de los tres subproductos estudiados: cáscara de batata, cáscara de naranja y espirulina",
     },
     sourcesLabel: { en: "Sources studied", no: "Råstoffer undersøkt", es: "Materias primas estudiadas" },
     sources: [
@@ -254,80 +264,59 @@ export const research = {
       },
     ],
   },
-  projects: [
-    {
-      kicker: {
-        en: "Product development",
-        no: "Produktutvikling",
-        es: "Desarrollo de producto",
-      },
-      title: "ImpactTaste × Estrella Galicia",
-      place: { en: "Spain", no: "Spania", es: "España" },
-      date: { en: "2025", no: "2025", es: "2025" },
-      summary: {
-        en: "An alfajor, Argentina's flagship sweet, made with spent brewing grain, a by-product of the brewing industry. The product idea was my own.",
-        no: "En alfajor, Argentinas mest kjente søtsak, laget med mask, et biprodukt fra ølbrygging. Produktideen var min egen.",
-        es: "Un alfajor, producto emblema argentino, elaborado con bagazo de cervecería, un subproducto de la industria cervecera. La idea del producto fue propia.",
-      },
-      points: {
-        en: [
-          "Product concept, target consumers, naming, value proposition and communication",
-          "Consumer research with 117 respondents on acceptance and market positioning",
-          "Linked sustainability and the circular economy to commercial value",
-        ],
-        no: [
-          "Produktkonsept, målgruppe, navn, verdiforslag og kommunikasjon",
-          "Forbrukerundersøkelse med 117 respondenter om aksept og markedsposisjon",
-          "Koblet bærekraft og sirkulærøkonomi til kommersiell verdi",
-        ],
-        es: [
-          "Concepto de producto, público objetivo, nombre, propuesta de valor y comunicación",
-          "Investigación de consumidores con 117 respuestas sobre aceptación y posicionamiento",
-          "Vinculé sustentabilidad y economía circular con valor comercial",
-        ],
-      } satisfies TList,
+  impact: {
+    kicker: {
+      en: "Product development",
+      no: "Produktutvikling",
+      es: "Desarrollo de producto",
     },
-    {
-      kicker: {
-        en: "Research laboratory intern",
-        no: "Forskningspraktikant, laboratorium",
-        es: "Pasante de laboratorio de investigación",
-      },
-      title: "Universidad Católica Argentina (UCA)",
-      place: { en: "Buenos Aires", no: "Buenos Aires", es: "Buenos Aires" },
-      date: { en: "May 2023 – Dec 2024", no: "mai 2023 – des. 2024", es: "may. 2023 – dic. 2024" },
-      summary: {
-        en: "Research on anthocyanins and the antioxidant properties of elderberry juice.",
-        no: "Forskning på antocyaniner og antioksidantegenskapene i hyllebærsaft.",
-        es: "Investigación sobre antocianinas y propiedades antioxidantes del jugo de saúco.",
-      },
-      points: {
-        en: [
-          "pH and colour measurements",
-          "Helped evaluate different formulations",
-          "Recorded and analysed data in Excel and helped interpret results",
-        ],
-        no: [
-          "Målinger av pH og farge",
-          "Bidro i vurderingen av ulike formuleringer",
-          "Registrerte og analyserte data i Excel og bidro til å tolke resultatene",
-        ],
-        es: [
-          "Mediciones de pH y color",
-          "Colaboré en la evaluación de distintas formulaciones",
-          "Registré y analicé datos en Excel y ayudé a interpretar resultados",
-        ],
-      } satisfies TList,
+    title: "ImpactTaste × Estrella Galicia",
+    place: { en: "Spain", no: "Spania", es: "España" },
+    date: { en: "2025", no: "2025", es: "2025" },
+    summary: {
+      en: "An alfajor, Argentina's flagship sweet, made with spent brewing grain, a by-product of the brewing industry. The product idea was my own.",
+      no: "En alfajor, Argentinas mest kjente søtsak, laget med mask, et biprodukt fra ølbrygging. Produktideen var min egen.",
+      es: "Un alfajor, producto emblema argentino, elaborado con bagazo de cervecería, un subproducto de la industria cervecera. La idea del producto fue propia.",
     },
-  ],
+    points: {
+      en: [
+        "Product concept, target consumers, naming, value proposition and communication",
+        "Consumer research on acceptance and market positioning",
+        "Linked sustainability and the circular economy to commercial value",
+      ],
+      no: [
+        "Produktkonsept, målgruppe, navn, verdiforslag og kommunikasjon",
+        "Forbrukerundersøkelse om aksept og markedsposisjon",
+        "Koblet bærekraft og sirkulærøkonomi til kommersiell verdi",
+      ],
+      es: [
+        "Concepto de producto, público objetivo, nombre, propuesta de valor y comunicación",
+        "Investigación de consumidores sobre aceptación y posicionamiento",
+        "Vinculé sustentabilidad y economía circular con valor comercial",
+      ],
+    } satisfies TList,
+    statValue: "117",
+    statLabel: {
+      en: "consumers surveyed",
+      no: "forbrukere spurt",
+      es: "consumidores encuestados",
+    },
+    visualAlt: {
+      en: "Illustration of an alfajor made with spent brewing grain",
+      no: "Illustrasjon av en alfajor laget med mask fra ølbrygging",
+      es: "Ilustración de un alfajor elaborado con bagazo de cervecería",
+    },
+    grainLabel: { en: "Spent grain", no: "Mask", es: "Bagazo" },
+    fillingLabel: { en: "Dulce de leche", no: "Dulce de leche", es: "Dulce de leche" },
+  },
 };
 
 export const experience = {
-  heading: { en: "Work experience", no: "Arbeidserfaring", es: "Experiencia laboral" },
+  heading: { en: "Experience", no: "Erfaring", es: "Experiencia" },
   intro: {
-    en: "Fast-paced, customer-facing work in three countries and three languages.",
-    no: "Travelt arbeid med kundekontakt i tre land og på tre språk.",
-    es: "Trabajo dinámico y de cara al cliente en tres países y tres idiomas.",
+    en: "Lab research plus fast-paced, customer-facing work in three countries and three languages.",
+    no: "Laboratorieforskning og travelt arbeid med kundekontakt i tre land og på tre språk.",
+    es: "Investigación de laboratorio y trabajo dinámico de cara al cliente en tres países y tres idiomas.",
   },
   items: [
     {
@@ -373,6 +362,21 @@ export const experience = {
         en: "Customer service in a restaurant and bar: cocktails, coffee and draught beer.",
         no: "Kundeservice i restaurant og bar: cocktailer, kaffe og fatøl.",
         es: "Atención al cliente en restaurante y bar: cócteles, café y cerveza tirada.",
+      },
+    },
+    {
+      role: {
+        en: "Research laboratory intern",
+        no: "Forskningspraktikant, laboratorium",
+        es: "Pasante de laboratorio de investigación",
+      },
+      org: "Universidad Católica Argentina (UCA)",
+      place: { en: "Buenos Aires", no: "Buenos Aires", es: "Buenos Aires" },
+      date: { en: "May 2023 – Dec 2024", no: "mai 2023 – des. 2024", es: "may. 2023 – dic. 2024" },
+      text: {
+        en: "Research on anthocyanins and the antioxidant properties of elderberry juice: pH and colour measurements, evaluating formulations, and recording, analysing and interpreting data in Excel.",
+        no: "Forskning på antocyaniner og antioksidantegenskapene i hyllebærsaft: målinger av pH og farge, vurdering av formuleringer og registrering, analyse og tolkning av data i Excel.",
+        es: "Investigación sobre antocianinas y propiedades antioxidantes del jugo de saúco: mediciones de pH y color, evaluación de formulaciones y registro, análisis e interpretación de datos en Excel.",
       },
     },
     {
