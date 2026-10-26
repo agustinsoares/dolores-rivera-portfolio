@@ -38,20 +38,26 @@ export const ui = {
 } satisfies Record<string, T | Record<string, T>>;
 
 export const hero = {
-  eyebrow: {
-    en: "Food Engineer · Bergen, Norway",
-    no: "Næringsmiddelingeniør · Bergen",
-    es: "Ingeniera en Alimentos · Bergen, Noruega",
+  name: "María Dolores Rivera",
+  role: {
+    en: "Food Engineer",
+    no: "Næringsmiddelingeniør",
+    es: "Ingeniera en Alimentos",
   },
-  title: {
-    en: "From by-products to better food.",
-    no: "Fra biprodukter til bedre mat.",
-    es: "De subproductos a mejores alimentos.",
+  location: {
+    en: "Bergen, Norway",
+    no: "Bergen, Norge",
+    es: "Bergen, Noruega",
   },
   lead: {
-    en: "I'm María Dolores Rivera, a food engineer from Argentina now living in Bergen. My work sits between the lab and the market: green extraction of natural antioxidants, sustainable product development and the practical side of getting things done.",
-    no: "Jeg heter María Dolores Rivera og er næringsmiddelingeniør fra Argentina, nå bosatt i Bergen. Arbeidet mitt ligger mellom laboratoriet og markedet: grønn ekstraksjon av naturlige antioksidanter, bærekraftig produktutvikling og det praktiske arbeidet med å få ting gjort.",
-    es: "Soy María Dolores Rivera, ingeniera en alimentos argentina, hoy en Bergen. Mi trabajo está entre el laboratorio y el mercado: extracción verde de antioxidantes naturales, desarrollo sustentable de productos y el lado práctico de llevar las cosas adelante.",
+    en: "Recently graduated Food Engineer from Argentina with an international academic background. I bring together lab research, product development and sustainable innovation with a practical, people-oriented approach.",
+    no: "Nyutdannet næringsmiddelingeniør fra Argentina med internasjonal studiebakgrunn. Jeg kombinerer laboratorieforskning, produktutvikling og bærekraftig innovasjon med en praktisk og menneskeorientert tilnærming.",
+    es: "Ingeniera en Alimentos recién recibida, de Argentina, con formación académica internacional. Combino investigación de laboratorio, desarrollo de productos e innovación sustentable con un enfoque práctico y orientado a las personas.",
+  },
+  photoAlt: {
+    en: "Portrait of María Dolores Rivera",
+    no: "Portrett av María Dolores Rivera",
+    es: "Retrato de María Dolores Rivera",
   },
   status: {
     en: "Open to junior roles in R&D, quality and production",
@@ -97,25 +103,28 @@ export const stats: { value: string; label: T }[] = [
 
 export const about = {
   heading: {
-    en: "Engineering, lab work and people",
-    no: "Ingeniørfag, laboratoriearbeid og mennesker",
-    es: "Ingeniería, laboratorio y personas",
+    en: "About me",
+    no: "Om meg",
+    es: "Sobre mí",
   },
   body: {
     en: [
-      "I graduated in 2026 from a five-year Food Engineering degree at the Pontificia Universidad Católica Argentina in Buenos Aires. My background covers process engineering, food analysis and quality, plus laboratory research on bioactive compounds.",
-      "I wrote my thesis at the Universitat de València on turning agro-food by-products into natural antioxidants. I also led a sustainable product concept with ImpactTaste and Estrella Galicia that used spent brewing grain.",
-      "Alongside my studies I've worked in event operations, logistics, customer service and hospitality in Argentina, Spain and Norway. In Bergen I was working within two weeks of arriving. I adapt fast, take initiative and like learning on the job.",
+      "I'm a recently graduated Food Engineer from Argentina, now based in Bergen, Norway, with an international academic background and a strong interest in the food industry.",
+      "My studies and projects have taken me from laboratory research and food analysis to product development, consumer insights and sustainable innovation. My thesis at the University of Valencia looked at agro-food by-products as sources of natural antioxidants, and ImpactTaste, a project with Estrella Galicia, showed me how sustainability can become new food products and value propositions.",
+      "Working in hospitality, customer service and event operations in three countries has strengthened my communication, adaptability, teamwork and problem-solving.",
+      "I'm curious, proactive and eager to keep learning. My goal is to contribute, learn and help turn ideas into practical solutions that create value.",
     ],
     no: [
-      "Jeg ble uteksaminert i 2026 fra et femårig studium i næringsmiddelteknologi ved Pontificia Universidad Católica Argentina i Buenos Aires. Bakgrunnen min dekker prosessteknikk, næringsmiddelanalyse og kvalitet, i tillegg til laboratorieforskning på bioaktive forbindelser.",
-      "Bacheloroppgaven skrev jeg ved Universitat de València, om å gjøre biprodukter fra matindustrien om til naturlige antioksidanter. Jeg ledet også et bærekraftig produktkonsept med ImpactTaste og Estrella Galicia basert på mask fra ølbrygging.",
-      "Ved siden av studiene har jeg jobbet med arrangementer, logistikk, kundeservice og servering i Argentina, Spania og Norge. I Bergen var jeg i jobb innen to uker etter at jeg kom. Jeg tilpasser meg raskt, tar initiativ og liker å lære i jobben.",
+      "Jeg er nyutdannet næringsmiddelingeniør fra Argentina, nå bosatt i Bergen, med internasjonal studiebakgrunn og stor interesse for næringsmiddelindustrien.",
+      "Studiene og prosjektene mine har tatt meg fra laboratorieforskning og næringsmiddelanalyse til produktutvikling, forbrukerinnsikt og bærekraftig innovasjon. Bacheloroppgaven ved Universitetet i Valencia handlet om biprodukter fra matindustrien som kilder til naturlige antioksidanter, og ImpactTaste, et prosjekt med Estrella Galicia, viste meg hvordan bærekraft kan bli til nye matprodukter og verdiforslag.",
+      "Arbeid innen servering, kundeservice og arrangementer i tre land har styrket kommunikasjonsevnen, tilpasningsevnen, samarbeidet og problemløsningen min.",
+      "Jeg er nysgjerrig, proaktiv og lærevillig. Målet mitt er å bidra, lære og hjelpe til med å gjøre ideer om til praktiske løsninger som skaper verdi.",
     ],
     es: [
-      "Me recibí en 2026 de Ingeniería en Alimentos (carrera de cinco años) en la Pontificia Universidad Católica Argentina, en Buenos Aires. Mi formación abarca ingeniería de procesos, análisis y calidad de alimentos, e investigación de laboratorio sobre compuestos bioactivos.",
-      "Hice mi tesis en la Universitat de València sobre la valorización de subproductos agroalimentarios como antioxidantes naturales. También lideré un concepto de producto sustentable con ImpactTaste y Estrella Galicia a partir de bagazo de cervecería.",
-      "En paralelo a la carrera trabajé en operaciones de eventos, logística, atención al cliente y gastronomía en Argentina, España y Noruega. En Bergen empecé a trabajar a las dos semanas de llegar. Me adapto rápido, tomo la iniciativa y me gusta aprender trabajando.",
+      "Soy Ingeniera en Alimentos recién recibida, de Argentina, hoy en Bergen, Noruega, con formación académica internacional y un fuerte interés por la industria alimentaria.",
+      "Mis estudios y proyectos me llevaron desde la investigación de laboratorio y el análisis de alimentos hasta el desarrollo de productos, la investigación de consumidores y la innovación sustentable. Mi tesis en la Universidad de Valencia estudió subproductos agroalimentarios como fuente de antioxidantes naturales, y ImpactTaste, un proyecto con Estrella Galicia, me mostró cómo la sustentabilidad puede convertirse en nuevos productos y propuestas de valor.",
+      "Trabajar en gastronomía, atención al cliente y operaciones de eventos en tres países fortaleció mi comunicación, adaptabilidad, trabajo en equipo y resolución de problemas.",
+      "Soy curiosa, proactiva y tengo muchas ganas de seguir aprendiendo. Mi objetivo es aportar, aprender y ayudar a convertir ideas en soluciones prácticas que generen valor.",
     ],
   } satisfies TList,
   openToHeading: {
@@ -383,43 +392,115 @@ export const education = {
     place: "Buenos Aires",
     date: "2026",
     detail: {
-      en: "Five-year degree · final average 8.52/10",
-      no: "Femårig grad · snittkarakter 8,52/10",
-      es: "Carrera de cinco años · promedio final 8,52/10",
+      en: "Five-year degree, 2020–2026",
+      no: "Femårig grad, 2020–2026",
+      es: "Carrera de cinco años, 2020–2026",
     },
-    courseworkLabel: { en: "Coursework", no: "Fag", es: "Materias" },
-    coursework: {
-      en: [
-        "Process Engineering",
-        "Automation and Control",
-        "Electrical Installations",
-        "Food Analysis",
-        "Analytical Chemistry",
-        "Quality Management",
-        "Applied Statistics",
-        "Food Product Development",
-      ],
-      no: [
-        "Prosessteknikk",
-        "Automatisering og regulering",
-        "Elektriske installasjoner",
-        "Næringsmiddelanalyse",
-        "Analytisk kjemi",
-        "Kvalitetsledelse",
-        "Anvendt statistikk",
-        "Produktutvikling av næringsmidler",
-      ],
-      es: [
-        "Ingeniería de Procesos",
-        "Automatización y Control",
-        "Instalaciones Eléctricas",
-        "Análisis de Alimentos",
-        "Química Analítica",
-        "Gestión de la Calidad",
-        "Estadística Aplicada",
-        "Desarrollo de Productos Alimenticios",
-      ],
+    official: {
+      en: "Officially recognised degree with national validity in Argentina (Ministerial Resolution 1231/2015).",
+      no: "Offisielt godkjent grad med nasjonal gyldighet i Argentina (departementsvedtak 1231/2015).",
+      es: "Título con reconocimiento oficial y validez nacional (Resolución Ministerial 1231/2015).",
+    },
+    facts: [
+      {
+        value: "66",
+        label: { en: "Subjects passed", no: "Fag bestått", es: "Materias aprobadas" },
+      },
+      {
+        value: "8.52",
+        label: { en: "Overall average (out of 10)", no: "Snittkarakter (av 10)", es: "Promedio general (sobre 10)" },
+      },
+      {
+        value: "14",
+        label: { en: "Subjects with 10/10", no: "Fag med 10/10", es: "Materias con 10" },
+      },
+      {
+        value: "5",
+        label: { en: "Years of study", no: "Studieår", es: "Años de carrera" },
+      },
+    ],
+    areasLabel: {
+      en: "What the degree covers",
+      no: "Hva graden omfatter",
+      es: "Qué incluye el título",
+    },
+    areas: [
+      {
+        name: { en: "Food science", no: "Næringsmiddelvitenskap", es: "Ciencia de los alimentos" },
+        items: {
+          en: ["Food Chemistry I and II", "Food Microbiology", "Industrial Microbiology", "Food Preservation", "Nutrition", "Fruit and Vegetable Industry"],
+          no: ["Næringsmiddelkjemi I og II", "Næringsmiddelmikrobiologi", "Industriell mikrobiologi", "Konservering av næringsmidler", "Ernæring", "Frukt- og grønnsaksindustri"],
+          es: ["Química de los Alimentos I y II", "Microbiología de los Alimentos", "Microbiología Industrial", "Preservación de Alimentos", "Nutrición", "Industria Frutihortícola"],
+        } satisfies TList,
+      },
+      {
+        name: { en: "Process engineering", no: "Prosessteknikk", es: "Ingeniería de procesos" },
+        items: {
+          en: ["Unit Operations I and II", "Transport Phenomena", "Applied Thermodynamics", "Process Engineering", "Facilities Engineering", "Automation and Control", "Electrical Engineering", "Plant Design Project"],
+          no: ["Enhetsoperasjoner I og II", "Transportfenomener", "Anvendt termodynamikk", "Prosessteknikk", "Anleggsteknikk", "Automatisering og regulering", "Elektroteknikk", "Prosjektering av anlegg"],
+          es: ["Operaciones Unitarias I y II", "Fenómenos de Transporte", "Termodinámica Aplicada", "Ingeniería de Procesos", "Ingeniería de las Instalaciones", "Automatización y Control", "Electrotecnia", "Proyecto de Planta"],
+        } satisfies TList,
+      },
+      {
+        name: { en: "Chemistry and biology", no: "Kjemi og biologi", es: "Química y biología" },
+        items: {
+          en: ["Analytical and Instrumental Chemistry", "Organic Chemistry", "Biological Chemistry", "Physical Chemistry", "Microbiology", "Biology"],
+          no: ["Analytisk og instrumentell kjemi", "Organisk kjemi", "Biokjemi", "Fysikalsk kjemi", "Mikrobiologi", "Biologi"],
+          es: ["Química Analítica e Instrumental", "Química Orgánica", "Química Biológica", "Fisicoquímica", "Microbiología", "Biología"],
+        } satisfies TList,
+      },
+      {
+        name: { en: "Quality, safety and environment", no: "Kvalitet, sikkerhet og miljø", es: "Calidad, seguridad y ambiente" },
+        items: {
+          en: ["Quality Management", "Sanitation, Hygiene and Industrial Safety", "Ecology and Environmental Management", "Packaging", "Food Law"],
+          no: ["Kvalitetsledelse", "Sanitær, hygiene og industriell sikkerhet", "Økologi og miljøledelse", "Emballasje", "Lovgivning"],
+          es: ["Gestión de la Calidad", "Saneamiento, Higiene y Seguridad Industrial", "Ecología y Gestión Ambiental", "Envases y Embalajes", "Legislación"],
+        } satisfies TList,
+      },
+      {
+        name: { en: "Product and business", no: "Produkt og forretning", es: "Producto y negocio" },
+        items: {
+          en: ["Product Development", "Project Development and Analysis", "Business Organisation", "Economics", "Entrepreneurship", "Triple-Impact Business"],
+          no: ["Produktutvikling", "Prosjektutvikling og -analyse", "Bedriftsorganisasjon", "Økonomi", "Entreprenørskap", "Bedrifter med trippel effekt"],
+          es: ["Desarrollo de Productos", "Desarrollo y Análisis de Proyectos", "Organización Empresarial", "Economía", "Taller de Emprendedorismo", "Empresas de Triple Impacto"],
+        } satisfies TList,
+      },
+      {
+        name: { en: "Maths, physics and computing", no: "Matematikk, fysikk og databehandling", es: "Matemática, física y computación" },
+        items: {
+          en: ["Mathematics I–III and Advanced", "Algebra and Analytic Geometry", "Physics I–III", "Statistics and Applied Statistics", "Computing I and II", "Engineering Graphics"],
+          no: ["Matematikk I–III og videregående", "Algebra og analytisk geometri", "Fysikk I–III", "Statistikk og anvendt statistikk", "Databehandling I og II", "Teknisk tegning"],
+          es: ["Matemática I–III y Avanzada", "Álgebra y Geometría Analítica", "Física I–III", "Estadística y Estadística Aplicada", "Computación I y II", "Sistemas de Representación"],
+        } satisfies TList,
+      },
+    ],
+    extra: {
+      en: "Also includes a supervised professional internship, technical English and a humanities and ethics programme.",
+      no: "Omfatter også veiledet yrkespraksis, teknisk engelsk og et program i humaniora og etikk.",
+      es: "Incluye además la Práctica Profesional Supervisada, inglés técnico y un ciclo de humanidades y ética.",
+    },
+    topMarksLabel: {
+      en: "Top marks (10/10) include",
+      no: "Toppkarakter (10/10) blant annet i",
+      es: "Algunas materias con 10",
+    },
+    topMarks: {
+      en: ["Nutrition", "Biological Chemistry", "Applied Statistics", "Engineering Graphics", "Mathematics I", "Physics I"],
+      no: ["Ernæring", "Biokjemi", "Anvendt statistikk", "Teknisk tegning", "Matematikk I", "Fysikk I"],
+      es: ["Nutrición", "Química Biológica", "Estadística Aplicada", "Sistemas de Representación", "Matemática I", "Física I"],
     } satisfies TList,
+    diplomaLabel: { en: "Degree certificate", no: "Vitnemål", es: "Título" },
+    diplomaAlt: {
+      en: "Food Engineering degree certificate from the Pontificia Universidad Católica Argentina, issued to María Dolores Rivera on 2 September 2026",
+      no: "Vitnemål i næringsmiddelteknologi fra Pontificia Universidad Católica Argentina, utstedt til María Dolores Rivera 2. september 2026",
+      es: "Título de Ingeniera en Alimentos de la Pontificia Universidad Católica Argentina, otorgado a María Dolores Rivera el 2 de septiembre de 2026",
+    },
+    diplomaCaption: {
+      en: "Issued 2 September 2026 · ID number hidden",
+      no: "Utstedt 2. september 2026 · ID-nummer skjult",
+      es: "Emitido el 2 de septiembre de 2026 · DNI oculto",
+    },
+    diplomaOpen: { en: "View full size", no: "Vis i full størrelse", es: "Ver en tamaño completo" },
   },
   exchangesLabel: { en: "Exchange semesters", no: "Utvekslingssemestre", es: "Intercambios" },
   exchanges: [

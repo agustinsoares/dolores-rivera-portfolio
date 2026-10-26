@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { LangProvider, useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import portrait from "@/assets/dolores-rivera.jpg";
+import diploma from "@/assets/diploma-ingenieria-alimentos.jpg";
 import {
   LANGS,
   about,
@@ -136,54 +138,20 @@ function Header() {
   );
 }
 
-function SpecimenCard() {
-  const { t } = useLang();
-  const s = research.thesis.sources;
-  return (
-    <figure
-      aria-hidden="true"
-      className="reveal relative mx-auto w-full max-w-sm rounded-sm border border-ink/15 bg-card p-6 shadow-[6px_6px_0_hsl(var(--ink)/0.08)] [animation-delay:200ms]"
-    >
-      <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-        <span>Sample set · 03</span>
-        <span>València · 2026</span>
-      </div>
-      <div className="relative mt-6 h-56">
-        <span className="absolute left-2 top-4 size-28 rounded-full bg-batata/90 mix-blend-multiply" />
-        <span className="absolute right-4 top-0 size-32 rounded-full bg-citrus/85 mix-blend-multiply" />
-        <span className="absolute bottom-0 left-1/2 size-36 -translate-x-1/2 rounded-full bg-spirulina/90 mix-blend-multiply" />
-      </div>
-      <ul className="mt-6 space-y-2 border-t border-dashed border-ink/20 pt-4">
-        {s.map((src) => (
-          <li key={src.latin} className="flex items-center justify-between gap-3 text-sm">
-            <span className="flex items-center gap-2">
-              <span className={cn("size-2.5 rounded-full", toneClass[src.tone as keyof typeof toneClass])} />
-              {t(src.name)}
-            </span>
-            <span className="font-display italic text-muted-foreground">{src.latin}</span>
-          </li>
-        ))}
-      </ul>
-      <p className="mt-4 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-        PEF ⟷ PLE/ASE · H₂O
-      </p>
-    </figure>
-  );
-}
-
 function Hero() {
   const { t } = useLang();
   return (
     <section id="top" className="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:pb-24">
-      <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr]">
-        <div className="reveal">
+      <div className="grid items-center gap-10 md:grid-cols-[1fr_auto] lg:gap-16">
+        <div className="reveal order-2 md:order-1">
           <p className="section-label flex items-center gap-2">
             <MapPin className="size-3.5" aria-hidden="true" />
-            {t(hero.eyebrow)}
+            {t(hero.location)}
           </p>
           <h1 className="mt-5 font-display text-5xl font-light leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl">
-            {t(hero.title)}
+            {hero.name}
           </h1>
+          <p className="mt-3 font-display text-2xl italic text-umber-deep sm:text-3xl">{t(hero.role)}</p>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
             {t(hero.lead)}
           </p>
@@ -209,7 +177,18 @@ function Hero() {
             </Button>
           </div>
         </div>
-        <SpecimenCard />
+        <div className="reveal order-1 md:order-2 [animation-delay:150ms]">
+          <div className="relative w-40 sm:w-48 lg:w-60">
+            <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-t-full bg-sand" aria-hidden="true" />
+            <img
+              src={portrait}
+              alt={t(hero.photoAlt)}
+              width={175}
+              height={212}
+              className="relative aspect-[175/212] w-full rounded-t-full border border-ink/10 bg-white object-cover"
+            />
+          </div>
+        </div>
       </div>
 
       <dl className="mt-16 grid grid-cols-2 border-t border-ink/15 lg:grid-cols-4">
@@ -406,34 +385,103 @@ function Education() {
             <p>{d.date}</p>
             <p className="mt-1 normal-case tracking-normal">{d.place}</p>
           </div>
-          <div className="grid gap-12 md:grid-cols-[1.2fr_1fr]">
-            <div>
-              <p className="text-lg font-medium">{d.org}</p>
-              <p className="mt-1 text-muted-foreground">{t(d.detail)}</p>
-              <h3 className="section-label mt-8">{t(d.courseworkLabel)}</h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {t(d.coursework).map((c) => (
-                  <li key={c}>
-                    <Badge variant="outline" className="rounded-full border-ink/20 bg-paper px-3 py-1 text-[13px] font-normal">
-                      {c}
-                    </Badge>
-                  </li>
-                ))}
-              </ul>
+          <div className="min-w-0">
+            <p className="text-lg font-medium">{d.org}</p>
+            <p className="mt-1 text-muted-foreground">{t(d.detail)}</p>
+            <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{t(d.official)}</p>
+
+            <dl className="mt-8 grid grid-cols-2 border-y border-ink/15 sm:grid-cols-4">
+              {d.facts.map((f, i) => (
+                <div
+                  key={f.value}
+                  className={cn(
+                    "flex flex-col py-5 pr-4",
+                    i % 2 === 1 && "border-l border-ink/15 pl-4",
+                    i === 2 && "border-t border-ink/15 sm:border-t-0",
+                    i === 3 && "border-t border-ink/15 sm:border-t-0",
+                    i > 0 && "sm:border-l sm:pl-5",
+                  )}
+                >
+                  <dt className="text-sm text-muted-foreground">{t(f.label)}</dt>
+                  <dd className="order-first font-display text-4xl font-light tabular-nums">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <h3 className="section-label mt-12">{t(d.areasLabel)}</h3>
+            <div className="mt-5 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+              {d.areas.map((area) => (
+                <div key={area.name.en}>
+                  <p className="font-display text-lg">{t(area.name)}</p>
+                  <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
+                    {t(area.items).map((it) => (
+                      <li key={it} className="flex gap-2">
+                        <span className="mt-2 size-1 shrink-0 rounded-full bg-umber" aria-hidden="true" />
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-            <div>
-              <h3 className="section-label">{t(education.exchangesLabel)}</h3>
-              <ul className="mt-3 space-y-6">
-                {education.exchanges.map((ex) => (
-                  <li key={ex.org} className="border-l-2 border-citrus pl-4">
-                    <p className="font-medium">{ex.org}</p>
-                    <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                      {t(ex.place)} · {t(ex.date)}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(ex.text)}</p>
-                  </li>
-                ))}
-              </ul>
+            <p className="mt-8 max-w-2xl text-sm text-muted-foreground">{t(d.extra)}</p>
+
+            <h3 className="section-label mt-10">{t(d.topMarksLabel)}</h3>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {t(d.topMarks).map((c) => (
+                <li key={c}>
+                  <Badge variant="outline" className="rounded-full border-ink/20 bg-paper px-3 py-1 text-[13px] font-normal">
+                    {c}
+                  </Badge>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-14 grid gap-12 md:grid-cols-[1fr_1.3fr]">
+              <div>
+                <h3 className="section-label">{t(education.exchangesLabel)}</h3>
+                <ul className="mt-3 space-y-6">
+                  {education.exchanges.map((ex) => (
+                    <li key={ex.org} className="border-l-2 border-citrus pl-4">
+                      <p className="font-medium">{ex.org}</p>
+                      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                        {t(ex.place)} · {t(ex.date)}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(ex.text)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <figure className="min-w-0">
+                <h3 className="section-label">{t(d.diplomaLabel)}</h3>
+                <a
+                  href={diploma}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-3 block overflow-hidden rounded-sm border border-ink/15 bg-white shadow-[6px_6px_0_hsl(var(--sand))]"
+                >
+                  <img
+                    src={diploma}
+                    alt={t(d.diplomaAlt)}
+                    width={1600}
+                    height={1131}
+                    loading="lazy"
+                    className="w-full transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none"
+                  />
+                </a>
+                <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-2 text-sm text-muted-foreground">
+                  <span>{t(d.diplomaCaption)}</span>
+                  <a
+                    href={diploma}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-umber-deep underline-offset-4 hover:underline"
+                  >
+                    {t(d.diplomaOpen)}
+                    <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                  </a>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
