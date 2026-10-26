@@ -221,9 +221,9 @@ function Hero() {
           <img
             src={portrait}
             alt={t(hero.photoAlt)}
-            width={175}
-            height={212}
-            className="aspect-[175/212] w-44 rounded-md bg-white object-cover shadow-[0_24px_60px_-20px_hsl(var(--ink)/0.35)] sm:w-60 lg:w-80"
+            width={700}
+            height={848}
+            className="aspect-[700/848] w-44 rounded-md bg-white object-cover shadow-[0_24px_60px_-20px_hsl(var(--ink)/0.35)] sm:w-60 lg:w-80"
           />
         </div>
 
