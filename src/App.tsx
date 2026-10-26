@@ -15,7 +15,6 @@ import { LangProvider, useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import portrait from "@/assets/dolores-rivera.jpg";
 import diploma from "@/assets/diploma-ingenieria-alimentos.jpg";
-import imgExtracts from "@/assets/projects/thesis-extracts.jpg";
 import imgBurgers from "@/assets/projects/thesis-burgers.jpg";
 import imgColourDays from "@/assets/projects/thesis-colour-days.jpg";
 import imgAse from "@/assets/projects/thesis-ase.jpg";
@@ -329,7 +328,6 @@ function About() {
 }
 
 const projectImages: Record<string, { src: string; w: number; h: number }> = {
-  extracts: { src: imgExtracts, w: 1320, h: 660 },
   burgers: { src: imgBurgers, w: 684, h: 533 },
   colourDays: { src: imgColourDays, w: 640, h: 360 },
   ase: { src: imgAse, w: 600, h: 800 },
@@ -583,23 +581,21 @@ function Projects() {
             </p>
           </div>
 
-          <div className="mt-12 grid items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
-            <div className="min-w-0">
-              <Gallery items={[th.gallery[0]]} thumbClass="aspect-[2/1]" />
-              <Gallery items={th.gallery.slice(1, 3)} className="mt-4 grid grid-cols-2 gap-4" thumbClass="aspect-[4/3]" />
-            </div>
-            <div>
-              <h4 className="section-label">{t(th.findingsLabel)}</h4>
-              <ul className="mt-4 space-y-4">
-                {t(th.findings).map((f) => (
-                  <li key={f} className="flex gap-3 text-[15px] leading-relaxed">
-                    <span className="mt-2.5 h-px w-4 shrink-0 bg-umber" aria-hidden="true" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Gallery items={th.gallery.slice(3)} className="mt-8 grid grid-cols-2 gap-4" thumbClass="aspect-[3/4]" />
-            </div>
+          <div className="mt-14">
+            <h4 className="section-label">{t(th.findingsLabel)}</h4>
+            <ul className="mt-4 grid gap-6 md:grid-cols-3">
+              {t(th.findings).map((f) => (
+                <li key={f} className="flex gap-3 border-t border-ink/15 pt-4 text-[15px] leading-relaxed">
+                  <span className="mt-2.5 h-px w-4 shrink-0 bg-umber" aria-hidden="true" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Gallery
+              items={th.gallery}
+              className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4"
+              thumbClass="aspect-[4/3]"
+            />
           </div>
         </article>
 

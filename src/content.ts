@@ -406,14 +406,6 @@ export const projects = {
     } satisfies TList,
     gallery: [
       {
-        src: "extracts",
-        caption: {
-          en: "Water-based extracts after separation",
-          no: "Vannbaserte ekstrakter etter separasjon",
-          es: "Extractos acuosos tras la separación",
-        },
-      },
-      {
         src: "burgers",
         caption: {
           en: "Control burgers (top) and burgers with spirulina extract",
