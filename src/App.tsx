@@ -4,13 +4,8 @@ import {
   ArrowDownToLine,
   ArrowRight,
   ArrowUpRight,
-  Beef,
-  CalendarCheck,
-  FlaskConical,
   Mail,
   Menu,
-  Percent,
-  Refrigerator,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,7 +28,12 @@ import imgFinished from "@/assets/projects/alfarajote-finished.jpg";
 import imgBox from "@/assets/projects/alfarajote-box.jpg";
 import imgProblem from "@/assets/projects/thesis-problem.jpg";
 import imgIdea from "@/assets/projects/thesis-idea.jpg";
-import imgBurgers3 from "@/assets/projects/thesis-burgers3.jpg";
+import imgBurgersCover from "@/assets/projects/thesis-burgers-cover.jpg";
+import step1 from "@/assets/projects/step-1.jpg";
+import step2 from "@/assets/projects/step-2.jpg";
+import step3 from "@/assets/projects/step-3.jpg";
+import step4 from "@/assets/projects/step-4.jpg";
+import step5 from "@/assets/projects/step-5.jpg";
 import imgSweetPotato from "@/assets/projects/thesis-sweetpotato.jpg";
 import imgOrange from "@/assets/projects/thesis-orange.jpg";
 import imgSpirulina from "@/assets/projects/thesis-spirulina.jpg";
@@ -340,7 +340,7 @@ const projectImages: Record<string, { src: string; w: number; h: number }> = {
   coating: { src: imgCoating, w: 408, h: 720 },
   finished: { src: imgFinished, w: 600, h: 800 },
   box: { src: imgBox, w: 600, h: 800 },
-  burgers3: { src: imgBurgers3, w: 1000, h: 324 },
+  burgersCover: { src: imgBurgersCover, w: 1320, h: 660 },
   sweetpotato: { src: imgSweetPotato, w: 600, h: 450 },
   orange: { src: imgOrange, w: 600, h: 396 },
   spirulina: { src: imgSpirulina, w: 564, h: 384 },
@@ -349,6 +349,8 @@ const projectImages: Record<string, { src: string; w: number; h: number }> = {
   orac: { src: chartOrac, w: 800, h: 481 },
   protein: { src: chartProtein, w: 800, h: 491 },
 };
+
+const stepImages = [step1, step2, step3, step4, step5];
 
 type GalleryItem = { src: string; caption: Record<Lang, string> };
 
@@ -438,8 +440,8 @@ function Projects() {
               <p className="mt-3 text-sm text-muted-foreground">{t(th.supervisor)}</p>
             </div>
             <Gallery
-              items={[th.gallery[0]]}
-              thumbClass="aspect-[2/1]"
+              items={[{ src: "burgersCover", caption: th.foodTest.burgersCaption }]}
+              thumbClass="aspect-[2/1] bg-white"
               className="min-w-0 self-start [&_figure>button]:shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
             />
           </div>
@@ -548,11 +550,18 @@ function Projects() {
             <h4 className="mt-2 font-display text-2xl sm:text-3xl">{t(th.foodTest.heading)}</h4>
             <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {th.foodTest.steps.map((step, i) => {
-                const Icon = [FlaskConical, Percent, Beef, Refrigerator, CalendarCheck][i];
+                const icon = stepImages[i];
                 return (
                   <li key={step.title.en} className="relative rounded-sm border border-ink/10 bg-card p-4">
-                    <div className="flex aspect-[5/3] items-center justify-center rounded-sm bg-sand/40">
-                      <Icon className="size-10 text-umber-deep" strokeWidth={1.4} aria-hidden="true" />
+                    <div className="flex aspect-[5/4] items-center justify-center overflow-hidden rounded-sm bg-sand/35">
+                      <img
+                        src={icon}
+                        alt=""
+                        width={420}
+                        height={393}
+                        loading="lazy"
+                        className="h-full w-auto object-contain mix-blend-multiply"
+                      />
                     </div>
                     <p className="mt-4 font-display text-lg leading-tight">
                       <span className="mr-1.5 font-mono text-sm text-citrus-deep">{i + 1}</span>
@@ -576,10 +585,7 @@ function Projects() {
 
           <div className="mt-12 grid items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
             <div className="min-w-0">
-              <Gallery
-                items={[{ src: "burgers3", caption: th.foodTest.burgersCaption }]}
-                thumbClass="aspect-[1000/324] bg-white object-contain"
-              />
+              <Gallery items={[th.gallery[0]]} thumbClass="aspect-[2/1]" />
               <Gallery items={th.gallery.slice(1, 3)} className="mt-4 grid grid-cols-2 gap-4" thumbClass="aspect-[4/3]" />
             </div>
             <div>
