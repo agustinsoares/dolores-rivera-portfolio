@@ -514,7 +514,7 @@ export const projects = {
       es: "Ver la presentación completa",
     },
     // Public Canva *view* link (Share → Public view link). Leave empty to hide the button.
-    presentationUrl: "",
+    presentationUrl: "https://canva.link/6oz9n9dag3s8u0a",
     quoteSource: {
       en: "Feedback from experts in food engineering, by-products and consumer behaviour",
       no: "Tilbakemelding fra eksperter innen næringsmiddelteknologi, biprodukter og forbrukeratferd",
