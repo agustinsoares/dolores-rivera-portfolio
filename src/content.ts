@@ -213,64 +213,178 @@ export const projects = {
       no: "Veileder: Francisco J. Barba Orellano · Næringsmiddelvitenskap og -teknologi",
       es: "Tutor: Francisco J. Barba Orellano · Ciencia y Tecnología de los Alimentos",
     },
-    sourcesLabel: { en: "Sources studied", no: "Råstoffer undersøkt", es: "Materias primas estudiadas" },
+    challenge: {
+      label: { en: "The challenge", no: "Utfordringen", es: "El desafío" },
+      heading: { en: "Why not use food waste?", no: "Hvorfor ikke bruke matavfall?", es: "¿Por qué no aprovechar los residuos?" },
+      problem: { en: "The problem", no: "Problemet", es: "El problema" },
+      idea: { en: "The idea: valorisation", no: "Ideen: verdiskaping", es: "La idea: valorización" },
+      cards: [
+        {
+          title: { en: "1/3 wasted", no: "1/3 kastes", es: "1/3 se desperdicia" },
+          text: {
+            en: "of the food produced worldwide is lost or wasted (FAO)",
+            no: "av maten som produseres i verden går tapt eller kastes (FAO)",
+            es: "de los alimentos producidos en el mundo se pierde o desperdicia (FAO)",
+          },
+        },
+        {
+          title: { en: "Bioactive", no: "Bioaktive", es: "Bioactivos" },
+          text: {
+            en: "By-products are rich in polyphenols and carotenoids",
+            no: "Biprodukter er rike på polyfenoler og karotenoider",
+            es: "Los subproductos son ricos en polifenoles y carotenoides",
+          },
+        },
+        {
+          title: { en: "Natural", no: "Naturlig", es: "Naturales" },
+          text: {
+            en: "Clean-label antioxidants instead of synthetic additives",
+            no: "«Clean label»-antioksidanter i stedet for syntetiske tilsetningsstoffer",
+            es: "Antioxidantes clean label en lugar de aditivos sintéticos",
+          },
+        },
+      ],
+    },
+    sourcesLabel: { en: "The raw materials", no: "Råstoffene", es: "Las materias primas" },
     sources: [
       {
         name: { en: "Sweet potato peel", no: "Søtpotetskall", es: "Cáscara de batata" },
         latin: "Ipomoea batatas",
         tone: "batata",
+        img: "sweetpotato",
+        points: {
+          en: ["Agro-industrial by-product", "Polyphenols, anthocyanins"],
+          no: ["Agroindustrielt biprodukt", "Polyfenoler, antocyaniner"],
+          es: ["Subproducto agroindustrial", "Polifenoles, antocianinas"],
+        } satisfies TList,
       },
       {
         name: { en: "Orange peel", no: "Appelsinskall", es: "Cáscara de naranja" },
         latin: "Citrus sinensis",
         tone: "orange",
+        img: "orange",
+        points: {
+          en: ["Waste from the juice industry", "Flavonoids and polyphenols"],
+          no: ["Avfall fra juiceindustrien", "Flavonoider og polyfenoler"],
+          es: ["Residuo de la industria del jugo", "Flavonoides y polifenoles"],
+        } satisfies TList,
       },
       {
         name: { en: "Spirulina", no: "Spirulina", es: "Espirulina" },
         latin: "Arthrospira platensis",
         tone: "spirulina",
+        img: "spirulina",
+        points: {
+          en: ["Microalga, about 60% protein", "Pigments: phycocyanin, chlorophylls"],
+          no: ["Mikroalge, omtrent 60 % protein", "Pigmenter: fykocyanin, klorofyll"],
+          es: ["Microalga, cerca de 60 % proteína", "Pigmentos: ficocianina, clorofilas"],
+        } satisfies TList,
       },
     ],
+    results: {
+      label: { en: "Results", no: "Resultater", es: "Resultados" },
+      heading: { en: "What the extracts showed", no: "Hva ekstraktene viste", es: "Qué mostraron los extractos" },
+      note: {
+        en: "Charts from the thesis; legend in Spanish (Naranja = orange, Boniato = sweet potato, Espirulina = spirulina).",
+        no: "Diagrammer fra oppgaven; forklaring på spansk (Naranja = appelsin, Boniato = søtpotet, Espirulina = spirulina).",
+        es: "Gráficos de la tesis (Naranja, Boniato = batata, Espirulina).",
+      },
+      charts: [
+        { src: "phenolics", title: { en: "Total phenolics", no: "Totale fenoler", es: "Polifenoles totales" } },
+        { src: "abts", title: { en: "Antioxidant capacity, ABTS", no: "Antioksidantkapasitet, ABTS", es: "Capacidad antioxidante, ABTS" } },
+        { src: "orac", title: { en: "Antioxidant capacity, ORAC", no: "Antioksidantkapasitet, ORAC", es: "Capacidad antioxidante, ORAC" } },
+        { src: "protein", title: { en: "Protein", no: "Protein", es: "Proteínas" } },
+      ],
+      takeaways: [
+        {
+          title: { en: "ASE", no: "ASE", es: "ASE" },
+          text: {
+            en: "Higher values and higher extraction yields overall",
+            no: "Høyere verdier og høyere ekstraksjonsutbytte totalt sett",
+            es: "Valores y rendimientos de extracción más altos en general",
+          },
+        },
+        {
+          title: { en: "PEF", no: "PEF", es: "PEF" },
+          text: {
+            en: "Better at preserving heat-sensitive compounds in the microalga",
+            no: "Bedre til å bevare varmesensitive forbindelser i mikroalgen",
+            es: "Mejor para preservar compuestos sensibles al calor en la microalga",
+          },
+        },
+        {
+          title: { en: "Spirulina", no: "Spirulina", es: "Espirulina" },
+          text: {
+            en: "Best overall bioactive profile, chosen for the food test",
+            no: "Best bioaktiv profil totalt, valgt til mattesten",
+            es: "Mejor perfil bioactivo general, elegida para la prueba en alimentos",
+          },
+        },
+      ],
+    },
+    foodTest: {
+      label: { en: "The food test", no: "Mattesten", es: "La prueba en alimentos" },
+      heading: { en: "Burger test: 5 steps", no: "Hamburgertest: 5 steg", es: "Prueba en hamburguesas: 5 pasos" },
+      steps: [
+        {
+          title: { en: "Make the powder", no: "Lag pulveret", es: "Hacer el polvo" },
+          text: {
+            en: "Freeze-dry the extract into a green powder",
+            no: "Frysetørk ekstraktet til et grønt pulver",
+            es: "Liofilizar el extracto hasta obtener un polvo verde",
+          },
+        },
+        {
+          title: { en: "Mix in at 1%", no: "Bland inn 1 %", es: "Mezclar al 1 %" },
+          text: {
+            en: "Add 1% (w/w) of the powder to ground beef",
+            no: "Tilsett 1 % (vekt/vekt) pulver i kjøttdeig",
+            es: "Agregar 1 % (p/p) del polvo a la carne picada",
+          },
+        },
+        {
+          title: { en: "Make the control", no: "Lag kontrollen", es: "Hacer el control" },
+          text: {
+            en: "Same burger without extract, as the reference",
+            no: "Samme hamburger uten ekstrakt, som referanse",
+            es: "La misma hamburguesa sin extracto, como referencia",
+          },
+        },
+        {
+          title: { en: "Refrigerate at 4 °C", no: "Kjøl ved 4 °C", es: "Refrigerar a 4 °C" },
+          text: {
+            en: "Store all the burgers in the fridge",
+            no: "Oppbevar alle hamburgerne i kjøleskapet",
+            es: "Guardar todas las hamburguesas en la heladera",
+          },
+        },
+        {
+          title: { en: "Monitor for 5 days", no: "Følg med i 5 dager", es: "Seguir durante 5 días" },
+          text: {
+            en: "Check pH and colour every day",
+            no: "Mål pH og farge hver dag",
+            es: "Medir pH y color todos los días",
+          },
+        },
+      ],
+      goalLabel: { en: "Goal", no: "Mål", es: "Objetivo" },
+      goal: {
+        en: "evaluate stability over 5 days of refrigeration (pH and colour)",
+        no: "vurdere stabiliteten over 5 dager i kjøleskap (pH og farge)",
+        es: "evaluar la estabilidad durante 5 días de refrigeración (pH y color)",
+      },
+      burgersCaption: {
+        en: "Control, spirulina-PEF and spirulina-ASE burgers",
+        no: "Kontroll, spirulina-PEF og spirulina-ASE",
+        es: "Hamburguesas control, espirulina-PEF y espirulina-ASE",
+      },
+    },
     specsLabel: { en: "Lab conditions", no: "Forsøksbetingelser", es: "Condiciones de laboratorio" },
     specs: [
       { label: { en: "PEF", no: "PEF", es: "PEF" }, value: { en: "3 kV/cm · 200 kJ/kg", no: "3 kV/cm · 200 kJ/kg", es: "3 kV/cm · 200 kJ/kg" } },
       { label: { en: "ASE", no: "ASE", es: "ASE" }, value: { en: "40 °C · 103.4 bar", no: "40 °C · 103,4 bar", es: "40 °C · 103,4 bar" } },
       { label: { en: "Dose", no: "Dose", es: "Dosis" }, value: { en: "1% w/w", no: "1 % vekt/vekt", es: "1 % p/p" } },
       { label: { en: "Shelf life", no: "Holdbarhet", es: "Vida útil" }, value: { en: "5 days · 4 °C", no: "5 dager · 4 °C", es: "5 días · 4 °C" } },
-    ],
-    steps: [
-      {
-        label: { en: "Extraction", no: "Ekstraksjon", es: "Extracción" },
-        text: {
-          en: "Compared Pulsed Electric Fields (PEF) with Pressurised Liquid Extraction (PLE/ASE): two green technologies that use only water as the solvent.",
-          no: "Sammenlignet pulserende elektriske felt (PEF) med trykksatt væskeekstraksjon (PLE/ASE): to grønne teknologier som kun bruker vann som løsemiddel.",
-          es: "Comparé Campos Eléctricos Pulsados (PEF) con Extracción con Líquidos Presurizados (PLE/ASE): dos tecnologías verdes que usan solo agua como solvente.",
-        },
-      },
-      {
-        label: { en: "Analysis", no: "Analyse", es: "Análisis" },
-        text: {
-          en: "Measured total phenolics (Folin–Ciocalteu), antioxidant capacity (ABTS, ORAC) and protein. Spirulina had the highest bioactive content. ASE gave higher yields; PEF better preserved heat-sensitive compounds.",
-          no: "Målte totale fenoler (Folin–Ciocalteu), antioksidantkapasitet (ABTS, ORAC) og protein. Spirulina hadde høyest innhold av bioaktive stoffer. ASE ga høyere utbytte; PEF bevarte varmesensitive forbindelser bedre.",
-          es: "Medí fenoles totales (Folin–Ciocalteu), capacidad antioxidante (ABTS, ORAC) y proteína. La espirulina tuvo el mayor contenido bioactivo. ASE dio mayores rendimientos; PEF preservó mejor los compuestos sensibles al calor.",
-        },
-      },
-      {
-        label: { en: "Application", no: "Anvendelse", es: "Aplicación" },
-        text: {
-          en: "Added freeze-dried spirulina extracts (1% w/w) to beef burgers as a natural antioxidant and colourant, tracking pH and colour over 5 days of refrigerated storage. The PEF extract gave the best stability against proteolytic deterioration.",
-          no: "Tilsatte frysetørkede spirulinaekstrakter (1 % vekt/vekt) i hamburgere av storfekjøtt som naturlig antioksidant og fargestoff, og fulgte pH og farge gjennom 5 dager kjølelagring. PEF-ekstraktet ga best stabilitet mot proteolytisk nedbrytning.",
-          es: "Incorporé extractos liofilizados de espirulina (1 % p/p) a hamburguesas de carne vacuna como antioxidante y colorante natural, con seguimiento de pH y color durante 5 días de refrigeración. El extracto por PEF mostró la mejor estabilidad frente al deterioro proteolítico.",
-        },
-      },
-      {
-        label: { en: "Data", no: "Data", es: "Datos" },
-        text: {
-          en: "Organised, analysed and interpreted the experimental data to compare extraction methods and judge how each ingredient performed.",
-          no: "Organiserte, analyserte og tolket forsøksdataene for å sammenligne ekstraksjonsmetodene og vurdere hvordan hver ingrediens fungerte.",
-          es: "Organicé, analicé e interpreté los datos experimentales para comparar los métodos de extracción y evaluar el desempeño de cada ingrediente.",
-        },
-      },
     ],
     findingsLabel: { en: "Key findings", no: "Hovedfunn", es: "Conclusiones clave" },
     findings: {

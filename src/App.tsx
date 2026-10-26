@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowDownToLine, ArrowUpRight, Mail, Menu, X } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowDownToLine,
+  ArrowRight,
+  ArrowUpRight,
+  Beef,
+  CalendarCheck,
+  FlaskConical,
+  Mail,
+  Menu,
+  Percent,
+  Refrigerator,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -18,6 +31,16 @@ import imgFilling from "@/assets/projects/alfarajote-filling.jpg";
 import imgCoating from "@/assets/projects/alfarajote-coating.jpg";
 import imgFinished from "@/assets/projects/alfarajote-finished.jpg";
 import imgBox from "@/assets/projects/alfarajote-box.jpg";
+import imgProblem from "@/assets/projects/thesis-problem.jpg";
+import imgIdea from "@/assets/projects/thesis-idea.jpg";
+import imgBurgers3 from "@/assets/projects/thesis-burgers3.jpg";
+import imgSweetPotato from "@/assets/projects/thesis-sweetpotato.jpg";
+import imgOrange from "@/assets/projects/thesis-orange.jpg";
+import imgSpirulina from "@/assets/projects/thesis-spirulina.jpg";
+import chartPhenolics from "@/assets/projects/chart-phenolics.jpg";
+import chartAbts from "@/assets/projects/chart-abts.jpg";
+import chartOrac from "@/assets/projects/chart-orac.jpg";
+import chartProtein from "@/assets/projects/chart-protein.jpg";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   type Lang,
@@ -317,6 +340,14 @@ const projectImages: Record<string, { src: string; w: number; h: number }> = {
   coating: { src: imgCoating, w: 408, h: 720 },
   finished: { src: imgFinished, w: 600, h: 800 },
   box: { src: imgBox, w: 600, h: 800 },
+  burgers3: { src: imgBurgers3, w: 1000, h: 324 },
+  sweetpotato: { src: imgSweetPotato, w: 600, h: 450 },
+  orange: { src: imgOrange, w: 600, h: 396 },
+  spirulina: { src: imgSpirulina, w: 564, h: 384 },
+  phenolics: { src: chartPhenolics, w: 800, h: 712 },
+  abts: { src: chartAbts, w: 800, h: 536 },
+  orac: { src: chartOrac, w: 800, h: 481 },
+  protein: { src: chartProtein, w: 800, h: 491 },
 };
 
 type GalleryItem = { src: string; caption: Record<Lang, string> };
@@ -405,18 +436,6 @@ function Projects() {
               </p>
               <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(th.summary)}</p>
               <p className="mt-3 text-sm text-muted-foreground">{t(th.supervisor)}</p>
-              <ul className="mt-6 flex flex-wrap gap-2" aria-label={t(th.sourcesLabel)}>
-                {th.sources.map((src) => (
-                  <li
-                    key={src.latin}
-                    className="flex items-center gap-2 rounded-full border border-ink/20 bg-paper/60 py-1.5 pl-2 pr-3.5 text-sm"
-                  >
-                    <span className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass])} aria-hidden="true" />
-                    {t(src.name)}
-                    <span className="font-display italic text-muted-foreground">{src.latin}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
             <Gallery
               items={[th.gallery[0]]}
@@ -434,19 +453,135 @@ function Projects() {
             ))}
           </dl>
 
-          <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/15 sm:grid-cols-2 lg:grid-cols-4">
-            {th.steps.map((step, i) => (
-              <li key={i} className="bg-sand-tint p-6">
-                <p className="flex items-baseline gap-3">
-                  <span className="font-mono text-xs text-citrus-deep">0{i + 1}</span>
-                  <span className="font-display text-xl">{t(step.label)}</span>
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-ink/75">{t(step.text)}</p>
-              </li>
-            ))}
-          </ol>
+          {/* The challenge */}
+          <div className="mt-16">
+            <p className="section-label">{t(th.challenge.label)}</p>
+            <h4 className="mt-2 font-display text-2xl sm:text-3xl">{t(th.challenge.heading)}</h4>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {[
+                { src: imgProblem, w: 900, h: 416, label: th.challenge.problem },
+                { src: imgIdea, w: 900, h: 379, label: th.challenge.idea },
+              ].map((f) => (
+                <figure key={f.label.en} className="flex flex-col justify-between rounded-sm border border-ink/10 bg-white p-4">
+                  <img src={f.src} alt="" width={f.w} height={f.h} loading="lazy" className="mx-auto max-h-48 w-auto object-contain" />
+                  <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-widest text-umber-deep">{t(f.label)}</figcaption>
+                </figure>
+              ))}
+            </div>
+            <ul className="mt-4 grid gap-4 md:grid-cols-3">
+              {th.challenge.cards.map((c, i) => (
+                <li
+                  key={c.title.en}
+                  className={cn(
+                    "rounded-sm border p-5",
+                    i === 0 ? "border-umber-deep bg-umber-deep text-paper" : "border-ink/10 bg-card",
+                  )}
+                >
+                  <p className="font-display text-2xl font-semibold">{t(c.title)}</p>
+                  <p className={cn("mt-1 text-sm leading-snug", i === 0 ? "text-paper/85" : "text-muted-foreground")}>{t(c.text)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-14">
+          {/* Raw materials */}
+          <div className="mt-16">
+            <p className="section-label">{t(th.sourcesLabel)}</p>
+            <ul className="mt-5 grid gap-4 md:grid-cols-3">
+              {th.sources.map((src) => {
+                const img = projectImages[src.img];
+                return (
+                  <li key={src.latin} className="rounded-sm border border-ink/10 bg-card p-4">
+                    <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-sm bg-white">
+                      <img src={img.src} alt="" width={img.w} height={img.h} loading="lazy" className="max-h-full w-auto object-contain" />
+                    </div>
+                    <p className="mt-4 flex items-center gap-2 font-display text-xl">
+                      <span className={cn("size-3 rounded-full", toneClass[src.tone as keyof typeof toneClass])} aria-hidden="true" />
+                      {t(src.name)}
+                    </p>
+                    <p className="font-display text-sm italic text-umber-deep">{src.latin}</p>
+                    <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+                      {t(src.points).map((pt) => (
+                        <li key={pt} className="flex gap-2">
+                          <span className="mt-2 size-1 shrink-0 rounded-full bg-umber" aria-hidden="true" />
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Results */}
+          <div className="mt-16">
+            <p className="section-label">{t(th.results.label)}</p>
+            <h4 className="mt-2 font-display text-2xl sm:text-3xl">{t(th.results.heading)}</h4>
+            <div className="mt-6 grid gap-4 lg:grid-cols-[2fr_1fr]">
+              <Gallery
+                items={th.results.charts.map((c) => ({ src: c.src, caption: c.title }))}
+                className="grid gap-4 sm:grid-cols-2 [&_figcaption]:font-display [&_figcaption]:text-base [&_figcaption]:text-ink"
+                thumbClass="aspect-[4/3] bg-white object-contain p-3"
+              />
+              <ul className="grid content-start gap-4">
+                {th.results.takeaways.map((k, i) => (
+                  <li
+                    key={k.title.en}
+                    className={cn(
+                      "rounded-sm border p-5",
+                      i === 2 ? "border-umber-deep bg-umber-deep text-paper" : "border-ink/10 bg-card",
+                    )}
+                  >
+                    <p className="font-display text-2xl font-semibold">{t(k.title)}</p>
+                    <p className={cn("mt-1 leading-snug", i === 2 ? "text-paper/90" : "text-ink/80")}>{t(k.text)}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className="mt-3 text-xs text-muted-foreground">{t(th.results.note)}</p>
+          </div>
+
+          {/* Food test */}
+          <div className="mt-16">
+            <p className="section-label">{t(th.foodTest.label)}</p>
+            <h4 className="mt-2 font-display text-2xl sm:text-3xl">{t(th.foodTest.heading)}</h4>
+            <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {th.foodTest.steps.map((step, i) => {
+                const Icon = [FlaskConical, Percent, Beef, Refrigerator, CalendarCheck][i];
+                return (
+                  <li key={step.title.en} className="relative rounded-sm border border-ink/10 bg-card p-4">
+                    <div className="flex aspect-[5/3] items-center justify-center rounded-sm bg-sand/40">
+                      <Icon className="size-10 text-umber-deep" strokeWidth={1.4} aria-hidden="true" />
+                    </div>
+                    <p className="mt-4 font-display text-lg leading-tight">
+                      <span className="mr-1.5 font-mono text-sm text-citrus-deep">{i + 1}</span>
+                      {t(step.title)}
+                    </p>
+                    <p className="mt-1 text-sm leading-snug text-muted-foreground">{t(step.text)}</p>
+                    {i < 4 && (
+                      <ArrowRight
+                        className="absolute -right-[0.95rem] top-1/2 hidden size-4 -translate-y-1/2 text-umber lg:block"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+            <p className="mt-4 rounded-sm bg-umber-deep px-5 py-4 text-paper">
+              <strong className="font-semibold">{t(th.foodTest.goalLabel)}:</strong> {t(th.foodTest.goal)}
+            </p>
+          </div>
+
+          <div className="mt-12 grid items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+            <div className="min-w-0">
+              <Gallery
+                items={[{ src: "burgers3", caption: th.foodTest.burgersCaption }]}
+                thumbClass="aspect-[1000/324] bg-white object-contain"
+              />
+              <Gallery items={th.gallery.slice(1, 3)} className="mt-4 grid grid-cols-2 gap-4" thumbClass="aspect-[4/3]" />
+            </div>
             <div>
               <h4 className="section-label">{t(th.findingsLabel)}</h4>
               <ul className="mt-4 space-y-4">
@@ -457,12 +592,8 @@ function Projects() {
                   </li>
                 ))}
               </ul>
+              <Gallery items={th.gallery.slice(3)} className="mt-8 grid grid-cols-2 gap-4" thumbClass="aspect-[3/4]" />
             </div>
-            <Gallery
-              items={th.gallery.slice(1)}
-              className="grid grid-cols-2 gap-4"
-              thumbClass="aspect-[4/3]"
-            />
           </div>
         </article>
 
