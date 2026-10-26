@@ -569,9 +569,9 @@ export const projects = {
     handle: "@lagamadecolores",
     url: "https://www.instagram.com/lagamadecolores/",
     summary: {
-      en: "I started this account during lockdown to share plant-based recipes with fruit and vegetables of every colour, the vegetable garden we built at home, and tips so others could grow their own food.",
-      no: "Jeg startet kontoen under nedstengningen for å dele plantebaserte oppskrifter med frukt og grønnsaker i alle farger, kjøkkenhagen vi bygde hjemme, og tips så andre kunne dyrke sin egen mat.",
-      es: "Abrí esta cuenta durante la cuarentena para compartir recetas a base de vegetales, con frutas y verduras de todos los colores, la huerta que armamos en casa y tips para que otros pudieran producir sus propios alimentos.",
+      en: "I started this account during the pandemic to share plant-based recipes with fruit and vegetables of every colour, the vegetable garden we built at home, and tips so others could grow their own food.",
+      no: "Jeg startet kontoen under pandemien for å dele plantebaserte oppskrifter med frukt og grønnsaker i alle farger, kjøkkenhagen vi bygde hjemme, og tips så andre kunne dyrke sin egen mat.",
+      es: "Abrí esta cuenta durante la pandemia para compartir recetas a base de vegetales, con frutas y verduras de todos los colores, la huerta que armamos en casa y tips para que otros pudieran producir sus propios alimentos.",
     },
     nameStory: {
       en: "The name has a double meaning: “La Gama” was the old name of my hometown, and “Colores” is what my family calls me instead of Dolores. It is also about the range of colours in real food.",
@@ -591,6 +591,33 @@ export const projects = {
       en: "Posts from @lagamadecolores: animals made from fruit, such as kiwi turtles, an orange lion and strawberry bunnies, plus homemade vegetable pizzas",
       no: "Innlegg fra @lagamadecolores: dyr laget av frukt, som kiwiskilpadder, en appelsinløve og jordbærkaniner, og hjemmelagde grønnsakspizzaer",
       es: "Publicaciones de @lagamadecolores: animales hechos con frutas, como tortugas de kiwi, un león de naranja y conejitos de frutilla, y pizzas caseras de verduras",
+    },
+    cta: { en: "Visit on Instagram", no: "Besøk på Instagram", es: "Ver en Instagram" },
+  },
+  photography: {
+    kicker: {
+      en: "Photography · Instagram",
+      no: "Fotografi · Instagram",
+      es: "Fotografía · Instagram",
+    },
+    title: { en: "Nature photography", no: "Naturfotografi", es: "Fotografía de naturaleza" },
+    // Fill in the account handle and URL to show the link and button
+    handle: "",
+    url: "",
+    summary: {
+      en: "My photography page, where I share nature as I find it: birds, farm animals, wildflowers and bees, lakes, mountains, coastline and sunsets.",
+      no: "Fotosiden min, der jeg deler naturen slik jeg finner den: fugler, gårdsdyr, villblomster og bier, innsjøer, fjell, kyst og solnedganger.",
+      es: "Mi página de fotografía, donde comparto la naturaleza tal como la encuentro: aves, animales de campo, flores silvestres y abejas, lagos, montañas, costa y atardeceres.",
+    },
+    points: {
+      en: ["Birds and wildlife", "Landscapes", "Nature close-ups"],
+      no: ["Fugler og dyreliv", "Landskap", "Naturnærbilder"],
+      es: ["Aves y fauna", "Paisajes", "Detalles de la naturaleza"],
+    } satisfies TList,
+    feedAlt: {
+      en: "Photos by María Dolores Rivera: a bird of prey in flight, a bee on lavender, a sunset, a burrowing owl, a cow, a sea cave with boats, a gull landing on water, the full moon and a lake pier",
+      no: "Bilder av María Dolores Rivera: en rovfugl i flukt, en bie på lavendel, en solnedgang, en ugle, en ku, en havgrotte med båter, en måke som lander på vannet, fullmåne og en brygge ved en innsjø",
+      es: "Fotos de María Dolores Rivera: un ave rapaz en vuelo, una abeja en lavanda, un atardecer, una lechucita, una vaca, una cueva marina con botes, una gaviota posándose en el agua, la luna llena y un muelle en un lago",
     },
     cta: { en: "Visit on Instagram", no: "Besøk på Instagram", es: "Ver en Instagram" },
   },

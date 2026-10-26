@@ -52,6 +52,15 @@ import igPizza from "@/assets/instagram/pizza.jpg";
 import igDolphin from "@/assets/instagram/dolphin.jpg";
 import igFish from "@/assets/instagram/fish.jpg";
 import igTart from "@/assets/instagram/tart.jpg";
+import phEagle from "@/assets/photography/eagle.jpg";
+import phBee from "@/assets/photography/bee.jpg";
+import phSunset from "@/assets/photography/sunset.jpg";
+import phOwl from "@/assets/photography/owl.jpg";
+import phCow from "@/assets/photography/cow.jpg";
+import phCave from "@/assets/photography/cave.jpg";
+import phGull from "@/assets/photography/gull.jpg";
+import phMoon from "@/assets/photography/moon.jpg";
+import phPier from "@/assets/photography/pier.jpg";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   type Lang,
@@ -371,6 +380,7 @@ const projectImages: Record<string, { src: string; w: number; h: number }> = {
 };
 
 const stepImages = [step1, step2, step3, step4, step5];
+const photoFeed = [phEagle, phBee, phSunset, phOwl, phCow, phCave, phGull, phMoon, phPier];
 const igFeed = [igTurtles, igLion, igBunnies, igCrab, igOwl, igPizza, igDolphin, igFish, igTart];
 
 type GalleryItem = { src: string; caption: Record<Lang, string> };
@@ -438,6 +448,101 @@ function Gallery({ items, className, thumbClass }: { items: GalleryItem[]; class
   );
 }
 
+type SocialData = {
+  kicker: Record<Lang, string>;
+  title: string | Record<Lang, string>;
+  handle: string;
+  url: string;
+  summary: Record<Lang, string>;
+  nameStory?: Record<Lang, string>;
+  stats?: { value: string; label: Record<Lang, string> }[];
+  points: Record<Lang, string[]>;
+  feedAlt: Record<Lang, string>;
+  cta: Record<Lang, string>;
+};
+
+// Instagram-style project: 3x3 feed plus text; links out once a URL is set
+function SocialProject({ data, feed }: { data: SocialData; feed: string[] }) {
+  const { t } = useLang();
+  const title = typeof data.title === "string" ? data.title : t(data.title);
+  const grid = (
+    <>
+      <div role="img" aria-label={t(data.feedAlt)} className="grid grid-cols-3 gap-1">
+        {feed.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt=""
+            width={480}
+            height={480}
+            loading="lazy"
+            className="aspect-square w-full object-cover transition-opacity duration-300 group-hover:opacity-90"
+          />
+        ))}
+      </div>
+      {data.handle && (
+        <span className="mt-3 flex items-center justify-between gap-3 px-1 pb-1">
+          <span className="flex items-center gap-2 font-display text-xl">
+            <InstagramIcon className="size-5 text-umber-deep" />
+            {data.handle}
+          </span>
+          <ArrowUpRight className="size-5 text-umber-deep transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+        </span>
+      )}
+    </>
+  );
+  const frame =
+    "group relative mx-auto block w-full max-w-md overflow-hidden rounded-sm border border-ink/10 bg-card p-3 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]";
+  return (
+    <article className="mt-20 grid items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+      {data.url ? (
+        <a href={data.url} target="_blank" rel="noopener noreferrer" aria-label={`${t(data.cta)}: ${data.handle}`} className={frame}>
+          {grid}
+        </a>
+      ) : (
+        <div className={frame}>{grid}</div>
+      )}
+      <div className="min-w-0">
+        <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(data.kicker)}</p>
+        <h3 className="mt-3 font-display text-4xl font-semibold tracking-tight text-umber sm:text-5xl">{title}</h3>
+        {data.handle && <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">{data.handle}</p>}
+        {data.stats && (
+          <dl className="mt-4 flex gap-8">
+            {data.stats.map((st) => (
+              <div key={st.value} className="flex flex-col">
+                <dt className="text-sm text-muted-foreground">{t(st.label)}</dt>
+                <dd className="order-first font-display text-3xl tabular-nums">{st.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(data.summary)}</p>
+        {data.nameStory && (
+          <p className="mt-3 border-l-2 border-umber pl-4 text-[15px] italic leading-relaxed text-ink/75">{t(data.nameStory)}</p>
+        )}
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {t(data.points).map((c) => (
+            <li key={c}>
+              <Badge variant="outline" className="rounded-full border-umber/40 bg-paper/60 px-3 py-1 text-[13px] font-normal">
+                {c}
+              </Badge>
+            </li>
+          ))}
+        </ul>
+        {data.url && (
+          <Button asChild size="lg" className="mt-8 h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber">
+            <a href={data.url} target="_blank" rel="noopener noreferrer">
+              <InstagramIcon className="size-4" />
+              {t(data.cta)}
+              <ArrowUpRight />
+            </a>
+          </Button>
+        )}
+      </div>
+    </article>
+  );
+}
+
 // Short edited cut of the prototype; autoplays muted unless the viewer prefers reduced motion
 function PrototypeVideo() {
   const { t } = useLang();
@@ -470,7 +575,6 @@ function Projects() {
   const { t } = useLang();
   const th = projects.thesis;
   const al = projects.alfarajote;
-  const ig = projects.instagram;
   const product = projectImages.product;
   return (
     <section id="projects" className="bg-sand-tint py-20">
@@ -755,68 +859,8 @@ function Projects() {
           />
         </article>
 
-        {/* Instagram */}
-        <article className="mt-20 grid items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
-          <a
-            href={ig.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${t(ig.cta)}: ${ig.handle}`}
-            className="group relative mx-auto block w-full max-w-md overflow-hidden rounded-sm border border-ink/10 bg-card p-3 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
-          >
-            <div role="img" aria-label={t(ig.feedAlt)} className="grid grid-cols-3 gap-1">
-              {igFeed.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt=""
-                  width={480}
-                  height={480}
-                  loading="lazy"
-                  className="aspect-square w-full object-cover transition-opacity duration-300 group-hover:opacity-90"
-                />
-              ))}
-            </div>
-            <span className="mt-3 flex items-center justify-between gap-3 px-1 pb-1">
-              <span className="flex items-center gap-2 font-display text-xl">
-                <InstagramIcon className="size-5 text-umber-deep" />
-                {ig.handle}
-              </span>
-              <ArrowUpRight className="size-5 text-umber-deep transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-            </span>
-          </a>
-          <div className="min-w-0">
-            <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(ig.kicker)}</p>
-            <h3 className="mt-3 font-display text-4xl font-semibold tracking-tight text-umber sm:text-5xl">{ig.title}</h3>
-            <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">{ig.handle}</p>
-            <dl className="mt-4 flex gap-8">
-              {ig.stats.map((st) => (
-                <div key={st.value} className="flex flex-col">
-                  <dt className="text-sm text-muted-foreground">{t(st.label)}</dt>
-                  <dd className="order-first font-display text-3xl tabular-nums">{st.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(ig.summary)}</p>
-            <p className="mt-3 border-l-2 border-umber pl-4 text-[15px] italic leading-relaxed text-ink/75">{t(ig.nameStory)}</p>
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {t(ig.points).map((c) => (
-                <li key={c}>
-                  <Badge variant="outline" className="rounded-full border-umber/40 bg-paper/60 px-3 py-1 text-[13px] font-normal">
-                    {c}
-                  </Badge>
-                </li>
-              ))}
-            </ul>
-            <Button asChild size="lg" className="mt-8 h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber">
-              <a href={ig.url} target="_blank" rel="noopener noreferrer">
-                <InstagramIcon className="size-4" />
-                {t(ig.cta)}
-                <ArrowUpRight />
-              </a>
-            </Button>
-          </div>
-        </article>
+        <SocialProject data={projects.instagram} feed={igFeed} />
+        <SocialProject data={projects.photography} feed={photoFeed} />
       </div>
     </section>
   );
