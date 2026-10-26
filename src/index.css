@@ -4,12 +4,16 @@
 
 @layer base {
   :root {
-    /* Brand: warm paper, deep spirulina green, citrus and sweet-potato accents
-       (the three raw materials from Dolores's thesis). */
+    /* Brand: warm paper, pastel spirulina green, citrus and sweet-potato accents
+       (the three raw materials from Dolores's thesis). Green is pastel sage;
+       --spirulina-deep is only for small text and focus rings that need contrast. */
     --paper: 40 38% 94%;
     --ink: 165 25% 13%;
-    --spirulina: 166 48% 24%;
+    --spirulina: 150 30% 74%;
+    --spirulina-deep: 158 38% 25%;
+    --sage: 145 28% 87%;
     --citrus: 24 78% 50%;
+    --citrus-deep: 20 80% 36%;
     --batata: 12 52% 44%;
 
     --background: var(--paper);
@@ -19,18 +23,18 @@
     --popover: 40 45% 97%;
     --popover-foreground: var(--ink);
     --primary: var(--spirulina);
-    --primary-foreground: 40 38% 96%;
+    --primary-foreground: var(--ink);
     --secondary: 40 25% 88%;
     --secondary-foreground: var(--ink);
     --muted: 40 25% 88%;
     --muted-foreground: 165 8% 34%;
-    --accent: 166 30% 88%;
+    --accent: var(--sage);
     --accent-foreground: var(--ink);
     --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 98%;
     --border: 40 18% 80%;
     --input: 40 18% 80%;
-    --ring: var(--spirulina);
+    --ring: var(--spirulina-deep);
     --radius: 0.375rem;
   }
 }
@@ -51,7 +55,7 @@
     background: hsl(var(--citrus) / 0.3);
   }
   :focus-visible {
-    outline: 2px solid hsl(var(--spirulina));
+    outline: 2px solid hsl(var(--spirulina-deep));
     outline-offset: 3px;
   }
 }

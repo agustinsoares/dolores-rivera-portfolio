@@ -187,10 +187,10 @@ function Hero() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
             {t(hero.lead)}
           </p>
-          <p className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-spirulina/25 bg-accent px-3 py-1 text-sm text-spirulina">
+          <p className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-spirulina-deep/20 bg-accent px-3 py-1 text-sm text-spirulina-deep">
             <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-spirulina/50 motion-reduce:animate-none" />
-              <span className="relative inline-flex size-2 rounded-full bg-spirulina" />
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-spirulina-deep/40 motion-reduce:animate-none" />
+              <span className="relative inline-flex size-2 rounded-full bg-spirulina-deep" />
             </span>
             {t(hero.status)}
           </p>
@@ -279,10 +279,10 @@ function Research() {
   const { t } = useLang();
   const th = research.thesis;
   return (
-    <section id="research" className="bg-ink py-20 text-paper">
+    <section id="research" className="bg-sage py-20 text-ink">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 grid gap-3 lg:grid-cols-[12rem_1fr] lg:gap-8">
-          <p className="pt-2 font-mono text-xs uppercase tracking-[0.18em] text-paper/60">
+          <p className="pt-2 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
             02 — {t(ui.nav.research)}
           </p>
           <h2 className="font-display text-3xl font-light leading-tight tracking-tight sm:text-4xl">
@@ -290,46 +290,46 @@ function Research() {
           </h2>
         </div>
 
-        <article className="grid gap-8 border-t border-paper/15 pt-10 lg:grid-cols-[12rem_1fr] lg:gap-8">
-          <div className="font-mono text-xs uppercase leading-relaxed tracking-widest text-paper/60">
+        <article className="grid gap-8 border-t border-ink/15 pt-10 lg:grid-cols-[12rem_1fr] lg:gap-8">
+          <div className="font-mono text-xs uppercase leading-relaxed tracking-widest text-muted-foreground">
             <p>{t(th.date)}</p>
             <p className="mt-1 normal-case tracking-normal">{th.place}</p>
           </div>
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-citrus">{t(th.kicker)}</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(th.kicker)}</p>
             <h3 className="mt-3 max-w-3xl font-display text-2xl leading-snug sm:text-3xl">
               {t(th.title)}
             </h3>
 
             <div className="mt-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
                 {t(th.sourcesLabel)}
               </p>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {th.sources.map((src) => (
                   <li
                     key={src.latin}
-                    className="flex items-center gap-2 rounded-full border border-paper/20 py-1.5 pl-2 pr-3.5 text-sm"
+                    className="flex items-center gap-2 rounded-full border border-ink/20 py-1.5 pl-2 pr-3.5 text-sm"
                   >
                     <span
-                      className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass], src.tone === "spirulina" && "ring-1 ring-paper/40")}
+                      className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass], src.tone === "spirulina" && "ring-1 ring-ink/20")}
                       aria-hidden="true"
                     />
                     {t(src.name)}
-                    <span className="font-display italic text-paper/60">{src.latin}</span>
+                    <span className="font-display italic text-muted-foreground">{src.latin}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-paper/15 sm:grid-cols-2">
+            <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/15 sm:grid-cols-2">
               {th.steps.map((step, i) => (
-                <li key={i} className="bg-ink p-6">
+                <li key={i} className="bg-sage p-6">
                   <p className="flex items-baseline gap-3">
-                    <span className="font-mono text-xs text-citrus">0{i + 1}</span>
+                    <span className="font-mono text-xs text-citrus-deep">0{i + 1}</span>
                     <span className="font-display text-xl">{t(step.label)}</span>
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-paper/75">{t(step.text)}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink/75">{t(step.text)}</p>
                 </li>
               ))}
             </ol>
@@ -340,17 +340,17 @@ function Research() {
           <div />
           <div className="grid gap-6 md:grid-cols-2">
             {research.projects.map((p) => (
-              <article key={p.title} className="flex flex-col rounded-sm border border-paper/15 p-6">
-                <p className="font-mono text-xs uppercase tracking-widest text-citrus">{t(p.kicker)}</p>
+              <article key={p.title} className="flex flex-col rounded-sm border border-ink/15 p-6">
+                <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(p.kicker)}</p>
                 <h3 className="mt-3 font-display text-2xl leading-snug">{p.title}</h3>
-                <p className="mt-1 font-mono text-xs uppercase tracking-widest text-paper/60">
+                <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
                   {t(p.place)} · {t(p.date)}
                 </p>
-                <p className="mt-4 leading-relaxed text-paper/85">{t(p.summary)}</p>
-                <ul className="mt-4 space-y-2 text-sm text-paper/75">
+                <p className="mt-4 leading-relaxed text-ink/85">{t(p.summary)}</p>
+                <ul className="mt-4 space-y-2 text-sm text-ink/75">
                   {t(p.points).map((pt) => (
                     <li key={pt} className="flex gap-3">
-                      <span className="mt-2 h-px w-3 shrink-0 bg-citrus" aria-hidden="true" />
+                      <span className="mt-2 h-px w-3 shrink-0 bg-citrus-deep" aria-hidden="true" />
                       {pt}
                     </li>
                   ))}
@@ -383,7 +383,7 @@ function Experience() {
               </div>
               <div>
                 <h3 className="font-display text-xl">{t(item.role)}</h3>
-                <p className="mt-0.5 text-sm font-medium text-spirulina">{item.org}</p>
+                <p className="mt-0.5 text-sm font-medium text-spirulina-deep">{item.org}</p>
                 <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">{t(item.text)}</p>
               </div>
             </li>
@@ -492,20 +492,20 @@ function Skills() {
 function Contact() {
   const { t } = useLang();
   return (
-    <section id="contact" className="bg-spirulina text-paper">
+    <section id="contact" className="bg-spirulina text-ink">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
-          <p className="pt-3 font-mono text-xs uppercase tracking-[0.18em] text-paper/85">
+          <p className="pt-3 font-mono text-xs uppercase tracking-[0.18em] text-ink/75">
             06 — {t(ui.nav.contact)}
           </p>
           <div>
             <h2 className="font-display text-5xl font-light tracking-tight sm:text-6xl">
               {t(contactSection.heading)}
             </h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-paper/85">{t(contactSection.text)}</p>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/75">{t(contactSection.text)}</p>
             <a
               href={`mailto:${contact.email}`}
-              className="mt-10 inline-flex items-center gap-3 break-all font-display text-2xl underline decoration-paper/40 decoration-1 underline-offset-8 transition-colors hover:decoration-citrus sm:text-3xl"
+              className="mt-10 inline-flex items-center gap-3 break-all font-display text-2xl underline decoration-ink/40 decoration-1 underline-offset-8 transition-colors hover:decoration-citrus-deep sm:text-3xl"
             >
               <Mail className="size-6 shrink-0" aria-hidden="true" />
               {contact.email}
@@ -521,7 +521,7 @@ function Contact() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="rounded-full border-paper/40 bg-transparent text-paper hover:bg-paper/10 hover:text-paper"
+                className="rounded-full border-ink/30 bg-transparent text-ink hover:bg-ink/5 hover:text-ink"
               >
                 <a href={contact.cv} download>
                   <ArrowDownToLine />
@@ -532,8 +532,8 @@ function Contact() {
           </div>
         </div>
       </div>
-      <footer className="border-t border-paper/15">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-6 text-sm text-paper/85 sm:px-6">
+      <footer className="border-t border-ink/15">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-6 text-sm text-ink/75 sm:px-6">
           <p>© {new Date().getFullYear()} María Dolores Rivera</p>
           <p>{t(contactSection.footer)}</p>
         </div>

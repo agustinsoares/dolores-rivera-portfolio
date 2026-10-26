@@ -16,8 +16,15 @@ export default {
       colors: {
         paper: "hsl(var(--paper))",
         ink: "hsl(var(--ink))",
-        spirulina: "hsl(var(--spirulina))",
-        citrus: "hsl(var(--citrus))",
+        sage: "hsl(var(--sage))",
+        spirulina: {
+          DEFAULT: "hsl(var(--spirulina))",
+          deep: "hsl(var(--spirulina-deep))",
+        },
+        citrus: {
+          DEFAULT: "hsl(var(--citrus))",
+          deep: "hsl(var(--citrus-deep))",
+        },
         batata: "hsl(var(--batata))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
