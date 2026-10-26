@@ -601,9 +601,8 @@ export const projects = {
       es: "Fotografía · Instagram",
     },
     title: { en: "Nature photography", no: "Naturfotografi", es: "Fotografía de naturaleza" },
-    // Fill in the account handle and URL to show the link and button
-    handle: "",
-    url: "",
+    handle: "@_dolitor",
+    url: "https://www.instagram.com/_dolitor/",
     summary: {
       en: "My photography page, where I share nature as I find it: birds, farm animals, wildflowers and bees, lakes, mountains, coastline and sunsets.",
       no: "Fotosiden min, der jeg deler naturen slik jeg finner den: fugler, gårdsdyr, villblomster og bier, innsjøer, fjell, kyst og solnedganger.",
