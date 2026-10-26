@@ -83,10 +83,10 @@
 }
 @keyframes sign {
   from {
-    clip-path: inset(-30% 100% -30% -10%);
+    clip-path: inset(-50% 100% -50% -30%);
   }
   to {
-    clip-path: inset(-30% -10% -30% -10%);
+    clip-path: inset(-50% -50% -50% -30%);
   }
 }
 @keyframes swash {

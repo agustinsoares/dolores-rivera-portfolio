@@ -73,8 +73,8 @@ function LanguageSwitcher({ className }: { className?: string }) {
 // MDR monogram written like a signature; the ink "writes" in on load, then the swash draws underneath
 function Signature() {
   return (
-    <span aria-hidden="true" className="relative block w-[5.5rem] text-ink transition-transform duration-300 group-hover:-rotate-3">
-      <span className="signature-ink block font-signature text-[2.9rem] leading-[0.9]">MDR</span>
+    <span aria-hidden="true" className="relative block w-[6.5rem] text-ink transition-transform duration-300 group-hover:-rotate-3">
+      <span className="signature-ink block pl-1 pr-5 font-signature text-[2.9rem] leading-[0.9]">MDR</span>
       <svg viewBox="0 0 80 14" className="signature-swash absolute -bottom-1 left-0 w-full overflow-visible" fill="none">
         <path
           d="M2 9c14-5 30-7 46-4 9 2 15 4 22 1 3-1 5-3 6-5"
@@ -184,7 +184,7 @@ function Hero() {
           >
             <span className="size-1.5 rounded-full bg-umber" />
           </span>
-          <h1 className="mt-6 font-display text-[3.4rem] font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl lg:text-[5.5rem]">
+          <h1 className="mt-6 font-display text-umber text-[3.4rem] font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl lg:text-[5.5rem]">
             <span className="block">{hero.firstName}</span>
             <span className="block italic">{hero.lastName}</span>
           </h1>
@@ -193,14 +193,14 @@ function Hero() {
             {t(hero.basedIn)} <strong className="font-semibold text-foreground">{t(hero.location)}</strong>.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="h-12 rounded-none bg-ink px-6 text-paper shadow-none hover:bg-ink/85">
+            <Button asChild size="lg" className="h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber">
               <a href="#contact">{t(ui.getInTouch)}</a>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="h-12 rounded-none border-ink/25 bg-transparent px-6 shadow-none hover:bg-ink/5"
+              className="h-12 rounded-none border-umber/50 bg-transparent px-6 text-umber-deep shadow-none hover:bg-umber/10 hover:text-umber-deep"
             >
               <a href="#experience">
                 {t(hero.viewExperience)}
