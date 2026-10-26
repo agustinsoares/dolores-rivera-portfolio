@@ -488,6 +488,33 @@ export const projects = {
       no: "Levedyktig, sensorisk uimotståelig, kulturelt sterk og miljømessig avgjørende.",
       es: "Viable, sensorialmente irresistible, culturalmente potente y ambientalmente esencial.",
     },
+    introQuestion: {
+      en: "How many times has a flavour taken you back home?",
+      no: "Hvor mange ganger har en smak tatt deg med tilbake hjem?",
+      es: "¿Cuántas veces un sabor te devolvió a casa?",
+    },
+    introAlt: {
+      en: "Grandmother's hands kneading dough on a floured table",
+      no: "Bestemors hender som elter deig på et melet bord",
+      es: "Manos de una abuela amasando sobre una mesa enharinada",
+    },
+    videoCaption: {
+      en: "The prototype, from dough to chocolate",
+      no: "Prototypen, fra deig til sjokolade",
+      es: "El prototipo, de la masa al chocolate",
+    },
+    videoAlt: {
+      en: "Video of the Alfarajote prototype being made: mixing the dough, filling with dulce de leche and coating in chocolate",
+      no: "Video av Alfarajote-prototypen: deigen blandes, fylles med dulce de leche og dekkes med sjokolade",
+      es: "Video de la elaboración del prototipo de Alfarajote: masa, relleno de dulce de leche y baño de chocolate",
+    },
+    presentationLabel: {
+      en: "See the full presentation",
+      no: "Se hele presentasjonen",
+      es: "Ver la presentación completa",
+    },
+    // Public Canva *view* link (Share → Public view link). Leave empty to hide the button.
+    presentationUrl: "",
     quoteSource: {
       en: "Feedback from experts in food engineering, by-products and consumer behaviour",
       no: "Tilbakemelding fra eksperter innen næringsmiddelteknologi, biprodukter og forbrukeratferd",

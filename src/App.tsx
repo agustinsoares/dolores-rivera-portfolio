@@ -40,6 +40,9 @@ import chartPhenolics from "@/assets/projects/chart-phenolics.jpg";
 import chartAbts from "@/assets/projects/chart-abts.jpg";
 import chartOrac from "@/assets/projects/chart-orac.jpg";
 import chartProtein from "@/assets/projects/chart-protein.jpg";
+import imgHands from "@/assets/projects/alfarajote-hands.jpg";
+import imgVideoPoster from "@/assets/projects/alfarajote-video-poster.jpg";
+import videoPrototype from "@/assets/projects/alfarajote-prototipo.mp4";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   type Lang,
@@ -415,6 +418,34 @@ function Gallery({ items, className, thumbClass }: { items: GalleryItem[]; class
   );
 }
 
+// Short edited cut of the prototype; autoplays muted unless the viewer prefers reduced motion
+function PrototypeVideo() {
+  const { t } = useLang();
+  const al = projects.alfarajote;
+  const [autoPlay, setAutoPlay] = useState(true);
+  useEffect(() => {
+    setAutoPlay(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+  return (
+    <figure className="mx-auto w-full max-w-[19rem]">
+      <video
+        key={String(autoPlay)}
+        src={videoPrototype}
+        poster={imgVideoPoster}
+        autoPlay={autoPlay}
+        muted
+        loop
+        playsInline
+        controls
+        preload="metadata"
+        aria-label={t(al.videoAlt)}
+        className="aspect-[9/16] w-full rounded-sm bg-ink object-cover shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.55)]"
+      />
+      <figcaption className="mt-2 text-xs text-muted-foreground">{t(al.videoCaption)}</figcaption>
+    </figure>
+  );
+}
+
 function Projects() {
   const { t } = useLang();
   const th = projects.thesis;
@@ -601,6 +632,22 @@ function Projects() {
 
         {/* Alfarajote */}
         <article className="mt-20 border-t border-ink/15 pt-20">
+          <figure className="relative mb-14 overflow-hidden rounded-sm">
+            <img
+              src={imgHands}
+              alt={t(al.introAlt)}
+              width={1800}
+              height={1017}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover sm:aspect-[21/9]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/35 to-ink/10" aria-hidden="true" />
+            <figcaption className="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+              <p className="max-w-3xl font-display text-3xl font-light italic leading-tight text-paper text-balance sm:text-5xl">
+                {t(al.introQuestion)}
+              </p>
+            </figcaption>
+          </figure>
           <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             <figure className="min-w-0 self-start">
               <img
@@ -653,24 +700,32 @@ function Projects() {
             </div>
           </div>
 
-          <h4 className="section-label mt-12">{t(al.businessLabel)}</h4>
-          <dl className="mt-4 grid grid-cols-2 border-y border-ink/15 sm:grid-cols-3 lg:grid-cols-6">
-            {al.business.map((b, i) => (
-              <div
-                key={b.label.en}
-                className={cn(
-                  "flex flex-col py-4 pr-3",
-                  i % 2 === 1 && "border-l border-ink/15 pl-4",
-                  i >= 2 && "border-t border-ink/15",
-                  "sm:border-l-0 sm:pl-0 sm:[&:not(:nth-child(3n+1))]:border-l sm:[&:not(:nth-child(3n+1))]:pl-4 sm:[&:nth-child(-n+3)]:border-t-0",
-                  "lg:border-t-0 lg:[&:not(:first-child)]:border-l lg:[&:not(:first-child)]:pl-4",
-                )}
-              >
-                <dt className="text-xs text-muted-foreground">{t(b.label)}</dt>
-                <dd className="order-first font-display text-2xl tabular-nums">{t(b.value)}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-14 grid items-center gap-10 md:grid-cols-[16rem_1fr] lg:grid-cols-[19rem_1fr] lg:gap-14">
+            <PrototypeVideo />
+            <div className="min-w-0">
+              <h4 className="section-label">{t(al.businessLabel)}</h4>
+              <dl className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-ink/15 bg-ink/15 sm:grid-cols-3">
+                {al.business.map((b) => (
+                  <div key={b.label.en} className="flex flex-col bg-sand-tint p-4">
+                    <dt className="text-xs text-muted-foreground">{t(b.label)}</dt>
+                    <dd className="order-first font-display text-2xl tabular-nums">{t(b.value)}</dd>
+                  </div>
+                ))}
+              </dl>
+              {al.presentationUrl && (
+                <Button
+                  asChild
+                  size="lg"
+                  className="mt-8 h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber"
+                >
+                  <a href={al.presentationUrl} target="_blank" rel="noopener noreferrer">
+                    {t(al.presentationLabel)}
+                    <ArrowUpRight />
+                  </a>
+                </Button>
+              )}
+            </div>
+          </div>
 
           <Gallery
             items={al.gallery.slice(1)}
