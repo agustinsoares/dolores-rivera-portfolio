@@ -1,0 +1,575 @@
+import { useEffect, useState } from "react";
+import { ArrowDownToLine, ArrowUpRight, Mail, MapPin, Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { LangProvider, useLang } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import {
+  LANGS,
+  about,
+  contact,
+  contactSection,
+  education,
+  experience,
+  hero,
+  research,
+  skills,
+  stats,
+  ui,
+} from "@/content";
+
+const SECTIONS = ["about", "research", "experience", "education", "skills", "contact"] as const;
+
+const toneClass = {
+  batata: "bg-batata",
+  orange: "bg-citrus",
+  spirulina: "bg-spirulina",
+} as const;
+
+function LinkedInIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+    </svg>
+  );
+}
+
+function LanguageSwitcher({ className }: { className?: string }) {
+  const { lang, setLang, t } = useLang();
+  return (
+    <div
+      role="group"
+      aria-label={t(ui.language)}
+      className={cn("inline-flex rounded-full border border-ink/15 bg-card p-0.5", className)}
+    >
+      {LANGS.map((l) => (
+        <button
+          key={l.code}
+          type="button"
+          lang={l.code === "no" ? "nb" : l.code}
+          aria-pressed={lang === l.code}
+          aria-label={l.name}
+          title={l.name}
+          onClick={() => setLang(l.code)}
+          className={cn(
+            "h-10 min-w-11 rounded-full px-2.5 font-mono sm:h-8 sm:min-w-10 text-xs tracking-wider transition-colors",
+            lang === l.code
+              ? "bg-ink text-paper"
+              : "text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {l.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function Header() {
+  const { t } = useLang();
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-40 transition-colors",
+        scrolled ? "border-b border-ink/10 bg-paper/85 backdrop-blur-md" : "bg-transparent",
+      )}
+    >
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <a href="#top" className="py-2 font-display text-lg font-medium tracking-tight">
+          Dolores Rivera
+        </a>
+        <nav aria-label="Main" className="hidden lg:block">
+          <ul className="flex items-center gap-6 text-sm">
+            {SECTIONS.map((id) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {t(ui.nav[id])}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="size-11 lg:hidden" aria-label={t(ui.menu)}>
+                <Menu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72 bg-paper">
+              <SheetTitle className="font-display text-xl font-medium">Dolores Rivera</SheetTitle>
+              <nav aria-label="Mobile" className="mt-8">
+                <ul className="space-y-1">
+                  {SECTIONS.map((id) => (
+                    <li key={id}>
+                      <a
+                        href={`#${id}`}
+                        onClick={() => setOpen(false)}
+                        className="block py-2.5 font-display text-2xl"
+                      >
+                        {t(ui.nav[id])}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function SpecimenCard() {
+  const { t } = useLang();
+  const s = research.thesis.sources;
+  return (
+    <figure
+      aria-hidden="true"
+      className="reveal relative mx-auto w-full max-w-sm rounded-sm border border-ink/15 bg-card p-6 shadow-[6px_6px_0_hsl(var(--ink)/0.08)] [animation-delay:200ms]"
+    >
+      <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+        <span>Sample set · 03</span>
+        <span>València · 2026</span>
+      </div>
+      <div className="relative mt-6 h-56">
+        <span className="absolute left-2 top-4 size-28 rounded-full bg-batata/90 mix-blend-multiply" />
+        <span className="absolute right-4 top-0 size-32 rounded-full bg-citrus/85 mix-blend-multiply" />
+        <span className="absolute bottom-0 left-1/2 size-36 -translate-x-1/2 rounded-full bg-spirulina/90 mix-blend-multiply" />
+      </div>
+      <ul className="mt-6 space-y-2 border-t border-dashed border-ink/20 pt-4">
+        {s.map((src) => (
+          <li key={src.latin} className="flex items-center justify-between gap-3 text-sm">
+            <span className="flex items-center gap-2">
+              <span className={cn("size-2.5 rounded-full", toneClass[src.tone as keyof typeof toneClass])} />
+              {t(src.name)}
+            </span>
+            <span className="font-display italic text-muted-foreground">{src.latin}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+        PEF ⟷ PLE/ASE · H₂O
+      </p>
+    </figure>
+  );
+}
+
+function Hero() {
+  const { t } = useLang();
+  return (
+    <section id="top" className="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:pb-24">
+      <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr]">
+        <div className="reveal">
+          <p className="section-label flex items-center gap-2">
+            <MapPin className="size-3.5" aria-hidden="true" />
+            {t(hero.eyebrow)}
+          </p>
+          <h1 className="mt-5 font-display text-5xl font-light leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl">
+            {t(hero.title)}
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
+            {t(hero.lead)}
+          </p>
+          <p className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-spirulina/25 bg-accent px-3 py-1 text-sm text-spirulina">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-spirulina/50 motion-reduce:animate-none" />
+              <span className="relative inline-flex size-2 rounded-full bg-spirulina" />
+            </span>
+            {t(hero.status)}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild size="lg" className="rounded-full">
+              <a href="#contact">
+                {t(ui.getInTouch)}
+                <ArrowUpRight />
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent">
+              <a href={contact.cv} download>
+                <ArrowDownToLine />
+                {t(ui.downloadCv)}
+              </a>
+            </Button>
+          </div>
+        </div>
+        <SpecimenCard />
+      </div>
+
+      <dl className="mt-16 grid grid-cols-2 border-t border-ink/15 lg:grid-cols-4">
+        {stats.map((s, i) => (
+          <div
+            key={s.value}
+            className={cn(
+              "flex flex-col border-b border-ink/15 py-6 pr-4 lg:border-b-0",
+              i % 2 === 1 && "border-l pl-4",
+              i > 0 && "lg:border-l lg:pl-6",
+            )}
+          >
+            <dt className="text-sm leading-snug text-muted-foreground">{t(s.label)}</dt>
+            <dd className="order-first font-display text-4xl font-light sm:text-5xl">{s.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+function SectionHeading({ index, id, title }: { index: string; id: string; title: string }) {
+  const { t } = useLang();
+  return (
+    <div className="mb-10 grid gap-3 lg:grid-cols-[12rem_1fr] lg:gap-8">
+      <p className="section-label pt-2">
+        {index} — {t(ui.nav[id as (typeof SECTIONS)[number]])}
+      </p>
+      <h2 className="font-display text-3xl font-light leading-tight tracking-tight text-balance sm:text-4xl">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
+function About() {
+  const { t } = useLang();
+  return (
+    <section id="about" className="mx-auto max-w-6xl px-4 pb-20 pt-8 sm:px-6 lg:pt-4">
+      <SectionHeading index="01" id="about" title={t(about.heading)} />
+      <div className="grid gap-12 lg:grid-cols-[12rem_1fr] lg:gap-8">
+        <div />
+        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr]">
+          <div className="space-y-5 text-[17px] leading-relaxed text-pretty">
+            {t(about.body).map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+          </div>
+          <div>
+            <h3 className="section-label">{t(about.openToHeading)}</h3>
+            <ul className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
+              {t(about.openTo).map((item) => (
+                <li key={item} className="flex items-start gap-3 py-2.5 text-sm">
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-citrus" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Research() {
+  const { t } = useLang();
+  const th = research.thesis;
+  return (
+    <section id="research" className="bg-ink py-20 text-paper">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-10 grid gap-3 lg:grid-cols-[12rem_1fr] lg:gap-8">
+          <p className="pt-2 font-mono text-xs uppercase tracking-[0.18em] text-paper/60">
+            02 — {t(ui.nav.research)}
+          </p>
+          <h2 className="font-display text-3xl font-light leading-tight tracking-tight sm:text-4xl">
+            {t(research.heading)}
+          </h2>
+        </div>
+
+        <article className="grid gap-8 border-t border-paper/15 pt-10 lg:grid-cols-[12rem_1fr] lg:gap-8">
+          <div className="font-mono text-xs uppercase leading-relaxed tracking-widest text-paper/60">
+            <p>{t(th.date)}</p>
+            <p className="mt-1 normal-case tracking-normal">{th.place}</p>
+          </div>
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-citrus">{t(th.kicker)}</p>
+            <h3 className="mt-3 max-w-3xl font-display text-2xl leading-snug sm:text-3xl">
+              {t(th.title)}
+            </h3>
+
+            <div className="mt-8">
+              <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
+                {t(th.sourcesLabel)}
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {th.sources.map((src) => (
+                  <li
+                    key={src.latin}
+                    className="flex items-center gap-2 rounded-full border border-paper/20 py-1.5 pl-2 pr-3.5 text-sm"
+                  >
+                    <span
+                      className={cn("size-4 rounded-full", toneClass[src.tone as keyof typeof toneClass], src.tone === "spirulina" && "ring-1 ring-paper/40")}
+                      aria-hidden="true"
+                    />
+                    {t(src.name)}
+                    <span className="font-display italic text-paper/60">{src.latin}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <ol className="mt-10 grid gap-px overflow-hidden rounded-sm bg-paper/15 sm:grid-cols-2">
+              {th.steps.map((step, i) => (
+                <li key={i} className="bg-ink p-6">
+                  <p className="flex items-baseline gap-3">
+                    <span className="font-mono text-xs text-citrus">0{i + 1}</span>
+                    <span className="font-display text-xl">{t(step.label)}</span>
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-paper/75">{t(step.text)}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </article>
+
+        <div className="mt-16 grid gap-8 lg:grid-cols-[12rem_1fr] lg:gap-8">
+          <div />
+          <div className="grid gap-6 md:grid-cols-2">
+            {research.projects.map((p) => (
+              <article key={p.title} className="flex flex-col rounded-sm border border-paper/15 p-6">
+                <p className="font-mono text-xs uppercase tracking-widest text-citrus">{t(p.kicker)}</p>
+                <h3 className="mt-3 font-display text-2xl leading-snug">{p.title}</h3>
+                <p className="mt-1 font-mono text-xs uppercase tracking-widest text-paper/60">
+                  {t(p.place)} · {t(p.date)}
+                </p>
+                <p className="mt-4 leading-relaxed text-paper/85">{t(p.summary)}</p>
+                <ul className="mt-4 space-y-2 text-sm text-paper/75">
+                  {t(p.points).map((pt) => (
+                    <li key={pt} className="flex gap-3">
+                      <span className="mt-2 h-px w-3 shrink-0 bg-citrus" aria-hidden="true" />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Experience() {
+  const { t } = useLang();
+  return (
+    <section id="experience" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeading index="03" id="experience" title={t(experience.heading)} />
+      <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
+        <p className="text-sm leading-relaxed text-muted-foreground">{t(experience.intro)}</p>
+        <ol className="border-t border-ink/15">
+          {experience.items.map((item) => (
+            <li
+              key={item.org}
+              className="grid gap-2 border-b border-ink/15 py-7 md:grid-cols-[11rem_1fr] md:gap-8"
+            >
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <p>{t(item.date)}</p>
+                <p className="mt-1 normal-case tracking-normal">{t(item.place)}</p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl">{t(item.role)}</h3>
+                <p className="mt-0.5 text-sm font-medium text-spirulina">{item.org}</p>
+                <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">{t(item.text)}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Education() {
+  const { t } = useLang();
+  const d = education.degree;
+  return (
+    <section id="education" className="border-y border-ink/10 bg-card/60 py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <SectionHeading index="04" id="education" title={t(d.title)} />
+        <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
+          <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            <p>{d.date}</p>
+            <p className="mt-1 normal-case tracking-normal">{d.place}</p>
+          </div>
+          <div className="grid gap-12 md:grid-cols-[1.2fr_1fr]">
+            <div>
+              <p className="text-lg font-medium">{d.org}</p>
+              <p className="mt-1 text-muted-foreground">{t(d.detail)}</p>
+              <h3 className="section-label mt-8">{t(d.courseworkLabel)}</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {t(d.coursework).map((c) => (
+                  <li key={c}>
+                    <Badge variant="outline" className="rounded-full border-ink/20 bg-paper px-3 py-1 text-[13px] font-normal">
+                      {c}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="section-label">{t(education.exchangesLabel)}</h3>
+              <ul className="mt-3 space-y-6">
+                {education.exchanges.map((ex) => (
+                  <li key={ex.org} className="border-l-2 border-citrus pl-4">
+                    <p className="font-medium">{ex.org}</p>
+                    <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                      {t(ex.place)} · {t(ex.date)}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(ex.text)}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Skills() {
+  const { t } = useLang();
+  return (
+    <section id="skills" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeading index="05" id="skills" title={t(skills.heading)} />
+      <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
+        <div />
+        <div className="grid gap-12 md:grid-cols-3">
+          {skills.groups.map((g) => (
+            <div key={g.label.en}>
+              <h3 className="section-label">{t(g.label)}</h3>
+              <ul className="mt-4 space-y-2">
+                {t(g.items).map((it) => (
+                  <li key={it} className="border-b border-ink/10 pb-2 text-[15px]">
+                    {it}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <div>
+            <h3 className="section-label">{t(skills.languagesLabel)}</h3>
+            <ul className="mt-4 space-y-4">
+              {skills.languages.map((l) => (
+                <li key={l.name.en}>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="text-[15px] font-medium">{t(l.name)}</span>
+                    <span className="text-right text-xs text-muted-foreground">{t(l.note)}</span>
+                  </div>
+                  <div className="mt-2 flex gap-1" aria-hidden="true">
+                    {[0, 1, 2, 3].map((i) => (
+                      <span
+                        key={i}
+                        className={cn("h-1.5 flex-1 rounded-full", i < l.level ? "bg-spirulina" : "bg-ink/10")}
+                      />
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  const { t } = useLang();
+  return (
+    <section id="contact" className="bg-spirulina text-paper">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
+          <p className="pt-3 font-mono text-xs uppercase tracking-[0.18em] text-paper/85">
+            06 — {t(ui.nav.contact)}
+          </p>
+          <div>
+            <h2 className="font-display text-5xl font-light tracking-tight sm:text-6xl">
+              {t(contactSection.heading)}
+            </h2>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-paper/85">{t(contactSection.text)}</p>
+            <a
+              href={`mailto:${contact.email}`}
+              className="mt-10 inline-flex items-center gap-3 break-all font-display text-2xl underline decoration-paper/40 decoration-1 underline-offset-8 transition-colors hover:decoration-citrus sm:text-3xl"
+            >
+              <Mail className="size-6 shrink-0" aria-hidden="true" />
+              {contact.email}
+            </a>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Button asChild size="lg" variant="secondary" className="rounded-full bg-paper text-ink hover:bg-paper/90">
+                <a href={contact.linkedin} target="_blank" rel="noopener noreferrer">
+                  <LinkedInIcon className="size-4" />
+                  LinkedIn
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="rounded-full border-paper/40 bg-transparent text-paper hover:bg-paper/10 hover:text-paper"
+              >
+                <a href={contact.cv} download>
+                  <ArrowDownToLine />
+                  {t(ui.cvNote)}
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer className="border-t border-paper/15">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-6 text-sm text-paper/85 sm:px-6">
+          <p>© {new Date().getFullYear()} María Dolores Rivera</p>
+          <p>{t(contactSection.footer)}</p>
+        </div>
+      </footer>
+    </section>
+  );
+}
+
+function Page() {
+  const { t } = useLang();
+  return (
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+      >
+        {t(ui.skip)}
+      </a>
+      <Header />
+      <main id="main">
+        <Hero />
+        <About />
+        <Research />
+        <Experience />
+        <Education />
+        <Skills />
+        <Contact />
+      </main>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <LangProvider>
+      <Page />
+    </LangProvider>
+  );
+}
