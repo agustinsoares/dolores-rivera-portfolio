@@ -75,6 +75,16 @@ function LinkedInIcon({ className }: { className?: string }) {
   );
 }
 
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 function LanguageSwitcher({ className }: { className?: string }) {
   const { lang, setLang, t } = useLang();
   return (
@@ -450,6 +460,7 @@ function Projects() {
   const { t } = useLang();
   const th = projects.thesis;
   const al = projects.alfarajote;
+  const ig = projects.instagram;
   const product = projectImages.product;
   return (
     <section id="projects" className="bg-sand-tint py-20">
@@ -732,6 +743,60 @@ function Projects() {
             className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
             thumbClass="aspect-[3/4]"
           />
+        </article>
+
+        {/* Instagram */}
+        <article className="mt-20 grid items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+          <a
+            href={ig.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${t(ig.cta)}: ${ig.handle}`}
+            className="group relative mx-auto block w-full max-w-sm overflow-hidden rounded-sm border border-ink/10 bg-card p-5 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
+          >
+            {/* a "range of colours" in food tones, after the account name */}
+            <div className="grid grid-cols-3 gap-2" aria-hidden="true">
+              {[
+                "bg-citrus", "bg-batata", "bg-spirulina",
+                "bg-sand", "bg-umber", "bg-[#d9a441]",
+                "bg-[#7a9a52]", "bg-[#c4473a]", "bg-[#e8d9b5]",
+              ].map((c, i) => (
+                <span
+                  key={i}
+                  className={cn("aspect-square rounded-sm transition-transform duration-500 group-hover:scale-[0.96] motion-reduce:transition-none", c)}
+                />
+              ))}
+            </div>
+            <span className="mt-5 flex items-center justify-between gap-3">
+              <span className="flex items-center gap-2 font-display text-xl">
+                <InstagramIcon className="size-5 text-umber-deep" />
+                {ig.handle}
+              </span>
+              <ArrowUpRight className="size-5 text-umber-deep transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+            </span>
+          </a>
+          <div className="min-w-0">
+            <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(ig.kicker)}</p>
+            <h3 className="mt-3 font-display text-4xl font-semibold tracking-tight text-umber sm:text-5xl">{ig.title}</h3>
+            <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">{ig.handle}</p>
+            <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(ig.summary)}</p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {t(ig.points).map((c) => (
+                <li key={c}>
+                  <Badge variant="outline" className="rounded-full border-umber/40 bg-paper/60 px-3 py-1 text-[13px] font-normal">
+                    {c}
+                  </Badge>
+                </li>
+              ))}
+            </ul>
+            <Button asChild size="lg" className="mt-8 h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber">
+              <a href={ig.url} target="_blank" rel="noopener noreferrer">
+                <InstagramIcon className="size-4" />
+                {t(ig.cta)}
+                <ArrowUpRight />
+              </a>
+            </Button>
+          </div>
         </article>
       </div>
     </section>

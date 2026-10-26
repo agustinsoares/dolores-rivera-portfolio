@@ -559,6 +559,27 @@ export const projects = {
       },
     ],
   },
+  instagram: {
+    kicker: {
+      en: "Content creation · Instagram",
+      no: "Innholdsproduksjon · Instagram",
+      es: "Creación de contenido · Instagram",
+    },
+    title: "La gama de colores",
+    handle: "@lagamadecolores",
+    url: "https://www.instagram.com/lagamadecolores/",
+    summary: {
+      en: "My Instagram page, where I used to share recipes and healthy-eating ideas: colourful, simple food with a nutrition angle.",
+      no: "Instagram-siden min, der jeg delte oppskrifter og ideer om sunt kosthold: fargerik, enkel mat med fokus på ernæring.",
+      es: "Mi página de Instagram, donde subía recetas e ideas de alimentación saludable: comida colorida y simple, con mirada nutricional.",
+    },
+    points: {
+      en: ["Recipe development", "Food photography and styling", "Communicating nutrition simply"],
+      no: ["Oppskriftsutvikling", "Matfotografering og styling", "Formidle ernæring på en enkel måte"],
+      es: ["Desarrollo de recetas", "Fotografía y estilismo de alimentos", "Comunicar nutrición de forma simple"],
+    } satisfies TList,
+    cta: { en: "Visit on Instagram", no: "Besøk på Instagram", es: "Ver en Instagram" },
+  },
 };
 
 export const experience = {
