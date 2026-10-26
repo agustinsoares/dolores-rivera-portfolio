@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowDownToLine, ArrowUpRight, Mail, MapPin, Menu } from "lucide-react";
+import { ArrowDown, ArrowDownToLine, ArrowUpRight, Mail, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -40,29 +40,31 @@ function LinkedInIcon({ className }: { className?: string }) {
 function LanguageSwitcher({ className }: { className?: string }) {
   const { lang, setLang, t } = useLang();
   return (
-    <div
-      role="group"
-      aria-label={t(ui.language)}
-      className={cn("inline-flex rounded-full border border-ink/15 bg-card p-0.5", className)}
-    >
-      {LANGS.map((l) => (
-        <button
-          key={l.code}
-          type="button"
-          lang={l.code === "no" ? "nb" : l.code}
-          aria-pressed={lang === l.code}
-          aria-label={l.name}
-          title={l.name}
-          onClick={() => setLang(l.code)}
-          className={cn(
-            "h-10 min-w-11 rounded-full px-2.5 font-mono sm:h-8 sm:min-w-10 text-xs tracking-wider transition-colors",
-            lang === l.code
-              ? "bg-ink text-paper"
-              : "text-muted-foreground hover:text-foreground",
+    <div role="group" aria-label={t(ui.language)} className={cn("flex items-center", className)}>
+      {LANGS.map((l, i) => (
+        <span key={l.code} className="flex items-center">
+          {i > 0 && (
+            <span className="px-0.5 text-xs text-ink/30" aria-hidden="true">
+              /
+            </span>
           )}
-        >
-          {l.label}
-        </button>
+          <button
+            type="button"
+            lang={l.code === "no" ? "nb" : l.code}
+            aria-pressed={lang === l.code}
+            aria-label={l.name}
+            title={l.name}
+            onClick={() => setLang(l.code)}
+            className={cn(
+              "h-10 px-1.5 text-xs tracking-wider underline-offset-[6px] transition-colors",
+              lang === l.code
+                ? "font-medium text-umber-deep underline decoration-umber decoration-1"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {l.label}
+          </button>
+        </span>
       ))}
     </div>
   );
@@ -88,41 +90,35 @@ function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <a href="#top" className="py-2 font-display text-lg font-medium tracking-tight">
-          Dolores Rivera
+        <a
+          href="#top"
+          aria-label="María Dolores Rivera"
+          className="flex size-11 items-center justify-center font-display text-2xl font-semibold italic leading-none tracking-[-0.12em] text-ink"
+        >
+          <span aria-hidden="true">
+            D<span className="text-umber">R</span>
+          </span>
         </a>
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-6 text-sm">
-            {SECTIONS.map((id) => (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  className="text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {t(ui.nav[id])}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <LanguageSwitcher />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="size-11 lg:hidden" aria-label={t(ui.menu)}>
-                <Menu />
+              <Button variant="ghost" size="icon" className="size-11 rounded-none" aria-label={t(ui.menu)}>
+                <Menu className="!size-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 bg-paper">
-              <SheetTitle className="font-display text-xl font-medium">Dolores Rivera</SheetTitle>
-              <nav aria-label="Mobile" className="mt-8">
+            <SheetContent side="right" className="flex w-80 flex-col bg-paper">
+              <SheetTitle className="font-display text-xl font-semibold">
+                María Dolores <span className="italic text-umber-deep">Rivera</span>
+              </SheetTitle>
+              <nav aria-label="Main" className="mt-8">
                 <ul className="space-y-1">
                   {SECTIONS.map((id) => (
                     <li key={id}>
                       <a
                         href={`#${id}`}
                         onClick={() => setOpen(false)}
-                        className="block py-2.5 font-display text-2xl"
+                        className="block py-2.5 font-display text-2xl transition-colors hover:text-umber-deep"
                       >
                         {t(ui.nav[id])}
                       </a>
@@ -130,6 +126,14 @@ function Header() {
                   ))}
                 </ul>
               </nav>
+              <a
+                href={contact.cv}
+                download
+                className="mt-auto inline-flex items-center gap-2 border-t border-ink/15 pt-5 text-sm text-umber-deep"
+              >
+                <ArrowDownToLine className="size-4" aria-hidden="true" />
+                {t(ui.downloadCv)}
+              </a>
             </SheetContent>
           </Sheet>
         </div>
@@ -141,54 +145,63 @@ function Header() {
 function Hero() {
   const { t } = useLang();
   return (
-    <section id="top" className="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:pb-24">
-      <div className="grid items-center gap-10 md:grid-cols-[1fr_auto] lg:gap-16">
+    <section id="top" className="mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 sm:pt-14 lg:pb-24">
+      <div className="relative grid items-center gap-10 md:grid-cols-[1fr_auto] lg:gap-20">
         <div className="reveal order-2 md:order-1">
-          <p className="section-label flex items-center gap-2">
-            <MapPin className="size-3.5" aria-hidden="true" />
-            {t(hero.location)}
+          <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.16em] text-umber-deep">
+            <span className="h-px w-7 bg-umber" aria-hidden="true" />
+            {t(hero.eyebrow)}
           </p>
-          <h1 className="mt-5 font-display text-5xl font-light leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl">
-            {hero.name}
+          <h1 className="mt-6 font-display text-[3.4rem] font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl lg:text-[5.5rem]">
+            <span className="block">{hero.firstName}</span>
+            <span className="block italic text-umber">{hero.lastName}</span>
           </h1>
-          <p className="mt-3 font-display text-2xl italic text-umber-deep sm:text-3xl">{t(hero.role)}</p>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            {t(hero.lead)}
+          <p className="mt-8 max-w-md text-[17px] leading-relaxed text-muted-foreground text-pretty">
+            <strong className="font-semibold text-foreground">{t(hero.role)}</strong> {t(hero.lead)}{" "}
+            {t(hero.basedIn)} <strong className="font-semibold text-foreground">{t(hero.location)}</strong>.
           </p>
-          <p className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-umber/25 bg-accent px-3 py-1 text-sm text-umber-deep">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-umber/40 motion-reduce:animate-none" />
-              <span className="relative inline-flex size-2 rounded-full bg-umber" />
-            </span>
-            {t(hero.status)}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="rounded-full">
-              <a href="#contact">
-                {t(ui.getInTouch)}
-                <ArrowUpRight />
-              </a>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Button asChild size="lg" className="h-12 rounded-none bg-ink px-6 text-paper shadow-none hover:bg-ink/85">
+              <a href="#contact">{t(ui.getInTouch)}</a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent">
-              <a href={contact.cv} download>
-                <ArrowDownToLine />
-                {t(ui.downloadCv)}
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-12 rounded-none border-ink/25 bg-transparent px-6 shadow-none hover:bg-ink/5"
+            >
+              <a href="#experience">
+                {t(hero.viewExperience)}
+                <ArrowDown />
               </a>
             </Button>
           </div>
         </div>
+
         <div className="reveal order-1 md:order-2 [animation-delay:150ms]">
-          <div className="relative w-40 sm:w-48 lg:w-60">
-            <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-t-full bg-sand" aria-hidden="true" />
-            <img
-              src={portrait}
-              alt={t(hero.photoAlt)}
-              width={175}
-              height={212}
-              className="relative aspect-[175/212] w-full rounded-t-full border border-ink/10 bg-white object-cover"
-            />
-          </div>
+          <img
+            src={portrait}
+            alt={t(hero.photoAlt)}
+            width={175}
+            height={212}
+            className="aspect-[175/212] w-44 rounded-md bg-white object-cover shadow-[0_24px_60px_-20px_hsl(var(--ink)/0.35)] sm:w-60 lg:w-80"
+          />
         </div>
+
+        {/* decorative ring between the columns, as in a lab sample marker */}
+        <span
+          className="pointer-events-none absolute left-[50%] top-[36%] hidden size-8 items-center justify-center rounded-full border border-umber/60 lg:flex"
+          aria-hidden="true"
+        >
+          <span className="size-1.5 rounded-full bg-umber" />
+        </span>
+        <a
+          href="#about"
+          className="absolute bottom-0 left-[54%] hidden flex-col items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-muted-foreground lg:flex"
+        >
+          <span className="[writing-mode:vertical-rl]">{t(hero.scroll)}</span>
+          <span className="h-14 w-px bg-ink/25" aria-hidden="true" />
+        </a>
       </div>
 
       <dl className="mt-16 grid grid-cols-2 border-t border-ink/15 lg:grid-cols-4">

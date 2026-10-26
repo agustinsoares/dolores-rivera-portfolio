@@ -38,7 +38,14 @@ export const ui = {
 } satisfies Record<string, T | Record<string, T>>;
 
 export const hero = {
-  name: "María Dolores Rivera",
+  firstName: "María Dolores",
+  lastName: "Rivera",
+  eyebrow: {
+    en: "Open to new opportunities",
+    no: "Åpen for nye muligheter",
+    es: "Abierta a nuevas oportunidades",
+  },
+  // role and location lead the paragraph so both read first
   role: {
     en: "Food Engineer",
     no: "Næringsmiddelingeniør",
@@ -50,20 +57,26 @@ export const hero = {
     es: "Bergen, Noruega",
   },
   lead: {
-    en: "Recently graduated Food Engineer from Argentina with an international academic background. I bring together lab research, product development and sustainable innovation with a practical, people-oriented approach.",
-    no: "Nyutdannet næringsmiddelingeniør fra Argentina med internasjonal studiebakgrunn. Jeg kombinerer laboratorieforskning, produktutvikling og bærekraftig innovasjon med en praktisk og menneskeorientert tilnærming.",
-    es: "Ingeniera en Alimentos recién recibida, de Argentina, con formación académica internacional. Combino investigación de laboratorio, desarrollo de productos e innovación sustentable con un enfoque práctico y orientado a las personas.",
+    en: "graduated in Argentina with an international academic background in lab research, product development and sustainable innovation.",
+    no: "utdannet i Argentina, med internasjonal studiebakgrunn innen laboratorieforskning, produktutvikling og bærekraftig innovasjon.",
+    es: "recibida en Argentina, con formación académica internacional en investigación de laboratorio, desarrollo de productos e innovación sustentable.",
+  },
+  basedIn: {
+    en: "Based in",
+    no: "Bosatt i",
+    es: "Radicada en",
   },
   photoAlt: {
     en: "Portrait of María Dolores Rivera",
     no: "Portrett av María Dolores Rivera",
     es: "Retrato de María Dolores Rivera",
   },
-  status: {
-    en: "Open to junior roles in R&D, quality and production",
-    no: "Åpen for juniorstillinger innen FoU, kvalitet og produksjon",
-    es: "Disponible para puestos junior en I+D, calidad y producción",
+  viewExperience: {
+    en: "View experience",
+    no: "Se erfaring",
+    es: "Ver experiencia",
   },
+  scroll: { en: "Scroll", no: "Rull", es: "Bajar" },
 };
 
 export const stats: { value: string; label: T }[] = [
