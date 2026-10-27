@@ -113,9 +113,9 @@ export const stats: { value: string; label: T }[] = [
   {
     value: "4",
     label: {
-      en: "Languages: Spanish, English, Norwegian and Italian",
-      no: "Språk: spansk, engelsk, norsk og italiensk",
-      es: "Idiomas: español, inglés, noruego e italiano",
+      en: "Languages: Spanish (native), English (B2), Norwegian (beginner) and Italian (understanding)",
+      no: "Språk: spansk (morsmål), engelsk (B2), norsk (nybegynner) og italiensk (forståelse)",
+      es: "Idiomas: español (nativo), inglés (B2), noruego (inicial) e italiano (comprensión)",
     },
   },
   {
