@@ -246,12 +246,6 @@ function Hero() {
             <span className="h-px w-7 bg-umber" aria-hidden="true" />
             {t(hero.eyebrow)}
           </p>
-          <span
-            className="pointer-events-none absolute -right-6 top-[42%] hidden size-8 items-center justify-center rounded-full border border-umber/60 lg:flex"
-            aria-hidden="true"
-          >
-            <span className="size-1.5 rounded-full bg-umber" />
-          </span>
           <h1 className="mt-6 font-display text-umber text-[3.4rem] font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl lg:text-[5.5rem]">
             <span className="block">{hero.firstName}</span>
             <span className="block italic">{hero.lastName}</span>
