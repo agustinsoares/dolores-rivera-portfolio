@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowDown,
   ArrowDownToLine,
@@ -139,6 +139,86 @@ function LanguageSwitcher({ className }: { className?: string }) {
   );
 }
 
+type MenuItem = {
+  href: string;
+  label: string;
+  sub?: string;
+  img?: string;
+  icon?: ReactNode;
+  external?: boolean;
+  download?: boolean;
+};
+
+// Sub-items for each section's dropdown in the header (and the mobile menu)
+function useNavMenus(): Record<(typeof SECTIONS)[number], MenuItem[]> {
+  const { t } = useLang();
+  const d = education.degree;
+  const icon = "size-4 text-umber-deep";
+  return {
+    about: [
+      { href: "#about", label: t(about.heading) },
+      { href: "#about-areas", label: t(about.openToHeading) },
+    ],
+    education: [
+      { href: "#education", label: t(d.title), sub: "UCA · 2020–2026" },
+      { href: "#education-areas", label: t(d.areasLabel) },
+      { href: "#education-exchanges", label: t(education.exchangesLabel), sub: "València · Murcia" },
+      { href: "#education-diploma", label: t(d.diplomaLabel) },
+    ],
+    experience: experience.items.map((item, i) => ({
+      href: `#experience-${i}`,
+      label: t(item.role),
+      sub: `${t(item.place)} · ${t(item.date)}`,
+    })),
+    projects: useProjectItems().map((it) => ({ href: `#${it.id}`, label: it.title, sub: t(it.sub), img: it.img })),
+    skills: [
+      ...skills.groups.map((g, i) => ({ href: `#skills-${i}`, label: t(g.label) })),
+      { href: "#skills-languages", label: t(skills.languagesLabel) },
+    ],
+    contact: [
+      { href: `mailto:${contact.email}`, label: contact.email, icon: <Mail className={icon} aria-hidden="true" /> },
+      ...contact.phones.map((ph) => ({
+        href: `tel:${ph.tel}`,
+        label: ph.display,
+        sub: t(ph.country),
+        icon: <Phone className={icon} aria-hidden="true" />,
+      })),
+      ...contact.phones
+        .filter((ph) => ph.whatsapp)
+        .map((ph) => ({
+          href: ph.whatsapp,
+          label: t(contactSection.whatsappLabel),
+          icon: <MessageCircle className={icon} aria-hidden="true" />,
+          external: true,
+        })),
+      { href: contact.linkedin, label: "LinkedIn", icon: <LinkedInIcon className={icon} />, external: true },
+      { href: contact.cv, label: t(ui.downloadCv), icon: <ArrowDownToLine className={icon} aria-hidden="true" />, download: true },
+    ],
+  };
+}
+
+function MenuLink({ item, onClick, className }: { item: MenuItem; onClick?: () => void; className?: string }) {
+  return (
+    <a
+      href={item.href}
+      onClick={onClick}
+      {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      {...(item.download ? { download: true } : {})}
+      className={className}
+    >
+      {item.img ? (
+        <img src={item.img} alt="" width={40} height={40} className="size-10 shrink-0 rounded-sm bg-white object-cover" />
+      ) : item.icon ? (
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-sm bg-sand/40">{item.icon}</span>
+      ) : null}
+      <span className="min-w-0">
+        <span className="block break-words font-display text-[15px] leading-tight text-ink">{item.label}</span>
+        {item.sub && <span className="block text-xs text-muted-foreground">{item.sub}</span>}
+      </span>
+    </a>
+  );
+}
+
 // MDR monogram written like a signature; the ink "writes" in on load, then the swash draws underneath
 function Signature() {
   return (
@@ -159,7 +239,7 @@ function Signature() {
 
 function Header() {
   const { t } = useLang();
-  const projectItems = useProjectItems();
+  const menus = useNavMenus();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -183,49 +263,37 @@ function Header() {
         </a>
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-7 text-sm">
-            {SECTIONS.map((id) =>
-              id === "projects" ? (
-                <li key={id} className="group relative">
-                  <a
-                    href={`#${id}`}
-                    aria-haspopup="true"
-                    className="inline-flex items-center gap-1 text-muted-foreground underline-offset-[6px] transition-colors hover:text-foreground hover:underline hover:decoration-umber group-focus-within:text-foreground"
-                  >
-                    {t(ui.nav[id])}
-                    <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
-                  </a>
-                  {/* dropdown: opens on hover and on keyboard focus */}
-                  <div className="invisible absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                    <ul className="rounded-sm border border-ink/10 bg-card p-2 shadow-[0_18px_40px_-20px_hsl(var(--ink)/0.45)]">
-                      {projectItems.map((it) => (
-                        <li key={it.id}>
-                          <a
-                            href={`#${it.id}`}
-                            onClick={(e) => e.currentTarget.blur()}
-                            className="flex items-center gap-3 rounded-sm p-2 transition-colors hover:bg-sand-tint focus-visible:bg-sand-tint"
-                          >
-                            <img src={it.img} alt="" width={40} height={40} className="size-10 shrink-0 rounded-sm bg-white object-cover" />
-                            <span className="min-w-0">
-                              <span className="block font-display text-[15px] leading-tight text-ink">{it.title}</span>
-                              <span className="block text-xs text-muted-foreground">{t(it.sub)}</span>
-                            </span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              ) : (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    className="text-muted-foreground underline-offset-[6px] transition-colors hover:text-foreground hover:underline hover:decoration-umber"
-                  >
-                    {t(ui.nav[id])}
-                  </a>
-                </li>
-              ),
-            )}
+            {SECTIONS.map((id, idx) => (
+              <li key={id} className="group relative">
+                <a
+                  href={`#${id}`}
+                  aria-haspopup="true"
+                  className="inline-flex items-center gap-1 text-muted-foreground underline-offset-[6px] transition-colors hover:text-foreground hover:underline hover:decoration-umber group-focus-within:text-foreground"
+                >
+                  {t(ui.nav[id])}
+                  <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
+                </a>
+                {/* dropdown: opens on hover and on keyboard focus */}
+                <div
+                  className={cn(
+                    "invisible absolute top-full z-50 pt-3 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100",
+                    idx === SECTIONS.length - 1 ? "right-0 w-[22rem]" : "left-1/2 w-80 -translate-x-1/2",
+                  )}
+                >
+                  <ul className="rounded-sm border border-ink/10 bg-card p-2 shadow-[0_18px_40px_-20px_hsl(var(--ink)/0.45)]">
+                    {menus[id].map((it) => (
+                      <li key={it.href + it.label}>
+                        <MenuLink
+                          item={it}
+                          onClick={() => (document.activeElement as HTMLElement | null)?.blur()}
+                          className="flex items-center gap-3 rounded-sm p-2 transition-colors hover:bg-sand-tint focus-visible:bg-sand-tint"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
           </ul>
         </nav>
         <div className="flex items-center gap-3">
@@ -236,7 +304,7 @@ function Header() {
                 <Menu className="!size-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="flex w-80 flex-col bg-paper">
+            <SheetContent side="right" className="flex w-80 flex-col overflow-y-auto bg-paper">
               <SheetTitle className="font-display text-xl font-semibold">
                 María Dolores <span className="italic">Rivera</span>
               </SheetTitle>
@@ -251,21 +319,21 @@ function Header() {
                       >
                         {t(ui.nav[id])}
                       </a>
-                      {id === "projects" && (
-                        <ul className="mb-2 ml-1 space-y-0.5 border-l border-umber/40 pl-4">
-                          {projectItems.map((it) => (
-                            <li key={it.id}>
-                              <a
-                                href={`#${it.id}`}
-                                onClick={() => setOpen(false)}
-                                className="block py-1.5 text-[15px] text-muted-foreground transition-colors hover:text-umber-deep"
-                              >
-                                {it.title}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                      <ul className="mb-2 ml-1 space-y-0.5 border-l border-umber/40 pl-4">
+                        {menus[id].map((it) => (
+                          <li key={it.href + it.label}>
+                            <a
+                              href={it.href}
+                              onClick={() => setOpen(false)}
+                              {...(it.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                              {...(it.download ? { download: true } : {})}
+                              className="block break-words py-1.5 text-[15px] text-muted-foreground transition-colors hover:text-umber-deep"
+                            >
+                              {it.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
                     </li>
                   ))}
                 </ul>
@@ -387,7 +455,7 @@ function About() {
               <p key={p}>{p}</p>
             ))}
           </div>
-          <div>
+          <div id="about-areas" className="scroll-mt-24">
             <h3 className="section-label">{t(about.openToHeading)}</h3>
             <ul className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
               {t(about.openTo).map((item) => (
@@ -987,10 +1055,11 @@ function Experience() {
       <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
         <p className="text-sm leading-relaxed text-muted-foreground">{t(experience.intro)}</p>
         <ol className="border-t border-ink/15">
-          {experience.items.map((item) => (
+          {experience.items.map((item, i) => (
             <li
               key={item.org}
-              className="grid gap-2 border-b border-ink/15 py-7 md:grid-cols-[11rem_1fr] md:gap-8"
+              id={`experience-${i}`}
+              className="scroll-mt-24 grid gap-2 border-b border-ink/15 py-7 md:grid-cols-[11rem_1fr] md:gap-8"
             >
               <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
                 <p>{t(item.date)}</p>
@@ -1044,7 +1113,7 @@ function Education() {
               ))}
             </dl>
 
-            <h3 className="section-label mt-12">{t(d.areasLabel)}</h3>
+            <h3 id="education-areas" className="section-label mt-12 scroll-mt-24">{t(d.areasLabel)}</h3>
             <div className="mt-5 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
               {d.areas.map((area) => (
                 <div key={area.name.en}>
@@ -1075,7 +1144,7 @@ function Education() {
 
             <div className="mt-14 grid gap-12 md:grid-cols-[1fr_1.3fr]">
               <div>
-                <h3 className="section-label">{t(education.exchangesLabel)}</h3>
+                <h3 id="education-exchanges" className="section-label scroll-mt-24">{t(education.exchangesLabel)}</h3>
                 <ul className="mt-3 space-y-6">
                   {education.exchanges.map((ex) => (
                     <li key={ex.org} className="border-l-2 border-citrus pl-4">
@@ -1089,7 +1158,7 @@ function Education() {
                 </ul>
               </div>
               <figure className="min-w-0">
-                <h3 className="section-label">{t(d.diplomaLabel)}</h3>
+                <h3 id="education-diploma" className="section-label scroll-mt-24">{t(d.diplomaLabel)}</h3>
                 <a
                   href={diploma}
                   target="_blank"
@@ -1134,8 +1203,8 @@ function Skills() {
       <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
         <div />
         <div className="grid gap-12 md:grid-cols-3">
-          {skills.groups.map((g) => (
-            <div key={g.label.en}>
+          {skills.groups.map((g, i) => (
+            <div key={g.label.en} id={`skills-${i}`} className="scroll-mt-24">
               <h3 className="section-label">{t(g.label)}</h3>
               <ul className="mt-4 space-y-2">
                 {t(g.items).map((it) => (
@@ -1146,7 +1215,7 @@ function Skills() {
               </ul>
             </div>
           ))}
-          <div>
+          <div id="skills-languages" className="scroll-mt-24">
             <h3 className="section-label">{t(skills.languagesLabel)}</h3>
             <ul className="mt-4 space-y-4">
               {skills.languages.map((l) => (
