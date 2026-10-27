@@ -111,19 +111,19 @@ export const stats: { value: string; label: T }[] = [
     },
   },
   {
-    value: "117",
+    value: "4",
     label: {
-      en: "Respondents in a consumer survey I ran",
-      no: "Respondenter i en forbrukerundersøkelse jeg gjennomførte",
-      es: "Personas en una encuesta de consumidores que realicé",
+      en: "Languages: Spanish, English, Norwegian and Italian",
+      no: "Språk: spansk, engelsk, norsk og italiensk",
+      es: "Idiomas: español, inglés, noruego e italiano",
     },
   },
   {
     value: "3",
     label: {
-      en: "Countries lived and worked in",
-      no: "Land jeg har bodd og jobbet i",
-      es: "Países donde viví y trabajé",
+      en: "Countries lived and worked in: Norway, Spain and Argentina",
+      no: "Land jeg har bodd og jobbet i: Norge, Spania og Argentina",
+      es: "Países donde viví y trabajé: Noruega, España y Argentina",
     },
   },
 ];
