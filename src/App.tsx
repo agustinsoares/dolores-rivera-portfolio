@@ -822,6 +822,7 @@ function Projects() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t(al.surveyNote)}</p>
 
               <blockquote className="mt-8 border-l-2 border-umber pl-5">
                 <p className="font-display text-xl italic leading-snug">“{t(al.quote)}”</p>
@@ -833,7 +834,16 @@ function Projects() {
           <div className="mt-14 grid items-center gap-10 md:grid-cols-[16rem_1fr] lg:grid-cols-[19rem_1fr] lg:gap-14">
             <PrototypeVideo />
             <div className="min-w-0">
-              <h4 className="section-label">{t(al.businessLabel)}</h4>
+              <h4 className="section-label">{t(al.scopeLabel)}</h4>
+              <ul className="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+                {t(al.scope).map((item) => (
+                  <li key={item} className="flex gap-2.5 text-[15px] leading-snug">
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-umber" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h4 className="section-label mt-10">{t(al.businessLabel)}</h4>
               <dl className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-ink/15 bg-ink/15 sm:grid-cols-3">
                 {al.business.map((b) => (
                   <div key={b.label.en} className="flex flex-col bg-sand-tint p-4">
@@ -842,6 +852,7 @@ function Projects() {
                   </div>
                 ))}
               </dl>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t(al.businessNote)}</p>
               {al.presentationUrl && (
                 <Button
                   asChild
