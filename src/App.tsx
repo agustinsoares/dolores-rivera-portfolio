@@ -6,6 +6,7 @@ import {
   ArrowUpRight,
   ChevronDown,
   Mail,
+  MapPin,
   Menu,
   MessageCircle,
   Phone,
@@ -1244,72 +1245,59 @@ function Skills() {
 
 function Contact() {
   const { t } = useLang();
+  const [no, ar] = contact.phones;
+  const r = contactSection.rows;
+  const rows: { label: string; value: string; href: string; icon: ReactNode; external?: boolean; download?: boolean }[] = [
+    { label: t(r.email), value: contact.email, href: `mailto:${contact.email}`, icon: <Mail className="size-[18px]" aria-hidden="true" /> },
+    { label: t(r.phoneNo), value: no.display, href: `tel:${no.tel}`, icon: <Phone className="size-[18px]" aria-hidden="true" /> },
+    {
+      label: t(r.whatsappAr),
+      value: ar.display,
+      href: ar.whatsapp || `tel:${ar.tel}`,
+      icon: <MessageCircle className="size-[18px]" aria-hidden="true" />,
+      external: Boolean(ar.whatsapp),
+    },
+    { label: t(r.linkedin), value: contact.linkedinLabel.replace("linkedin.com", ""), href: contact.linkedin, icon: <LinkedInIcon className="size-[18px]" />, external: true },
+    { label: t(r.cv), value: t(ui.cvNote), href: contact.cv, icon: <ArrowDownToLine className="size-[18px]" aria-hidden="true" />, download: true },
+  ];
   return (
     <section id="contact" className="bg-sand text-ink">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <div className="grid gap-8 lg:grid-cols-[12rem_1fr]">
-          <p className="pt-3 font-mono text-xs uppercase tracking-[0.18em] text-ink/75">
-            06 — {t(ui.nav.contact)}
-          </p>
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
+        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
-            <h2 className="font-display text-5xl font-light tracking-tight sm:text-6xl">
-              {t(contactSection.heading)}
-            </h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/75">{t(contactSection.text)}</p>
-            <a
-              href={`mailto:${contact.email}`}
-              className="mt-10 inline-flex max-w-full items-center gap-3 font-display text-[1.3rem] underline decoration-ink/40 decoration-1 underline-offset-8 transition-colors [overflow-wrap:anywhere] hover:decoration-citrus-deep sm:text-3xl"
-            >
-              <Mail className="size-6 shrink-0" aria-hidden="true" />
-              {contact.email}
-            </a>
-            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-              {contact.phones.map((ph) => (
-                <li key={ph.tel} className="border-t border-ink/20 pt-3">
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-ink/85">{t(ph.country)}</p>
-                  <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1">
-                    <a
-                      href={`tel:${ph.tel}`}
-                      className="inline-flex items-center gap-2 font-display text-xl tabular-nums underline decoration-ink/30 decoration-1 underline-offset-4 hover:decoration-citrus-deep"
-                    >
-                      <Phone className="size-4 shrink-0" aria-hidden="true" />
-                      {ph.display}
-                    </a>
-                    {ph.whatsapp && (
-                      <a
-                        href={ph.whatsapp}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm underline decoration-ink/30 underline-offset-4 hover:decoration-citrus-deep"
-                      >
-                        <MessageCircle className="size-4" aria-hidden="true" />
-                        {t(contactSection.whatsappLabel)}
-                      </a>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild size="lg" variant="secondary" className="rounded-full bg-paper text-ink hover:bg-paper/90">
-                <a href={contact.linkedin} target="_blank" rel="noopener noreferrer">
-                  <LinkedInIcon className="size-4" />
-                  LinkedIn
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="rounded-full border-ink/30 bg-transparent text-ink hover:bg-ink/5 hover:text-ink"
-              >
-                <a href={contact.cv} download>
-                  <ArrowDownToLine />
-                  {t(ui.cvNote)}
-                </a>
-              </Button>
-            </div>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink/75">06 — {t(ui.nav.contact)}</p>
+            <h2 className="mt-4 font-display text-5xl font-light tracking-tight sm:text-6xl">{t(contactSection.heading)}</h2>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/80 text-pretty">{t(contactSection.text)}</p>
+            <p className="mt-8 inline-flex items-center gap-2 text-sm text-ink/80">
+              <MapPin className="size-4 text-umber-deep" aria-hidden="true" />
+              {t(contactSection.location)}
+            </p>
           </div>
+
+          <ul className="divide-y divide-ink/10 overflow-hidden rounded-sm border border-ink/10 bg-paper shadow-[0_24px_60px_-30px_hsl(var(--ink)/0.45)]">
+            {rows.map((row) => (
+              <li key={row.label}>
+                <a
+                  href={row.href}
+                  {...(row.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  {...(row.download ? { download: true } : {})}
+                  className="group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-sand-tint focus-visible:bg-sand-tint sm:gap-4 sm:px-6"
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-sand/50 text-umber-deep">{row.icon}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-mono text-[11px] uppercase tracking-widest text-muted-foreground">{row.label}</span>
+                    <span className="mt-0.5 block font-display text-[15px] leading-snug tabular-nums [overflow-wrap:anywhere] sm:text-xl">
+                      {row.value}
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    className="hidden size-4 shrink-0 text-umber-deep transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:block"
+                    aria-hidden="true"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <footer className="border-t border-ink/15">

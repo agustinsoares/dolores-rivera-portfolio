@@ -974,6 +974,18 @@ export const contactSection = {
     es: "Busco puestos junior en Bergen y también estoy abierta a oportunidades internacionales cuando el trabajo pueda hacerse de forma remota. Donde cuenten la ingeniería, el laboratorio y lo práctico, me encantaría saber de vos.",
   },
   whatsappLabel: { en: "Message on WhatsApp", no: "Send melding på WhatsApp", es: "Escribir por WhatsApp" },
+  rows: {
+    email: { en: "Email", no: "E-post", es: "Email" },
+    phoneNo: { en: "Phone · Norway", no: "Telefon · Norge", es: "Teléfono · Noruega" },
+    whatsappAr: { en: "WhatsApp · Argentina", no: "WhatsApp · Argentina", es: "WhatsApp · Argentina" },
+    linkedin: { en: "LinkedIn", no: "LinkedIn", es: "LinkedIn" },
+    cv: { en: "Curriculum vitae", no: "CV", es: "Currículum" },
+  },
+  location: {
+    en: "Based in Bergen · open to remote work",
+    no: "Bosatt i Bergen · åpen for fjernarbeid",
+    es: "En Bergen · abierta a trabajo remoto",
+  },
   footer: {
     en: "Bergen, Norway",
     no: "Bergen, Norge",
