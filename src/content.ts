@@ -202,6 +202,14 @@ export const projects = {
     no: "Forsknings- og produktprosjekter",
     es: "Proyectos de investigación y producto",
   },
+  index: {
+    label: { en: "Jump to a project", no: "Gå til et prosjekt", es: "Ir a un proyecto" },
+    alfarajote: { en: "Product development", no: "Produktutvikling", es: "Desarrollo de producto" },
+    thesisTitle: { en: "Bachelor's thesis", no: "Bacheloroppgave", es: "Tesis de grado" },
+    thesis: { en: "Antioxidant extracts · 9.7/10", no: "Antioksidantekstrakter · 9,7/10", es: "Extractos antioxidantes · 9,7/10" },
+    lagama: { en: "Recipes · Instagram", no: "Oppskrifter · Instagram", es: "Recetas · Instagram" },
+    photography: { en: "Nature · Instagram", no: "Natur · Instagram", es: "Naturaleza · Instagram" },
+  },
   viewPhoto: { en: "Open photo", no: "Åpne bilde", es: "Abrir foto" },
   close: { en: "Close", no: "Lukk", es: "Cerrar" },
   thesis: {

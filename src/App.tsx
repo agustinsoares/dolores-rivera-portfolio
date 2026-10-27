@@ -458,7 +458,7 @@ type SocialData = {
 };
 
 // Instagram-style project: 3x3 feed plus text; links out once a URL is set
-function SocialProject({ data, feed }: { data: SocialData; feed: string[] }) {
+function SocialProject({ id, data, feed }: { id: string; data: SocialData; feed: string[] }) {
   const { t } = useLang();
   const title = typeof data.title === "string" ? data.title : t(data.title);
   const grid = (
@@ -490,7 +490,7 @@ function SocialProject({ data, feed }: { data: SocialData; feed: string[] }) {
   const frame =
     "group relative mx-auto block w-full max-w-md overflow-hidden rounded-sm border border-ink/10 bg-card p-3 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]";
   return (
-    <article className="mt-20 grid items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+    <article id={id} className="mt-20 grid scroll-mt-24 items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
       {data.url ? (
         <a href={data.url} target="_blank" rel="noopener noreferrer" aria-label={`${t(data.cta)}: ${data.handle}`} className={frame}>
           {grid}
@@ -567,6 +567,46 @@ function PrototypeVideo() {
   );
 }
 
+// Mini table of contents at the top of Projects: one tile per project, linking to its anchor
+function ProjectIndex() {
+  const { t } = useLang();
+  const items = [
+    { id: "project-alfarajote", img: imgProduct, title: projects.alfarajote.title, sub: projects.index.alfarajote },
+    { id: "project-thesis", img: imgBurgersCover, title: t(projects.index.thesisTitle), sub: projects.index.thesis },
+    { id: "project-lagama", img: igLion, title: projects.instagram.title, sub: projects.index.lagama },
+    { id: "project-photography", img: phEagle, title: t(projects.photography.title), sub: projects.index.photography },
+  ];
+  return (
+    <nav aria-label={t(projects.index.label)} className="mb-16">
+      <p className="section-label">{t(projects.index.label)}</p>
+      <ol className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {items.map((it, i) => (
+          <li key={it.id}>
+            <a
+              href={`#${it.id}`}
+              className="group flex h-full items-center gap-3 rounded-sm border border-ink/10 bg-card p-2.5 pr-3 transition-colors hover:border-umber/50 hover:bg-paper"
+            >
+              <img
+                src={it.img}
+                alt=""
+                width={64}
+                height={64}
+                loading="lazy"
+                className="size-14 shrink-0 rounded-sm bg-white object-cover sm:size-16"
+              />
+              <span className="min-w-0">
+                <span className="block font-mono text-[11px] text-citrus-deep">0{i + 1}</span>
+                <span className="block font-display text-base leading-tight group-hover:text-umber-deep sm:text-lg">{it.title}</span>
+                <span className="mt-0.5 block text-xs leading-snug text-muted-foreground">{t(it.sub)}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
 function Projects() {
   const { t } = useLang();
   const th = projects.thesis;
@@ -577,8 +617,125 @@ function Projects() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading index="04" id="projects" title={t(projects.heading)} />
 
+        <ProjectIndex />
+
+        {/* Alfarajote */}
+        <article id="project-alfarajote" className="scroll-mt-24">
+          <figure className="relative mb-14 overflow-hidden rounded-sm">
+            <img
+              src={imgHands}
+              alt={t(al.introAlt)}
+              width={1800}
+              height={1017}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover sm:aspect-[21/9]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/35 to-ink/10" aria-hidden="true" />
+            <figcaption className="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+              <p className="max-w-3xl font-display text-3xl font-light italic leading-tight text-paper text-balance sm:text-5xl">
+                {t(al.introQuestion)}
+              </p>
+            </figcaption>
+          </figure>
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+            <figure className="min-w-0 self-start">
+              <img
+                src={product.src}
+                alt={t(al.gallery[0].caption)}
+                width={product.w}
+                height={product.h}
+                loading="lazy"
+                className="aspect-[4/5] w-full rounded-sm object-cover shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
+              />
+              <figcaption className="mt-2 text-xs text-muted-foreground">{t(al.gallery[0].caption)}</figcaption>
+            </figure>
+            <div className="min-w-0">
+              <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(al.kicker)}</p>
+              <h3 className="mt-3 font-display text-5xl font-semibold tracking-tight text-umber sm:text-6xl">{al.title}</h3>
+              <p className="mt-1 font-display text-xl italic text-ink/80">{t(al.tagline)}</p>
+              <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                {t(al.place)} · {t(al.date)}
+              </p>
+              <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(al.summary)}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {t(al.claims).map((c) => (
+                  <li key={c}>
+                    <Badge variant="outline" className="rounded-full border-umber/40 bg-paper/60 px-3 py-1 text-[13px] font-normal">
+                      {c}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+
+              <h4 className="section-label mt-8">{t(al.surveyLabel)}</h4>
+              <ul className="mt-4 space-y-3">
+                {al.survey.map((row) => (
+                  <li key={row.value + row.label.en}>
+                    <div className="flex items-baseline justify-between gap-3 text-sm">
+                      <span>{t(row.label)}</span>
+                      <span className="font-display text-lg tabular-nums">{row.value}%</span>
+                    </div>
+                    <div className="mt-1 h-1.5 rounded-full bg-ink/10" aria-hidden="true">
+                      <div className="h-full rounded-full bg-umber" style={{ width: `${row.value}%` }} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t(al.surveyNote)}</p>
+
+              <blockquote className="mt-8 border-l-2 border-umber pl-5">
+                <p className="font-display text-xl italic leading-snug">“{t(al.quote)}”</p>
+                <footer className="mt-2 text-xs text-muted-foreground">{t(al.quoteSource)}</footer>
+              </blockquote>
+            </div>
+          </div>
+
+          <div className="mt-14 grid items-center gap-10 md:grid-cols-[16rem_1fr] lg:grid-cols-[19rem_1fr] lg:gap-14">
+            <PrototypeVideo />
+            <div className="min-w-0">
+              <h4 className="section-label">{t(al.scopeLabel)}</h4>
+              <ul className="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+                {t(al.scope).map((item) => (
+                  <li key={item} className="flex gap-2.5 text-[15px] leading-snug">
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-umber" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h4 className="section-label mt-10">{t(al.businessLabel)}</h4>
+              <dl className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-ink/15 bg-ink/15 sm:grid-cols-3">
+                {al.business.map((b) => (
+                  <div key={b.label.en} className="flex flex-col bg-sand-tint p-4">
+                    <dt className="text-xs text-muted-foreground">{t(b.label)}</dt>
+                    <dd className="order-first font-display text-2xl tabular-nums">{t(b.value)}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t(al.businessNote)}</p>
+              {al.presentationUrl && (
+                <Button
+                  asChild
+                  size="lg"
+                  className="mt-8 h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber"
+                >
+                  <a href={al.presentationUrl} target="_blank" rel="noopener noreferrer">
+                    {t(al.presentationLabel)}
+                    <ArrowUpRight />
+                  </a>
+                </Button>
+              )}
+            </div>
+          </div>
+
+          <Gallery
+            items={al.gallery.slice(1)}
+            className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
+            thumbClass="aspect-[3/4]"
+          />
+        </article>
+
         {/* Thesis */}
-        <article>
+        <article id="project-thesis" className="mt-20 scroll-mt-24 border-t border-ink/15 pt-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
             <div className="min-w-0">
               <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(th.kicker)}</p>
@@ -760,123 +917,8 @@ function Projects() {
           </div>
         </article>
 
-        {/* Alfarajote */}
-        <article className="mt-20 border-t border-ink/15 pt-20">
-          <figure className="relative mb-14 overflow-hidden rounded-sm">
-            <img
-              src={imgHands}
-              alt={t(al.introAlt)}
-              width={1800}
-              height={1017}
-              loading="lazy"
-              className="aspect-[4/3] w-full object-cover sm:aspect-[21/9]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/35 to-ink/10" aria-hidden="true" />
-            <figcaption className="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-              <p className="max-w-3xl font-display text-3xl font-light italic leading-tight text-paper text-balance sm:text-5xl">
-                {t(al.introQuestion)}
-              </p>
-            </figcaption>
-          </figure>
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
-            <figure className="min-w-0 self-start">
-              <img
-                src={product.src}
-                alt={t(al.gallery[0].caption)}
-                width={product.w}
-                height={product.h}
-                loading="lazy"
-                className="aspect-[4/5] w-full rounded-sm object-cover shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]"
-              />
-              <figcaption className="mt-2 text-xs text-muted-foreground">{t(al.gallery[0].caption)}</figcaption>
-            </figure>
-            <div className="min-w-0">
-              <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(al.kicker)}</p>
-              <h3 className="mt-3 font-display text-5xl font-semibold tracking-tight text-umber sm:text-6xl">{al.title}</h3>
-              <p className="mt-1 font-display text-xl italic text-ink/80">{t(al.tagline)}</p>
-              <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                {t(al.place)} · {t(al.date)}
-              </p>
-              <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(al.summary)}</p>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {t(al.claims).map((c) => (
-                  <li key={c}>
-                    <Badge variant="outline" className="rounded-full border-umber/40 bg-paper/60 px-3 py-1 text-[13px] font-normal">
-                      {c}
-                    </Badge>
-                  </li>
-                ))}
-              </ul>
-
-              <h4 className="section-label mt-8">{t(al.surveyLabel)}</h4>
-              <ul className="mt-4 space-y-3">
-                {al.survey.map((row) => (
-                  <li key={row.value + row.label.en}>
-                    <div className="flex items-baseline justify-between gap-3 text-sm">
-                      <span>{t(row.label)}</span>
-                      <span className="font-display text-lg tabular-nums">{row.value}%</span>
-                    </div>
-                    <div className="mt-1 h-1.5 rounded-full bg-ink/10" aria-hidden="true">
-                      <div className="h-full rounded-full bg-umber" style={{ width: `${row.value}%` }} />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t(al.surveyNote)}</p>
-
-              <blockquote className="mt-8 border-l-2 border-umber pl-5">
-                <p className="font-display text-xl italic leading-snug">“{t(al.quote)}”</p>
-                <footer className="mt-2 text-xs text-muted-foreground">{t(al.quoteSource)}</footer>
-              </blockquote>
-            </div>
-          </div>
-
-          <div className="mt-14 grid items-center gap-10 md:grid-cols-[16rem_1fr] lg:grid-cols-[19rem_1fr] lg:gap-14">
-            <PrototypeVideo />
-            <div className="min-w-0">
-              <h4 className="section-label">{t(al.scopeLabel)}</h4>
-              <ul className="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
-                {t(al.scope).map((item) => (
-                  <li key={item} className="flex gap-2.5 text-[15px] leading-snug">
-                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-umber" aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <h4 className="section-label mt-10">{t(al.businessLabel)}</h4>
-              <dl className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-ink/15 bg-ink/15 sm:grid-cols-3">
-                {al.business.map((b) => (
-                  <div key={b.label.en} className="flex flex-col bg-sand-tint p-4">
-                    <dt className="text-xs text-muted-foreground">{t(b.label)}</dt>
-                    <dd className="order-first font-display text-2xl tabular-nums">{t(b.value)}</dd>
-                  </div>
-                ))}
-              </dl>
-              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{t(al.businessNote)}</p>
-              {al.presentationUrl && (
-                <Button
-                  asChild
-                  size="lg"
-                  className="mt-8 h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber"
-                >
-                  <a href={al.presentationUrl} target="_blank" rel="noopener noreferrer">
-                    {t(al.presentationLabel)}
-                    <ArrowUpRight />
-                  </a>
-                </Button>
-              )}
-            </div>
-          </div>
-
-          <Gallery
-            items={al.gallery.slice(1)}
-            className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
-            thumbClass="aspect-[3/4]"
-          />
-        </article>
-
-        <SocialProject data={projects.instagram} feed={igFeed} />
-        <SocialProject data={projects.photography} feed={photoFeed} />
+        <SocialProject id="project-lagama" data={projects.instagram} feed={igFeed} />
+        <SocialProject id="project-photography" data={projects.photography} feed={photoFeed} />
       </div>
     </section>
   );
