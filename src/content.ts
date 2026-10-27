@@ -584,11 +584,20 @@ export const projects = {
       },
     ],
   },
+  beyond: {
+    label: { en: "Beyond engineering", no: "Utenfor ingeniørfaget", es: "Más allá de la ingeniería" },
+    heading: { en: "Additional projects", no: "Andre prosjekter", es: "Proyectos adicionales" },
+    intro: {
+      en: "Two personal Instagram pages I run in my free time. They are hobbies, not paid work, but they show how I communicate food and nature.",
+      no: "To personlige Instagram-sider jeg driver på fritiden. Det er hobbyer, ikke betalt arbeid, men de viser hvordan jeg formidler mat og natur.",
+      es: "Dos páginas personales de Instagram que llevo en mi tiempo libre. Son hobbies, no trabajo remunerado, pero muestran cómo comunico la comida y la naturaleza.",
+    },
+  },
   instagram: {
     kicker: {
-      en: "Content creation · Instagram",
-      no: "Innholdsproduksjon · Instagram",
-      es: "Creación de contenido · Instagram",
+      en: "Personal project · Instagram",
+      no: "Personlig prosjekt · Instagram",
+      es: "Proyecto personal · Instagram",
     },
     title: "La gama de colores",
     handle: "@lagamadecolores",
@@ -621,9 +630,9 @@ export const projects = {
   },
   photography: {
     kicker: {
-      en: "Photography · Instagram",
-      no: "Fotografi · Instagram",
-      es: "Fotografía · Instagram",
+      en: "Personal project · Instagram",
+      no: "Personlig prosjekt · Instagram",
+      es: "Proyecto personal · Instagram",
     },
     title: { en: "Nature photography", no: "Naturfotografi", es: "Fotografía de naturaleza" },
     handle: "@_dolitor",
