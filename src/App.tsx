@@ -4,6 +4,7 @@ import {
   ArrowDownToLine,
   ArrowRight,
   ArrowUpRight,
+  ChevronDown,
   Mail,
   Menu,
   MessageCircle,
@@ -158,6 +159,7 @@ function Signature() {
 
 function Header() {
   const { t } = useLang();
+  const projectItems = useProjectItems();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -181,16 +183,49 @@ function Header() {
         </a>
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-7 text-sm">
-            {SECTIONS.map((id) => (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  className="text-muted-foreground underline-offset-[6px] transition-colors hover:text-foreground hover:underline hover:decoration-umber"
-                >
-                  {t(ui.nav[id])}
-                </a>
-              </li>
-            ))}
+            {SECTIONS.map((id) =>
+              id === "projects" ? (
+                <li key={id} className="group relative">
+                  <a
+                    href={`#${id}`}
+                    aria-haspopup="true"
+                    className="inline-flex items-center gap-1 text-muted-foreground underline-offset-[6px] transition-colors hover:text-foreground hover:underline hover:decoration-umber group-focus-within:text-foreground"
+                  >
+                    {t(ui.nav[id])}
+                    <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
+                  </a>
+                  {/* dropdown: opens on hover and on keyboard focus */}
+                  <div className="invisible absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                    <ul className="rounded-sm border border-ink/10 bg-card p-2 shadow-[0_18px_40px_-20px_hsl(var(--ink)/0.45)]">
+                      {projectItems.map((it) => (
+                        <li key={it.id}>
+                          <a
+                            href={`#${it.id}`}
+                            onClick={(e) => e.currentTarget.blur()}
+                            className="flex items-center gap-3 rounded-sm p-2 transition-colors hover:bg-sand-tint focus-visible:bg-sand-tint"
+                          >
+                            <img src={it.img} alt="" width={40} height={40} className="size-10 shrink-0 rounded-sm bg-white object-cover" />
+                            <span className="min-w-0">
+                              <span className="block font-display text-[15px] leading-tight text-ink">{it.title}</span>
+                              <span className="block text-xs text-muted-foreground">{t(it.sub)}</span>
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ) : (
+                <li key={id}>
+                  <a
+                    href={`#${id}`}
+                    className="text-muted-foreground underline-offset-[6px] transition-colors hover:text-foreground hover:underline hover:decoration-umber"
+                  >
+                    {t(ui.nav[id])}
+                  </a>
+                </li>
+              ),
+            )}
           </ul>
         </nav>
         <div className="flex items-center gap-3">
@@ -216,6 +251,21 @@ function Header() {
                       >
                         {t(ui.nav[id])}
                       </a>
+                      {id === "projects" && (
+                        <ul className="mb-2 ml-1 space-y-0.5 border-l border-umber/40 pl-4">
+                          {projectItems.map((it) => (
+                            <li key={it.id}>
+                              <a
+                                href={`#${it.id}`}
+                                onClick={() => setOpen(false)}
+                                className="block py-1.5 text-[15px] text-muted-foreground transition-colors hover:text-umber-deep"
+                              >
+                                {it.title}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -568,14 +618,19 @@ function PrototypeVideo() {
 }
 
 // Mini table of contents at the top of Projects: one tile per project, linking to its anchor
-function ProjectIndex() {
+function useProjectItems() {
   const { t } = useLang();
-  const items = [
+  return [
     { id: "project-alfarajote", img: imgProduct, title: projects.alfarajote.title, sub: projects.index.alfarajote },
     { id: "project-thesis", img: imgBurgersCover, title: t(projects.index.thesisTitle), sub: projects.index.thesis },
     { id: "project-lagama", img: igLion, title: projects.instagram.title, sub: projects.index.lagama },
     { id: "project-photography", img: phEagle, title: t(projects.photography.title), sub: projects.index.photography },
   ];
+}
+
+function ProjectIndex() {
+  const { t } = useLang();
+  const items = useProjectItems();
   return (
     <nav aria-label={t(projects.index.label)} className="mb-16">
       <p className="section-label">{t(projects.index.label)}</p>
