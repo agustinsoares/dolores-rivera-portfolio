@@ -588,6 +588,15 @@ function Projects() {
               </p>
               <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(th.summary)}</p>
               <p className="mt-3 text-sm text-muted-foreground">{t(th.supervisor)}</p>
+              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <Button asChild size="lg" className="h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber">
+                  <a href={th.presentationUrl} target="_blank" rel="noopener noreferrer">
+                    {t(th.presentationLabel)}
+                    <ArrowUpRight />
+                  </a>
+                </Button>
+                <span className="text-xs text-muted-foreground">{t(th.presentationNote)}</span>
+              </div>
             </div>
             <Gallery
               items={[{ src: "burgersCover", caption: th.foodTest.burgersCaption }]}

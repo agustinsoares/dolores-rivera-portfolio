@@ -13,7 +13,7 @@ export const contact = {
   email: "doloresrivera4344@gmail.com",
   linkedin: "https://www.linkedin.com/in/doloresrivera4344/",
   linkedinLabel: "linkedin.com/in/doloresrivera4344",
-  cv: "/CV_Maria_Dolores_Rivera.pdf",
+  cv: "CV_Maria_Dolores_Rivera.pdf",
   phones: [
     {
       country: { en: "Norway", no: "Norge", es: "Noruega" },
@@ -221,6 +221,17 @@ export const projects = {
       en: "A third of the world's food is lost or wasted, yet agro-food waste is rich in bioactive compounds. I obtained and characterised water-based extracts from sweet potato peel, orange peel and spirulina with two green technologies, then tested spirulina extract as a natural antioxidant and colourant in beef burgers.",
       no: "En tredjedel av verdens mat går tapt eller kastes, men avfall fra matindustrien er rikt på bioaktive forbindelser. Jeg framstilte og karakteriserte vannbaserte ekstrakter fra søtpotetskall, appelsinskall og spirulina med to grønne teknologier, og testet spirulinaekstrakt som naturlig antioksidant og fargestoff i hamburgere av storfekjøtt.",
       es: "Un tercio de los alimentos del mundo se pierde o desperdicia, pero los residuos agroalimentarios son ricos en compuestos bioactivos. Obtuve y caractericé extractos acuosos de cáscara de batata, cáscara de naranja y espirulina con dos tecnologías verdes, y probé el extracto de espirulina como antioxidante y colorante natural en hamburguesas de carne vacuna.",
+    },
+    presentationUrl: "Presentacion_Tesis_Maria_Dolores_Rivera.pdf",
+    presentationLabel: {
+      en: "See the full presentation",
+      no: "Se hele presentasjonen",
+      es: "Ver la presentación completa",
+    },
+    presentationNote: {
+      en: "PDF · 27 slides · in Spanish",
+      no: "PDF · 27 lysbilder · på spansk",
+      es: "PDF · 27 diapositivas",
     },
     supervisor: {
       en: "Supervisor: Francisco J. Barba Orellano · Food Science and Technology",
