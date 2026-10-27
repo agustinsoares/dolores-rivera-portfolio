@@ -570,6 +570,11 @@ export const projects = {
       no: "Hvor mange ganger har en smak tatt deg med tilbake hjem?",
       es: "¿Cuántas veces un sabor te devolvió a casa?",
     },
+    bridgeAlt: {
+      en: "Hands holding a box of Alfarajote alfajores, with the line: We didn't just make a sweet. We built a bridge between cultures, emotions and flavours.",
+      no: "Hender som holder en eske med Alfarajote-alfajores, med teksten: Vi lagde ikke bare en søtsak. Vi bygde en bro mellom kulturer, følelser og smaker.",
+      es: "Manos sosteniendo una caja de alfajores Alfarajote, con la frase: No hicimos solo un dulce. Construimos un puente entre culturas, emociones y sabores.",
+    },
     introAlt: {
       en: "Grandmother's hands kneading dough on a floured table",
       no: "Bestemors hender som elter deig på et melet bord",

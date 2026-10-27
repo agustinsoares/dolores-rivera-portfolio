@@ -45,6 +45,7 @@ import chartAbts from "@/assets/projects/chart-abts.jpg";
 import chartOrac from "@/assets/projects/chart-orac.jpg";
 import chartProtein from "@/assets/projects/chart-protein.jpg";
 import imgHands from "@/assets/projects/alfarajote-hands.jpg";
+import imgBridge from "@/assets/projects/alfarajote-bridge.jpg";
 import imgVideoPoster from "@/assets/projects/alfarajote-video-poster.jpg";
 import videoPrototype from "@/assets/projects/alfarajote-prototipo.mp4";
 import igTurtles from "@/assets/instagram/turtles.jpg";
@@ -856,6 +857,16 @@ function Projects() {
             className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
             thumbClass="aspect-[3/4]"
           />
+          <figure className="mt-14 overflow-hidden rounded-sm shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]">
+            <img
+              src={imgBridge}
+              alt={t(al.bridgeAlt)}
+              width={1800}
+              height={1013}
+              loading="lazy"
+              className="w-full"
+            />
+          </figure>
         </article>
 
         {/* Thesis */}
