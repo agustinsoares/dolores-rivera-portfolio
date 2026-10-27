@@ -457,20 +457,14 @@ type SocialData = {
   cta: Record<Lang, string>;
 };
 
-// Compact card for personal side projects: small feed strip, short text and a link out
-function SocialCard({ data, feed }: { data: SocialData; feed: string[] }) {
+// Instagram-style project: 3x3 feed plus text; links out once a URL is set
+function SocialProject({ data, feed }: { data: SocialData; feed: string[] }) {
   const { t } = useLang();
   const title = typeof data.title === "string" ? data.title : t(data.title);
-  return (
-    <article className="flex flex-col overflow-hidden rounded-sm border border-ink/10 bg-card">
-      <a
-        href={data.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${t(data.cta)}: ${data.handle}`}
-        className="group grid grid-cols-3 gap-0.5"
-      >
-        {feed.slice(0, 3).map((src, i) => (
+  const grid = (
+    <>
+      <div role="img" aria-label={t(data.feedAlt)} className="grid grid-cols-3 gap-1">
+        {feed.map((src, i) => (
           <img
             key={i}
             src={src}
@@ -481,31 +475,65 @@ function SocialCard({ data, feed }: { data: SocialData; feed: string[] }) {
             className="aspect-square w-full object-cover transition-opacity duration-300 group-hover:opacity-90"
           />
         ))}
-      </a>
-      <span className="sr-only">{t(data.feedAlt)}</span>
-      <div className="flex flex-1 flex-col p-5">
-        <p className="font-mono text-[11px] uppercase tracking-widest text-citrus-deep">{t(data.kicker)}</p>
-        <h4 className="mt-2 font-display text-2xl font-semibold tracking-tight text-umber">{title}</h4>
-        <p className="mt-0.5 flex flex-wrap items-baseline gap-x-3 text-sm text-muted-foreground">
-          <span>{data.handle}</span>
-          {data.stats?.map((st) => (
-            <span key={st.value}>
-              <span className="font-medium text-ink">{st.value}</span> {t(st.label)}
-            </span>
-          ))}
-        </p>
-        <p className="mt-3 text-[15px] leading-relaxed text-ink/85">{t(data.summary)}</p>
-        {data.nameStory && <p className="mt-2 text-sm italic leading-relaxed text-ink/70">{t(data.nameStory)}</p>}
-        <a
-          href={data.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-auto inline-flex items-center gap-2 self-start pt-5 text-sm font-medium text-umber-deep underline-offset-4 hover:underline"
-        >
-          <InstagramIcon className="size-4" />
-          {t(data.cta)}
-          <ArrowUpRight className="size-4" aria-hidden="true" />
+      </div>
+      {data.handle && (
+        <span className="mt-3 flex items-center justify-between gap-3 px-1 pb-1">
+          <span className="flex items-center gap-2 font-display text-xl">
+            <InstagramIcon className="size-5 text-umber-deep" />
+            {data.handle}
+          </span>
+          <ArrowUpRight className="size-5 text-umber-deep transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+        </span>
+      )}
+    </>
+  );
+  const frame =
+    "group relative mx-auto block w-full max-w-md overflow-hidden rounded-sm border border-ink/10 bg-card p-3 shadow-[0_24px_60px_-28px_hsl(var(--ink)/0.45)]";
+  return (
+    <article className="mt-20 grid items-center gap-10 border-t border-ink/15 pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+      {data.url ? (
+        <a href={data.url} target="_blank" rel="noopener noreferrer" aria-label={`${t(data.cta)}: ${data.handle}`} className={frame}>
+          {grid}
         </a>
+      ) : (
+        <div className={frame}>{grid}</div>
+      )}
+      <div className="min-w-0">
+        <p className="font-mono text-xs uppercase tracking-widest text-citrus-deep">{t(data.kicker)}</p>
+        <h3 className="mt-3 font-display text-4xl font-semibold tracking-tight text-umber sm:text-5xl">{title}</h3>
+        {data.handle && <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">{data.handle}</p>}
+        {data.stats && (
+          <dl className="mt-4 flex gap-8">
+            {data.stats.map((st) => (
+              <div key={st.value} className="flex flex-col">
+                <dt className="text-sm text-muted-foreground">{t(st.label)}</dt>
+                <dd className="order-first font-display text-3xl tabular-nums">{st.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <p className="mt-5 text-[17px] leading-relaxed text-ink/85 text-pretty">{t(data.summary)}</p>
+        {data.nameStory && (
+          <p className="mt-3 border-l-2 border-umber pl-4 text-[15px] italic leading-relaxed text-ink/75">{t(data.nameStory)}</p>
+        )}
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {t(data.points).map((c) => (
+            <li key={c}>
+              <Badge variant="outline" className="rounded-full border-umber/40 bg-paper/60 px-3 py-1 text-[13px] font-normal">
+                {c}
+              </Badge>
+            </li>
+          ))}
+        </ul>
+        {data.url && (
+          <Button asChild size="lg" className="mt-8 h-12 rounded-none bg-umber-deep px-6 text-paper shadow-none hover:bg-umber">
+            <a href={data.url} target="_blank" rel="noopener noreferrer">
+              <InstagramIcon className="size-4" />
+              {t(data.cta)}
+              <ArrowUpRight />
+            </a>
+          </Button>
+        )}
       </div>
     </article>
   );
@@ -836,16 +864,8 @@ function Projects() {
           />
         </article>
 
-        {/* Beyond engineering: personal side projects, kept visually secondary */}
-        <div className="mt-20 border-t border-ink/15 pt-14">
-          <p className="section-label">{t(projects.beyond.label)}</p>
-          <h3 className="mt-2 font-display text-2xl sm:text-3xl">{t(projects.beyond.heading)}</h3>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{t(projects.beyond.intro)}</p>
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
-            <SocialCard data={projects.instagram} feed={igFeed} />
-            <SocialCard data={projects.photography} feed={photoFeed} />
-          </div>
-        </div>
+        <SocialProject data={projects.instagram} feed={igFeed} />
+        <SocialProject data={projects.photography} feed={photoFeed} />
       </div>
     </section>
   );
