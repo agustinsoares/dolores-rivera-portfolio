@@ -718,7 +718,7 @@ export const experience = {
         no: "Servering og kundeservice",
         es: "Hotelería y atención al cliente",
       },
-      org: "Thon Hotel, Scandic, Café & Restaurant Special, MM Café",
+      org: "Thon Hotel, Scandic, Kafé & Restaurant Spesial, MM Café",
       place: { en: "Bergen, Norway", no: "Bergen", es: "Bergen, Noruega" },
       date: { en: "Oct 2026 – present", no: "okt. 2026 – nå", es: "oct. 2026 – actualidad" },
       text: {
